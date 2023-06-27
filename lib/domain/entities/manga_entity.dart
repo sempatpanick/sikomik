@@ -33,8 +33,8 @@ class MangaEntity extends Equatable {
 
 class DataMangaEntity extends Equatable {
   final String title;
-  final int chapter;
-  final double rating;
+  final num chapter;
+  final num rating;
   final String imagePath;
   final String path;
 

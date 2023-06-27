@@ -26,8 +26,8 @@ Map<String, dynamic> _$MangaModelToJson(MangaModel instance) =>
 DataMangaModel _$DataMangaModelFromJson(Map<String, dynamic> json) =>
     DataMangaModel(
       title: json['title'] as String,
-      chapter: json['chapter'] as int,
-      rating: (json['rating'] as num).toDouble(),
+      chapter: json['chapter'] as num,
+      rating: json['rating'] as num,
       imagePath: json['image_path'] as String,
       path: json['path'] as String,
     );

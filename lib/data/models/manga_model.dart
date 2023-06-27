@@ -42,8 +42,8 @@ class MangaModel extends Equatable {
 @JsonSerializable()
 class DataMangaModel extends Equatable {
   final String title;
-  final int chapter;
-  final double rating;
+  final num chapter;
+  final num rating;
   @JsonKey(name: 'image_path')
   final String imagePath;
   final String path;
