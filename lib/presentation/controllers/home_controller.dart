@@ -59,7 +59,6 @@ class HomeController extends GetxController {
     }, (r) {
       configuration.value = r;
       configuration.refresh();
-      successSnackBar("", "Success");
     });
   }
 
