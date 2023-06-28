@@ -12,6 +12,8 @@ Future<bool?> successSnackBar(
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
+    webBgColor:
+        "#${backgroundColor.value.toRadixString(16).substring(2, backgroundColor.value.toRadixString(16).length)}",
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
@@ -59,6 +61,8 @@ Future<bool?> failedSnackBar(
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
+    webBgColor:
+        "#${backgroundColor.value.toRadixString(16).substring(2, backgroundColor.value.toRadixString(16).length)}",
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
