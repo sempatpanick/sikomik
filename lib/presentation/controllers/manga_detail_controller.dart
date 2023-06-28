@@ -23,9 +23,9 @@ class MangaDetailController extends GetxController {
       changeStateManga(RequestState.error);
       failedSnackBar("", l.message);
     }, (r) {
-      changeStateManga(RequestState.loaded);
       manga.value = r.data;
       manga.refresh();
+      changeStateManga(RequestState.loaded);
     });
   }
 
