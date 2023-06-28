@@ -5,9 +5,12 @@ import '../../common/state_enum.dart';
 import '../../domain/entities/chapter_entity.dart';
 import '../../domain/usecases/get_chapter_case.dart';
 import '../../injection.dart';
+import 'home_controller.dart';
 
 class ChapterController extends GetxController {
   final GetChapterCase getChapterCase = locator();
+
+  final HomeController homeController = Get.find<HomeController>();
 
   Rx<RequestState> stateChapter = RequestState.empty.obs;
 
