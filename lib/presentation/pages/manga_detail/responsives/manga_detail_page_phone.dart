@@ -128,7 +128,6 @@ class MangaDetailPageContent extends StatelessWidget {
                           ),
                         ],
                       ),
-                      constraints: const BoxConstraints(minHeight: 100),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -170,6 +169,9 @@ class MangaDetailPageContent extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 16.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -279,7 +281,7 @@ class MangaDetailPageContent extends StatelessWidget {
             ),
             Positioned(
               left: 24.0,
-              top: 100,
+              top: 110,
               child: Image.network(
                 "${controller.homeController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
                 width: 130,
@@ -288,7 +290,8 @@ class MangaDetailPageContent extends StatelessWidget {
                 loadingBuilder: (context, child, event) => event == null
                     ? child
                     : SizedBox(
-                        height: 140,
+                        width: 130,
+                        height: 200,
                         child: Center(
                           child: SizedBox(
                             width: 40,
@@ -301,7 +304,8 @@ class MangaDetailPageContent extends StatelessWidget {
                         ),
                       ),
                 errorBuilder: (context, url, error) => const SizedBox(
-                  height: 140,
+                  width: 130,
+                  height: 200,
                   child: Center(
                     child: Icon(
                       Icons.broken_image_outlined,
