@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:sikomik/common/failure.dart';
+import 'package:sikomik/domain/entities/configuration_entity.dart';
 import 'package:sikomik/domain/entities/manga_entity.dart';
 
 import '../../common/exception.dart';
@@ -16,6 +17,23 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   SiKomikRepositoryImpl({
     required this.remoteDataSource,
   });
+
+  @override
+  Future<Either<Failure, ConfigurationEntity>> getConfiguration() async {
+    try {
+      final result = await remoteDataSource.getConfiguration();
+
+      return Right(result.toEntity());
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
 
   @override
   Future<Either<Failure, MangaEntity>> getLatestManga({

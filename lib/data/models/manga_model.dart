@@ -9,6 +9,7 @@ part 'manga_model.g.dart';
 class MangaModel extends Equatable {
   final bool status;
   final int page;
+  @JsonKey(name: 'max_page')
   final int maxPage;
   final List<DataMangaModel> data;
 

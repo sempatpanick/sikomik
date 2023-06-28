@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/common/snackbar.dart';
 
+import '../../common/snackbar.dart';
 import '../../common/state_enum.dart';
+import '../../domain/entities/configuration_entity.dart';
 import '../../domain/entities/manga_entity.dart';
+import '../../domain/usecases/get_configuration_case.dart';
 import '../../domain/usecases/get_latest_manga_case.dart';
 import '../../injection.dart';
 
 class HomeController extends GetxController {
   final GetLatestMangaCase getLatestMangaCase = locator();
+  final GetConfigurationCase getConfigurationCase = locator();
 
   Rx<RequestState> stateMangas = RequestState.loading.obs;
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchInputController = TextEditingController();
+
+  Rxn<ConfigurationEntity> configuration = Rxn();
 
   RxList<DataMangaEntity> mangas = <DataMangaEntity>[].obs;
   RxInt currentPage = 0.obs;
@@ -40,6 +45,24 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  Future<void> initialize() async {
+    await getConfiguration();
+    await getLatestManga(isClearMangas: true);
+  }
+
+  Future<void> getConfiguration() async {
+    final result = await getConfigurationCase.execute();
+
+    result.fold((l) {
+      configuration.value = null;
+      configuration.refresh();
+    }, (r) {
+      configuration.value = r;
+      configuration.refresh();
+      successSnackBar("", "Success");
+    });
+  }
+
   Future<void> getLatestManga({
     bool isClearMangas = false,
     bool isClearMangasSearch = false,
@@ -48,9 +71,13 @@ class HomeController extends GetxController {
 
     if (isClearMangas) {
       mangas.clear();
+      currentPage.value = 0;
+      maxPage.value = 0;
     }
     if (isClearMangasSearch) {
       mangasSearch.clear();
+      currentPageSearch.value = 0;
+      maxPageSearch.value = 0;
     }
 
     final result = await getLatestMangaCase.execute(

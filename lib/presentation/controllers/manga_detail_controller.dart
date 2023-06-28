@@ -5,9 +5,12 @@ import '../../common/state_enum.dart';
 import '../../domain/entities/manga_detail_entity.dart';
 import '../../domain/usecases/get_manga_detail_case.dart';
 import '../../injection.dart';
+import 'home_controller.dart';
 
 class MangaDetailController extends GetxController {
   final GetMangaDetailCase getMangaDetailCase = locator();
+
+  final HomeController homeController = Get.find<HomeController>();
 
   Rx<RequestState> stateManga = RequestState.empty.obs;
 

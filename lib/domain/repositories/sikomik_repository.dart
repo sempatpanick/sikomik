@@ -2,10 +2,12 @@ import 'package:dartz/dartz.dart';
 
 import '../../common/failure.dart';
 import '../entities/chapter_entity.dart';
+import '../entities/configuration_entity.dart';
 import '../entities/manga_detail_entity.dart';
 import '../entities/manga_entity.dart';
 
 abstract class SiKomikRepository {
+  Future<Either<Failure, ConfigurationEntity>> getConfiguration();
   Future<Either<Failure, MangaEntity>> getLatestManga({
     required int page,
     String? q,

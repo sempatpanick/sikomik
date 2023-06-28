@@ -15,12 +15,14 @@ dependencies:
   cupertino_icons: ^1.0.5
   dartz: ^0.10.1
   equatable: ^2.0.5
+  flutter_rating_bar: ^4.0.1
   get: ^4.6.5
   get_it: ^7.6.0
   google_fonts: ^5.1.0
   http: ^1.1.0
   intl: ^0.18.1
   json_annotation: ^4.8.1
+  responsive_framework: ^1.1.0
   url_strategy: ^0.2.0
 
 dev_dependencies:
