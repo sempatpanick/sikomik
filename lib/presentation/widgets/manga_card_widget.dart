@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../common/app_router.dart';
 import '../../domain/entities/manga_entity.dart';
-import '../controllers/home_controller.dart';
+import '../controllers/main_controller.dart';
 
 class MangaCardWidget extends StatelessWidget {
   final DataMangaEntity manga;
@@ -37,7 +37,7 @@ class MangaCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GetBuilder<HomeController>(
+            GetBuilder<MainController>(
               builder: (controller) => Image.network(
                 "${controller.configuration.value?.baseKomikUrl ?? ""}${manga.imagePath}",
                 width: double.infinity,

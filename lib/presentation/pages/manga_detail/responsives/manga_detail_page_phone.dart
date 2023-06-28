@@ -73,7 +73,7 @@ class MangaDetailPageContent extends StatelessWidget {
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
                   child: Image.network(
-                    "${controller.homeController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
+                    "${controller.mainController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
                     width: double.infinity,
                     height: 200,
                     fit: BoxFit.cover,
@@ -283,7 +283,7 @@ class MangaDetailPageContent extends StatelessWidget {
               left: 24.0,
               top: 110,
               child: Image.network(
-                "${controller.homeController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
+                "${controller.mainController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
                 width: 130,
                 height: 200,
                 fit: BoxFit.cover,

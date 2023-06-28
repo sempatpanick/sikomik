@@ -3,22 +3,20 @@ import 'package:get/get.dart';
 
 import '../../common/snackbar.dart';
 import '../../common/state_enum.dart';
-import '../../domain/entities/configuration_entity.dart';
 import '../../domain/entities/manga_entity.dart';
-import '../../domain/usecases/get_configuration_case.dart';
 import '../../domain/usecases/get_latest_manga_case.dart';
 import '../../injection.dart';
+import 'main_controller.dart';
 
 class HomeController extends GetxController {
   final GetLatestMangaCase getLatestMangaCase = locator();
-  final GetConfigurationCase getConfigurationCase = locator();
 
   Rx<RequestState> stateMangas = RequestState.loading.obs;
 
+  final MainController mainController = Get.find<MainController>();
+
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchInputController = TextEditingController();
-
-  Rxn<ConfigurationEntity> configuration = Rxn();
 
   RxList<DataMangaEntity> mangas = <DataMangaEntity>[].obs;
   RxInt currentPage = 0.obs;
@@ -46,20 +44,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> initialize() async {
-    await getConfiguration();
+    await mainController.getConfiguration();
     await getLatestManga(isClearMangas: true);
-  }
-
-  Future<void> getConfiguration() async {
-    final result = await getConfigurationCase.execute();
-
-    result.fold((l) {
-      configuration.value = null;
-      configuration.refresh();
-    }, (r) {
-      configuration.value = r;
-      configuration.refresh();
-    });
   }
 
   Future<void> getLatestManga({

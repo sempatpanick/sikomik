@@ -1,0 +1,34 @@
+import 'package:auto_route/annotations.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/main_controller.dart';
+import 'responsive/settings_page_phone.dart';
+
+@RoutePage()
+class SettingsPage extends StatelessWidget {
+  static const String routeName = "/settings";
+
+  const SettingsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return GetBuilder<MainController>(
+      autoRemove: true,
+      init: MainController(),
+      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => state.controller?.getConfiguration(),
+      ),
+      builder: (_) {
+        // if (ResponsiveBreakpoints.of(context).isMobile) {
+        if (size.width < 700) {
+          return const SettingsPagePhone();
+        }
+
+        return const SettingsPagePhone();
+      },
+    );
+  }
+}

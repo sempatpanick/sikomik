@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BrowserInAppRoute.name: (routeData) {
+      final args = routeData.argsAs<BrowserInAppRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: BrowserInAppPage(
+          key: args.key,
+          url: args.url,
+        ),
+      );
+    },
     ChapterRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<ChapterRouteArgs>(
@@ -33,6 +43,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    MainRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainPage(),
+      );
+    },
     MangaDetailRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<MangaDetailRouteArgs>(
@@ -46,7 +62,51 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsPage(),
+      );
+    },
   };
+}
+
+/// generated route for
+/// [BrowserInAppPage]
+class BrowserInAppRoute extends PageRouteInfo<BrowserInAppRouteArgs> {
+  BrowserInAppRoute({
+    Key? key,
+    required String url,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BrowserInAppRoute.name,
+          args: BrowserInAppRouteArgs(
+            key: key,
+            url: url,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BrowserInAppRoute';
+
+  static const PageInfo<BrowserInAppRouteArgs> page =
+      PageInfo<BrowserInAppRouteArgs>(name);
+}
+
+class BrowserInAppRouteArgs {
+  const BrowserInAppRouteArgs({
+    this.key,
+    required this.url,
+  });
+
+  final Key? key;
+
+  final String url;
+
+  @override
+  String toString() {
+    return 'BrowserInAppRouteArgs{key: $key, url: $url}';
+  }
 }
 
 /// generated route for
@@ -103,6 +163,20 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute({List<PageRouteInfo>? children})
+      : super(
+          MainRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [MangaDetailPage]
 class MangaDetailRoute extends PageRouteInfo<MangaDetailRouteArgs> {
   MangaDetailRoute({
@@ -139,4 +213,18 @@ class MangaDetailRouteArgs {
   String toString() {
     return 'MangaDetailRouteArgs{key: $key, path: $path}';
   }
+}
+
+/// generated route for
+/// [SettingsPage]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
