@@ -25,7 +25,7 @@ class MangaDetailEntity extends Equatable {
 
 class DataMangaDetailEntity extends Equatable {
   final String title;
-  final String description;
+  final String? description;
   final num rating;
   final List<List<String>> informations;
   final List<GenreDataMangaDetailEntity> genres;
@@ -34,7 +34,7 @@ class DataMangaDetailEntity extends Equatable {
 
   const DataMangaDetailEntity({
     required this.title,
-    required this.description,
+    this.description,
     required this.rating,
     required this.informations,
     required this.genres,

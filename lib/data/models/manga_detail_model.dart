@@ -34,7 +34,7 @@ class MangaDetailModel extends Equatable {
 @JsonSerializable()
 class DataMangaDetailModel extends Equatable {
   final String title;
-  final String description;
+  final String? description;
   final num rating;
   final List<List<String>> informations;
   final List<GenreDataMangaDetailModel> genres;
@@ -44,7 +44,7 @@ class DataMangaDetailModel extends Equatable {
 
   const DataMangaDetailModel({
     required this.title,
-    required this.description,
+    this.description,
     required this.rating,
     required this.informations,
     required this.genres,
