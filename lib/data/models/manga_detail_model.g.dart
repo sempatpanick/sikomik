@@ -22,7 +22,7 @@ DataMangaDetailModel _$DataMangaDetailModelFromJson(
         Map<String, dynamic> json) =>
     DataMangaDetailModel(
       title: json['title'] as String,
-      description: json['description'] as String,
+      description: json['description'] as String?,
       rating: json['rating'] as num,
       informations: (json['informations'] as List<dynamic>)
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
