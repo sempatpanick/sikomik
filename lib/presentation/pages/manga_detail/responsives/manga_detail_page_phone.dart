@@ -6,7 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:sikomik/common/theme.dart';
 
-import '../../../../common/app_router.dart';
+import '../../../../common/app_router.gr.dart';
 import '../../../../common/state_enum.dart';
 import '../../../controllers/manga_detail_controller.dart';
 
@@ -43,7 +43,8 @@ class MangaDetailPagePhone extends StatelessWidget {
       ),
       body: GetX<MangaDetailController>(
         builder: (controller) =>
-            controller.stateManga.value == RequestState.loading || controller.manga.value == null
+            controller.stateManga.value == RequestState.loading ||
+                    controller.manga.value == null
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -86,8 +87,8 @@ class MangaDetailPageContent extends StatelessWidget {
                                 width: 40,
                                 height: 40,
                                 child: CircularProgressIndicator(
-                                  value:
-                                      event.cumulativeBytesLoaded / (event.expectedTotalBytes ?? 1),
+                                  value: event.cumulativeBytesLoaded /
+                                      (event.expectedTotalBytes ?? 1),
                                   color: theme.primaryColor,
                                 ),
                               ),
@@ -116,7 +117,8 @@ class MangaDetailPageContent extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         color: theme.primaryColor,
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(10.0)),
                         border: Border.all(
                           color: Colors.grey,
                         ),
@@ -150,7 +152,8 @@ class MangaDetailPageContent extends StatelessWidget {
                             ),
                           ),
                           RatingBar.builder(
-                            initialRating: (controller.manga.value?.rating ?? 1) / 2,
+                            initialRating:
+                                (controller.manga.value?.rating ?? 1) / 2,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             ignoreGestures: true,
@@ -202,7 +205,8 @@ class MangaDetailPageContent extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: theme.primaryColor,
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(10.0)),
                           border: Border.all(
                             color: Colors.grey,
                           ),
@@ -219,14 +223,16 @@ class MangaDetailPageContent extends StatelessWidget {
                               .map((item) => TableRow(children: [
                                     Text(
                                       item[0],
-                                      style: theme.textTheme.labelLarge?.copyWith(
+                                      style:
+                                          theme.textTheme.labelLarge?.copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       item[1],
-                                      style: theme.textTheme.labelLarge?.copyWith(
+                                      style:
+                                          theme.textTheme.labelLarge?.copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -250,13 +256,15 @@ class MangaDetailPageContent extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
-                        separatorBuilder: (context, index) => const Divider(height: 1),
+                        separatorBuilder: (context, index) =>
+                            const Divider(height: 1),
                         itemCount: controller.manga.value?.chapters.length ?? 0,
                         itemBuilder: (context, index) {
                           final item = controller.manga.value!.chapters[index];
 
                           return ListTile(
-                            onTap: () => context.router.push(ChapterRoute(path: item.path)),
+                            onTap: () => context.router
+                                .push(ChapterRoute(path: item.path)),
                             title: Text(
                               "Chapter ${item.chapter}",
                               style: theme.textTheme.labelLarge?.copyWith(
@@ -297,7 +305,8 @@ class MangaDetailPageContent extends StatelessWidget {
                             width: 40,
                             height: 40,
                             child: CircularProgressIndicator(
-                              value: event.cumulativeBytesLoaded / (event.expectedTotalBytes ?? 1),
+                              value: event.cumulativeBytesLoaded /
+                                  (event.expectedTotalBytes ?? 1),
                               color: theme.primaryColor,
                             ),
                           ),

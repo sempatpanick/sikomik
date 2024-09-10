@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../common/app_router.dart';
+import '../../../../common/app_router.gr.dart';
 import '../../../../common/theme.dart';
 
 class SettingsPagePhone extends StatelessWidget {
@@ -19,7 +19,8 @@ class SettingsPagePhone extends StatelessWidget {
           children: [
             ListTile(
               onTap: () => context.router.push(
-                BrowserInAppRoute(url: "https://komik.ddg.my.id/privacy-police.html"),
+                BrowserInAppRoute(
+                    url: "https://komik.ddg.my.id/privacy-police.html"),
               ),
               title: Text(
                 "Privacy & Police",
@@ -31,7 +32,8 @@ class SettingsPagePhone extends StatelessWidget {
             ),
             ListTile(
               onTap: () => context.router.push(
-                BrowserInAppRoute(url: "https://komik.ddg.my.id/terms-and-conditions.html"),
+                BrowserInAppRoute(
+                    url: "https://komik.ddg.my.id/terms-and-conditions.html"),
               ),
               title: Text(
                 "Terms & Conditions",
