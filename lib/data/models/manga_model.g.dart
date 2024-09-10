@@ -8,8 +8,8 @@ part of 'manga_model.dart';
 
 MangaModel _$MangaModelFromJson(Map<String, dynamic> json) => MangaModel(
       status: json['status'] as bool,
-      page: json['page'] as int,
-      maxPage: json['max_page'] as int,
+      page: (json['page'] as num).toInt(),
+      maxPage: (json['max_page'] as num).toInt(),
       data: (json['data'] as List<dynamic>)
           .map((e) => DataMangaModel.fromJson(e as Map<String, dynamic>))
           .toList(),

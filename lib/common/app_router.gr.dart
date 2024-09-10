@@ -7,77 +7,25 @@
 // ignore_for_file: type=lint
 // coverage:ignore-file
 
-part of 'app_router.dart';
-
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    BrowserInAppRoute.name: (routeData) {
-      final args = routeData.argsAs<BrowserInAppRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: BrowserInAppPage(
-          key: args.key,
-          url: args.url,
-        ),
-      );
-    },
-    ChapterRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ChapterRouteArgs>(
-          orElse: () => ChapterRouteArgs(path: pathParams.getString('path')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChapterPage(
-          key: args.key,
-          path: args.path,
-        ),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainPage(),
-      );
-    },
-    MangaDetailRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MangaDetailRouteArgs>(
-          orElse: () =>
-              MangaDetailRouteArgs(path: pathParams.getString('path')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MangaDetailPage(
-          key: args.key,
-          path: args.path,
-        ),
-      );
-    },
-    SettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingsPage(),
-      );
-    },
-  };
-}
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
+import 'package:sikomik/presentation/pages/browser_in_app/browser_in_app_page.dart'
+    as _i1;
+import 'package:sikomik/presentation/pages/chapter/chapter_page.dart' as _i2;
+import 'package:sikomik/presentation/pages/home/home_page.dart' as _i3;
+import 'package:sikomik/presentation/pages/main/main_page.dart' as _i4;
+import 'package:sikomik/presentation/pages/manga_detail/manga_detail_page.dart'
+    as _i5;
+import 'package:sikomik/presentation/pages/settings/settings_page.dart' as _i6;
 
 /// generated route for
-/// [BrowserInAppPage]
-class BrowserInAppRoute extends PageRouteInfo<BrowserInAppRouteArgs> {
+/// [_i1.BrowserInAppPage]
+class BrowserInAppRoute extends _i7.PageRouteInfo<BrowserInAppRouteArgs> {
   BrowserInAppRoute({
-    Key? key,
+    _i8.Key? key,
     required String url,
-    List<PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           BrowserInAppRoute.name,
           args: BrowserInAppRouteArgs(
@@ -89,8 +37,16 @@ class BrowserInAppRoute extends PageRouteInfo<BrowserInAppRouteArgs> {
 
   static const String name = 'BrowserInAppRoute';
 
-  static const PageInfo<BrowserInAppRouteArgs> page =
-      PageInfo<BrowserInAppRouteArgs>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BrowserInAppRouteArgs>();
+      return _i1.BrowserInAppPage(
+        key: args.key,
+        url: args.url,
+      );
+    },
+  );
 }
 
 class BrowserInAppRouteArgs {
@@ -99,7 +55,7 @@ class BrowserInAppRouteArgs {
     required this.url,
   });
 
-  final Key? key;
+  final _i8.Key? key;
 
   final String url;
 
@@ -110,12 +66,12 @@ class BrowserInAppRouteArgs {
 }
 
 /// generated route for
-/// [ChapterPage]
-class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
+/// [_i2.ChapterPage]
+class ChapterRoute extends _i7.PageRouteInfo<ChapterRouteArgs> {
   ChapterRoute({
-    Key? key,
+    _i8.Key? key,
     required String path,
-    List<PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           ChapterRoute.name,
           args: ChapterRouteArgs(
@@ -128,8 +84,18 @@ class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
 
   static const String name = 'ChapterRoute';
 
-  static const PageInfo<ChapterRouteArgs> page =
-      PageInfo<ChapterRouteArgs>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ChapterRouteArgs>(
+          orElse: () => ChapterRouteArgs(path: pathParams.getString('path')));
+      return _i2.ChapterPage(
+        key: args.key,
+        path: args.path,
+      );
+    },
+  );
 }
 
 class ChapterRouteArgs {
@@ -138,7 +104,7 @@ class ChapterRouteArgs {
     required this.path,
   });
 
-  final Key? key;
+  final _i8.Key? key;
 
   final String path;
 
@@ -149,9 +115,9 @@ class ChapterRouteArgs {
 }
 
 /// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
+/// [_i3.HomePage]
+class HomeRoute extends _i7.PageRouteInfo<void> {
+  const HomeRoute({List<_i7.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -159,13 +125,18 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      return const _i3.HomePage();
+    },
+  );
 }
 
 /// generated route for
-/// [MainPage]
-class MainRoute extends PageRouteInfo<void> {
-  const MainRoute({List<PageRouteInfo>? children})
+/// [_i4.MainPage]
+class MainRoute extends _i7.PageRouteInfo<void> {
+  const MainRoute({List<_i7.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           initialChildren: children,
@@ -173,16 +144,21 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.MainPage();
+    },
+  );
 }
 
 /// generated route for
-/// [MangaDetailPage]
-class MangaDetailRoute extends PageRouteInfo<MangaDetailRouteArgs> {
+/// [_i5.MangaDetailPage]
+class MangaDetailRoute extends _i7.PageRouteInfo<MangaDetailRouteArgs> {
   MangaDetailRoute({
-    Key? key,
+    _i8.Key? key,
     required String path,
-    List<PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           MangaDetailRoute.name,
           args: MangaDetailRouteArgs(
@@ -195,8 +171,19 @@ class MangaDetailRoute extends PageRouteInfo<MangaDetailRouteArgs> {
 
   static const String name = 'MangaDetailRoute';
 
-  static const PageInfo<MangaDetailRouteArgs> page =
-      PageInfo<MangaDetailRouteArgs>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MangaDetailRouteArgs>(
+          orElse: () =>
+              MangaDetailRouteArgs(path: pathParams.getString('path')));
+      return _i5.MangaDetailPage(
+        key: args.key,
+        path: args.path,
+      );
+    },
+  );
 }
 
 class MangaDetailRouteArgs {
@@ -205,7 +192,7 @@ class MangaDetailRouteArgs {
     required this.path,
   });
 
-  final Key? key;
+  final _i8.Key? key;
 
   final String path;
 
@@ -216,9 +203,9 @@ class MangaDetailRouteArgs {
 }
 
 /// generated route for
-/// [SettingsPage]
-class SettingsRoute extends PageRouteInfo<void> {
-  const SettingsRoute({List<PageRouteInfo>? children})
+/// [_i6.SettingsPage]
+class SettingsRoute extends _i7.PageRouteInfo<void> {
+  const SettingsRoute({List<_i7.PageRouteInfo>? children})
       : super(
           SettingsRoute.name,
           initialChildren: children,
@@ -226,5 +213,10 @@ class SettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.SettingsPage();
+    },
+  );
 }

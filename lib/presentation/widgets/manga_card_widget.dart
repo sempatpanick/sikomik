@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-import '../../common/app_router.dart';
+import '../../common/app_router.gr.dart';
 import '../../domain/entities/manga_entity.dart';
 import '../controllers/main_controller.dart';
 
@@ -25,7 +25,8 @@ class MangaCardWidget extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10.0)),
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(10.0)),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.3),
@@ -52,7 +53,8 @@ class MangaCardWidget extends StatelessWidget {
                             width: 40,
                             height: 40,
                             child: CircularProgressIndicator(
-                              value: event.cumulativeBytesLoaded / (event.expectedTotalBytes ?? 1),
+                              value: event.cumulativeBytesLoaded /
+                                  (event.expectedTotalBytes ?? 1),
                               color: theme.primaryColor,
                             ),
                           ),
