@@ -3,22 +3,22 @@ import 'package:get/get.dart';
 
 import '../../common/snackbar.dart';
 import '../../common/state_enum.dart';
-import '../../domain/entities/manga_entity.dart';
-import '../../domain/usecases/get_latest_manga_case.dart';
+import '../../domain/entities/comic_entity.dart';
+import '../../domain/usecases/get_latest_comic_case.dart';
 import '../../injection.dart';
 import 'main_controller.dart';
 
 class HomeController extends GetxController {
-  final GetLatestMangaCase getLatestMangaCase = locator();
+  final GetLatestComicCase getLatestComicCase = locator();
 
-  Rx<RequestState> stateMangas = RequestState.loading.obs;
+  Rx<RequestState> stateComics = RequestState.loading.obs;
 
   final MainController mainController = Get.find<MainController>();
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchInputController = TextEditingController();
 
-  RxList<DataMangaEntity> mangas = <DataMangaEntity>[].obs;
+  RxList<DataComicEntity> comics = <DataComicEntity>[].obs;
   RxInt currentPage = 0.obs;
   RxBool isLastPage = false.obs;
 
@@ -28,9 +28,9 @@ class HomeController extends GetxController {
       () {
         if (scrollController.offset >
             scrollController.position.maxScrollExtent - 200) {
-          if (stateMangas.value != RequestState.loading) {
+          if (stateComics.value != RequestState.loading) {
             if (!isLastPage.value) {
-              getLatestManga();
+              getLatestComics();
             }
           }
         }
@@ -42,39 +42,39 @@ class HomeController extends GetxController {
 
   Future<void> initialize() async {
     await mainController.getConfiguration();
-    await getLatestManga(isClearMangas: true);
+    await getLatestComics(isClearComics: true);
   }
 
-  Future<void> getLatestManga({
-    bool isClearMangas = false,
-    bool isClearMangasSearch = false,
+  Future<void> getLatestComics({
+    bool isClearComics = false,
+    bool isClearSearch = false,
   }) async {
-    changeStateMangas(RequestState.loading);
+    changeStateComics(RequestState.loading);
 
-    if (isClearMangas) {
-      mangas.clear();
+    if (isClearComics) {
+      comics.clear();
       currentPage.value = 0;
       isLastPage.value = false;
     }
 
-    final result = await getLatestMangaCase.execute(
+    final result = await getLatestComicCase.execute(
         page: currentPage.value + 1, q: searchInputController.text);
 
     result.fold((l) {
-      changeStateMangas(RequestState.error);
+      changeStateComics(RequestState.error);
       failedSnackBar("", l.message);
     }, (r) {
-      changeStateMangas(RequestState.loaded);
+      changeStateComics(RequestState.loaded);
       currentPage.value = currentPage.value + 1;
       if ((r.data ?? []).isEmpty) {
         isLastPage.value = true;
       }
-      mangas.addAll(r.data ?? []);
+      comics.addAll(r.data ?? []);
     });
   }
 
-  void changeStateMangas(RequestState state) {
-    stateMangas.value = state;
-    stateMangas.refresh();
+  void changeStateComics(RequestState state) {
+    stateComics.value = state;
+    stateComics.refresh();
   }
 }

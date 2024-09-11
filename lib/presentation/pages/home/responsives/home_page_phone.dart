@@ -4,7 +4,7 @@ import 'package:sikomik/common/theme.dart';
 
 import '../../../../common/state_enum.dart';
 import '../../../controllers/home_controller.dart';
-import '../../../widgets/manga_card_widget.dart';
+import '../../../widgets/comic_card_widget.dart';
 
 class HomePagePhone extends StatelessWidget {
   const HomePagePhone({super.key});
@@ -27,8 +27,8 @@ class HomePagePhone extends StatelessWidget {
       body: GetX<HomeController>(
         builder: (controller) => RefreshIndicator(
           onRefresh: () => controller.searchInputController.text.isEmpty
-              ? controller.getLatestManga(isClearMangas: true)
-              : controller.getLatestManga(isClearMangasSearch: true),
+              ? controller.getLatestComics(isClearComics: true)
+              : controller.getLatestComics(isClearSearch: true),
           child: SingleChildScrollView(
             controller: controller.scrollController,
             physics: const BouncingScrollPhysics(),
@@ -49,14 +49,14 @@ class HomePagePhone extends StatelessWidget {
                       mainAxisSpacing: 8.0,
                       mainAxisExtent: 260,
                     ),
-                    itemCount: controller.mangas.length,
+                    itemCount: controller.comics.length,
                     itemBuilder: (context, index) {
-                      final item = controller.mangas[index];
+                      final item = controller.comics[index];
 
-                      return MangaCardWidget(manga: item);
+                      return ComicCardWidget(comic: item);
                     },
                   ),
-                  if (controller.stateMangas.value == RequestState.loading)
+                  if (controller.stateComics.value == RequestState.loading)
                     const SizedBox(
                       height: 100,
                       child: Center(

@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:sikomik/common/failure.dart';
+import 'package:sikomik/domain/entities/comic_entity.dart';
 import 'package:sikomik/domain/entities/configuration_entity.dart';
-import 'package:sikomik/domain/entities/manga_entity.dart';
 
 import '../../common/exception.dart';
 import '../../domain/entities/chapter_entity.dart';
-import '../../domain/entities/manga_detail_entity.dart';
+import '../../domain/entities/comic_detail_entity.dart';
 import '../../domain/repositories/sikomik_repository.dart';
 import '../datasources/sikomik_remote_data_source.dart';
 
@@ -36,12 +36,12 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   }
 
   @override
-  Future<Either<Failure, MangaEntity>> getLatestManga({
+  Future<Either<Failure, ComicEntity>> getLatestComic({
     required int page,
     String? q,
   }) async {
     try {
-      final result = await remoteDataSource.getLatestManga(page: page, q: q);
+      final result = await remoteDataSource.getLatestComic(page: page, q: q);
 
       return Right(result.toEntity());
     } on ResponseFailure catch (e) {
@@ -56,11 +56,11 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   }
 
   @override
-  Future<Either<Failure, MangaDetailEntity>> getMangaDetail({
+  Future<Either<Failure, ComicDetailEntity>> getComicDetail({
     required String path,
   }) async {
     try {
-      final result = await remoteDataSource.getMangaDetail(path: path);
+      final result = await remoteDataSource.getComicDetail(path: path);
 
       return Right(result.toEntity());
     } on ResponseFailure catch (e) {

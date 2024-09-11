@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 
 import '../presentation/pages/browser_in_app/browser_in_app_page.dart';
 import '../presentation/pages/chapter/chapter_page.dart';
+import '../presentation/pages/comic_detail/comic_detail_page.dart';
 import '../presentation/pages/home/home_page.dart';
 import '../presentation/pages/main/main_page.dart';
-import '../presentation/pages/manga_detail/manga_detail_page.dart';
 import '../presentation/pages/settings/settings_page.dart';
 import 'app_router.gr.dart';
 
@@ -22,8 +22,8 @@ class AppRouter extends RootStackRouter {
           path: HomePage.routeName,
         ),
         AutoRoute(
-          page: MangaDetailRoute.page,
-          path: MangaDetailPage.routeName,
+          page: ComicDetailRoute.page,
+          path: ComicDetailPage.routeName,
         ),
         AutoRoute(
           page: ChapterRoute.page,

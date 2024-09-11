@@ -13,10 +13,10 @@ import 'package:flutter/material.dart' as _i8;
 import 'package:sikomik/presentation/pages/browser_in_app/browser_in_app_page.dart'
     as _i1;
 import 'package:sikomik/presentation/pages/chapter/chapter_page.dart' as _i2;
-import 'package:sikomik/presentation/pages/home/home_page.dart' as _i3;
-import 'package:sikomik/presentation/pages/main/main_page.dart' as _i4;
-import 'package:sikomik/presentation/pages/manga_detail/manga_detail_page.dart'
-    as _i5;
+import 'package:sikomik/presentation/pages/comic_detail/comic_detail_page.dart'
+    as _i3;
+import 'package:sikomik/presentation/pages/home/home_page.dart' as _i4;
+import 'package:sikomik/presentation/pages/main/main_page.dart' as _i5;
 import 'package:sikomik/presentation/pages/settings/settings_page.dart' as _i6;
 
 /// generated route for
@@ -115,7 +115,57 @@ class ChapterRouteArgs {
 }
 
 /// generated route for
-/// [_i3.HomePage]
+/// [_i3.ComicDetailPage]
+class ComicDetailRoute extends _i7.PageRouteInfo<ComicDetailRouteArgs> {
+  ComicDetailRoute({
+    _i8.Key? key,
+    required String path,
+    List<_i7.PageRouteInfo>? children,
+  }) : super(
+          ComicDetailRoute.name,
+          args: ComicDetailRouteArgs(
+            key: key,
+            path: path,
+          ),
+          rawPathParams: {'path': path},
+          initialChildren: children,
+        );
+
+  static const String name = 'ComicDetailRoute';
+
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ComicDetailRouteArgs>(
+          orElse: () =>
+              ComicDetailRouteArgs(path: pathParams.getString('path')));
+      return _i3.ComicDetailPage(
+        key: args.key,
+        path: args.path,
+      );
+    },
+  );
+}
+
+class ComicDetailRouteArgs {
+  const ComicDetailRouteArgs({
+    this.key,
+    required this.path,
+  });
+
+  final _i8.Key? key;
+
+  final String path;
+
+  @override
+  String toString() {
+    return 'ComicDetailRouteArgs{key: $key, path: $path}';
+  }
+}
+
+/// generated route for
+/// [_i4.HomePage]
 class HomeRoute extends _i7.PageRouteInfo<void> {
   const HomeRoute({List<_i7.PageRouteInfo>? children})
       : super(
@@ -128,13 +178,13 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
   static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i3.HomePage();
+      return const _i4.HomePage();
     },
   );
 }
 
 /// generated route for
-/// [_i4.MainPage]
+/// [_i5.MainPage]
 class MainRoute extends _i7.PageRouteInfo<void> {
   const MainRoute({List<_i7.PageRouteInfo>? children})
       : super(
@@ -147,59 +197,9 @@ class MainRoute extends _i7.PageRouteInfo<void> {
   static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i4.MainPage();
+      return const _i5.MainPage();
     },
   );
-}
-
-/// generated route for
-/// [_i5.MangaDetailPage]
-class MangaDetailRoute extends _i7.PageRouteInfo<MangaDetailRouteArgs> {
-  MangaDetailRoute({
-    _i8.Key? key,
-    required String path,
-    List<_i7.PageRouteInfo>? children,
-  }) : super(
-          MangaDetailRoute.name,
-          args: MangaDetailRouteArgs(
-            key: key,
-            path: path,
-          ),
-          rawPathParams: {'path': path},
-          initialChildren: children,
-        );
-
-  static const String name = 'MangaDetailRoute';
-
-  static _i7.PageInfo page = _i7.PageInfo(
-    name,
-    builder: (data) {
-      final pathParams = data.inheritedPathParams;
-      final args = data.argsAs<MangaDetailRouteArgs>(
-          orElse: () =>
-              MangaDetailRouteArgs(path: pathParams.getString('path')));
-      return _i5.MangaDetailPage(
-        key: args.key,
-        path: args.path,
-      );
-    },
-  );
-}
-
-class MangaDetailRouteArgs {
-  const MangaDetailRouteArgs({
-    this.key,
-    required this.path,
-  });
-
-  final _i8.Key? key;
-
-  final String path;
-
-  @override
-  String toString() {
-    return 'MangaDetailRouteArgs{key: $key, path: $path}';
-  }
 }
 
 /// generated route for

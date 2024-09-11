@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../common/app_router.gr.dart';
-import '../../domain/entities/manga_entity.dart';
+import '../../domain/entities/comic_entity.dart';
 
-class MangaCardWidget extends StatelessWidget {
-  final DataMangaEntity manga;
+class ComicCardWidget extends StatelessWidget {
+  final DataComicEntity comic;
 
-  const MangaCardWidget({
+  const ComicCardWidget({
     super.key,
-    required this.manga,
+    required this.comic,
   });
 
   @override
@@ -20,8 +20,8 @@ class MangaCardWidget extends StatelessWidget {
     return InkWell(
       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10.0)),
       onTap: () {
-        if (manga.path == null) return;
-        context.router.push(MangaDetailRoute(path: manga.path!));
+        if (comic.path == null) return;
+        context.router.push(ComicDetailRoute(path: comic.path!));
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -39,9 +39,9 @@ class MangaCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (manga.imageUrl != null)
+            if (comic.imageUrl != null)
               Image.network(
-                "${manga.imageUrl}",
+                "${comic.imageUrl}",
                 width: double.infinity,
                 height: 140,
                 fit: BoxFit.cover,
@@ -72,7 +72,7 @@ class MangaCardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            if (manga.imageUrl == null)
+            if (comic.imageUrl == null)
               const SizedBox(
                 height: 140,
                 child: Center(
@@ -89,7 +89,7 @@ class MangaCardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                manga.title ?? "",
+                comic.title ?? "",
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelLarge?.copyWith(
@@ -105,7 +105,7 @@ class MangaCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Chapter ${manga.chapter}",
+                    "Chapter ${comic.chapter}",
                     style: theme.textTheme.labelLarge?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.normal,
@@ -118,7 +118,7 @@ class MangaCardWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: RatingBar.builder(
-                          initialRating: (manga.rating ?? 0) / 2,
+                          initialRating: (comic.rating ?? 0) / 2,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
                           ignoreGestures: true,
@@ -135,7 +135,7 @@ class MangaCardWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${manga.rating}",
+                        "${comic.rating}",
                         style: theme.textTheme.labelMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,

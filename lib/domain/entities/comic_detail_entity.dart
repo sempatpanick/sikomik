@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/manga_detail_model.dart';
+import '../../data/models/comic_detail_model.dart';
 
-class MangaDetailEntity extends Equatable {
+class ComicDetailEntity extends Equatable {
   final bool? status;
-  final DataMangaDetailEntity? data;
+  final DataComicDetailEntity? data;
 
-  const MangaDetailEntity({
+  const ComicDetailEntity({
     required this.status,
     required this.data,
   });
 
-  MangaDetailModel toModel() => MangaDetailModel(
+  ComicDetailModel toModel() => ComicDetailModel(
         status: status,
         data: data?.toModel(),
       );
@@ -23,7 +23,7 @@ class MangaDetailEntity extends Equatable {
       ];
 }
 
-class DataMangaDetailEntity extends Equatable {
+class DataComicDetailEntity extends Equatable {
   final String? title;
   final String? titleIndonesia;
   final String? imageUrl;
@@ -34,10 +34,10 @@ class DataMangaDetailEntity extends Equatable {
   final String? author;
   final String? status;
   final num? rating;
-  final List<GenreDataMangaDetailEntity>? genres;
-  final List<ChapterDataMangaDetailEntity>? chapters;
+  final List<GenreDataComicDetailEntity>? genres;
+  final List<ChapterDataComicDetailEntity>? chapters;
 
-  const DataMangaDetailEntity({
+  const DataComicDetailEntity({
     required this.title,
     required this.titleIndonesia,
     required this.imageUrl,
@@ -52,7 +52,7 @@ class DataMangaDetailEntity extends Equatable {
     required this.chapters,
   });
 
-  DataMangaDetailModel toModel() => DataMangaDetailModel(
+  DataComicDetailModel toModel() => DataComicDetailModel(
         title: title,
         titleIndonesia: titleIndonesia,
         imageUrl: imageUrl,
@@ -84,16 +84,16 @@ class DataMangaDetailEntity extends Equatable {
       ];
 }
 
-class GenreDataMangaDetailEntity extends Equatable {
+class GenreDataComicDetailEntity extends Equatable {
   final String? name;
   final String? path;
 
-  const GenreDataMangaDetailEntity({
+  const GenreDataComicDetailEntity({
     required this.name,
     required this.path,
   });
 
-  GenreDataMangaDetailModel toModel() => GenreDataMangaDetailModel(
+  GenreDataComicDetailModel toModel() => GenreDataComicDetailModel(
         name: name,
         path: path,
       );
@@ -105,20 +105,20 @@ class GenreDataMangaDetailEntity extends Equatable {
       ];
 }
 
-class ChapterDataMangaDetailEntity extends Equatable {
+class ChapterDataComicDetailEntity extends Equatable {
   final String? name;
   final num? chapter;
   final String? uploadedDate;
   final String? path;
 
-  const ChapterDataMangaDetailEntity({
+  const ChapterDataComicDetailEntity({
     required this.name,
     required this.chapter,
     required this.uploadedDate,
     required this.path,
   });
 
-  ChapterDataMangaDetailModel toModel() => ChapterDataMangaDetailModel(
+  ChapterDataComicDetailModel toModel() => ChapterDataComicDetailModel(
         name: name,
         chapter: chapter,
         uploadedDate: uploadedDate,

@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'manga_model.dart';
+part of 'comic_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MangaModel _$MangaModelFromJson(Map<String, dynamic> json) => MangaModel(
+ComicModel _$ComicModelFromJson(Map<String, dynamic> json) => ComicModel(
       status: json['status'] as bool?,
       page: (json['page'] as num?)?.toInt(),
       maxPage: (json['max_page'] as num?)?.toInt(),
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => DataMangaModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DataComicModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$MangaModelToJson(MangaModel instance) =>
+Map<String, dynamic> _$ComicModelToJson(ComicModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'page': instance.page,
@@ -23,8 +23,8 @@ Map<String, dynamic> _$MangaModelToJson(MangaModel instance) =>
       'data': instance.data,
     };
 
-DataMangaModel _$DataMangaModelFromJson(Map<String, dynamic> json) =>
-    DataMangaModel(
+DataComicModel _$DataComicModelFromJson(Map<String, dynamic> json) =>
+    DataComicModel(
       title: json['title'] as String?,
       imageUrl: imageUrlFromJson(json['imageUrl']),
       chapter: json['chapter'] as num?,
@@ -34,7 +34,7 @@ DataMangaModel _$DataMangaModelFromJson(Map<String, dynamic> json) =>
       path: json['path'] as String?,
     );
 
-Map<String, dynamic> _$DataMangaModelToJson(DataMangaModel instance) =>
+Map<String, dynamic> _$DataComicModelToJson(DataComicModel instance) =>
     <String, dynamic>{
       'title': instance.title,
       'imageUrl': imageUrlToJson(instance.imageUrl),

@@ -8,10 +8,10 @@ import 'package:sikomik/common/theme.dart';
 
 import '../../../../common/app_router.gr.dart';
 import '../../../../common/state_enum.dart';
-import '../../../controllers/manga_detail_controller.dart';
+import '../../../controllers/comic_detail_controller.dart';
 
-class MangaDetailPagePhone extends StatelessWidget {
-  const MangaDetailPagePhone({super.key});
+class ComicDetailPagePhone extends StatelessWidget {
+  const ComicDetailPagePhone({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +41,21 @@ class MangaDetailPagePhone extends StatelessWidget {
           ),
         ),
       ),
-      body: GetX<MangaDetailController>(
+      body: GetX<ComicDetailController>(
         builder: (controller) =>
-            controller.stateManga.value == RequestState.loading ||
-                    controller.manga.value == null
+            controller.stateComic.value == RequestState.loading ||
+                    controller.comic.value == null
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : const MangaDetailPageContent(),
+                : const ComicDetailPageContent(),
       ),
     );
   }
 }
 
-class MangaDetailPageContent extends StatelessWidget {
-  const MangaDetailPageContent({
+class ComicDetailPageContent extends StatelessWidget {
+  const ComicDetailPageContent({
     super.key,
   });
 
@@ -63,7 +63,7 @@ class MangaDetailPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return GetX<MangaDetailController>(
+    return GetX<ComicDetailController>(
       builder: (controller) => SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Stack(
@@ -73,9 +73,9 @@ class MangaDetailPageContent extends StatelessWidget {
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: controller.manga.value?.thumbnailUrl != null
+                  child: controller.comic.value?.thumbnailUrl != null
                       ? Image.network(
-                          controller.manga.value!.thumbnailUrl!,
+                          controller.comic.value!.thumbnailUrl!,
                           width: double.infinity,
                           height: 200,
                           fit: BoxFit.cover,
@@ -156,7 +156,7 @@ class MangaDetailPageContent extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${controller.manga.value?.rating ?? 0}",
+                            "${controller.comic.value?.rating ?? 0}",
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.titleLarge?.copyWith(
@@ -166,7 +166,7 @@ class MangaDetailPageContent extends StatelessWidget {
                           ),
                           RatingBar.builder(
                             initialRating:
-                                (controller.manga.value?.rating ?? 1) / 2,
+                                (controller.comic.value?.rating ?? 1) / 2,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             ignoreGestures: true,
@@ -195,7 +195,7 @@ class MangaDetailPageContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.manga.value?.title ?? "",
+                        controller.comic.value?.title ?? "",
                         style: theme.textTheme.titleLarge?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -205,7 +205,7 @@ class MangaDetailPageContent extends StatelessWidget {
                         height: 16.0,
                       ),
                       Text(
-                        controller.manga.value?.synopsis ?? "",
+                        controller.comic.value?.synopsis ?? "",
                         style: theme.textTheme.labelLarge?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
@@ -243,7 +243,7 @@ class MangaDetailPageContent extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  controller.manga.value?.author ?? "",
+                                  controller.comic.value?.author ?? "",
                                   style: theme.textTheme.labelLarge?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
@@ -261,7 +261,7 @@ class MangaDetailPageContent extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  controller.manga.value?.type ?? "",
+                                  controller.comic.value?.type ?? "",
                                   style: theme.textTheme.labelLarge?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
@@ -279,7 +279,7 @@ class MangaDetailPageContent extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  controller.manga.value?.storyConcept ?? "",
+                                  controller.comic.value?.storyConcept ?? "",
                                   style: theme.textTheme.labelLarge?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
@@ -297,7 +297,7 @@ class MangaDetailPageContent extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  controller.manga.value?.status ?? "",
+                                  controller.comic.value?.status ?? "",
                                   style: theme.textTheme.labelLarge?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
@@ -326,9 +326,9 @@ class MangaDetailPageContent extends StatelessWidget {
                         separatorBuilder: (context, index) =>
                             const Divider(height: 1),
                         itemCount:
-                            controller.manga.value?.chapters?.length ?? 0,
+                            controller.comic.value?.chapters?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final item = controller.manga.value!.chapters![index];
+                          final item = controller.comic.value!.chapters![index];
 
                           return ListTile(
                             onTap: () {
@@ -364,9 +364,9 @@ class MangaDetailPageContent extends StatelessWidget {
             Positioned(
               left: 24.0,
               top: 110,
-              child: controller.manga.value?.imageUrl != null
+              child: controller.comic.value?.imageUrl != null
                   ? Image.network(
-                      controller.manga.value!.imageUrl!,
+                      controller.comic.value!.imageUrl!,
                       width: 130,
                       height: 200,
                       fit: BoxFit.cover,

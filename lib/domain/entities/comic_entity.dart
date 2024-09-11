@@ -1,36 +1,25 @@
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-import '../../common/utils/convert_image_url.dart';
-import '../../domain/entities/manga_entity.dart';
+import '../../data/models/comic_model.dart';
 
-part 'manga_model.g.dart';
-
-@JsonSerializable()
-class MangaModel extends Equatable {
+class ComicEntity extends Equatable {
   final bool? status;
   final int? page;
-  @JsonKey(name: 'max_page')
   final int? maxPage;
-  final List<DataMangaModel>? data;
+  final List<DataComicEntity>? data;
 
-  const MangaModel({
+  const ComicEntity({
     required this.status,
     required this.page,
     required this.maxPage,
     required this.data,
   });
 
-  factory MangaModel.fromJson(Map<String, dynamic> json) =>
-      _$MangaModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MangaModelToJson(this);
-
-  MangaEntity toEntity() => MangaEntity(
+  ComicModel toModel() => ComicModel(
         status: status,
         page: page,
         maxPage: maxPage,
-        data: data?.map((item) => item.toEntity()).toList(),
+        data: data?.map((item) => item.toModel()).toList(),
       );
 
   @override
@@ -42,10 +31,8 @@ class MangaModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
-class DataMangaModel extends Equatable {
+class DataComicEntity extends Equatable {
   final String? title;
-  @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
   final String? imageUrl;
   final num? chapter;
   final num? rating;
@@ -53,7 +40,7 @@ class DataMangaModel extends Equatable {
   final String? lastUpdated;
   final String? path;
 
-  const DataMangaModel({
+  const DataComicEntity({
     required this.title,
     required this.imageUrl,
     required this.chapter,
@@ -63,12 +50,7 @@ class DataMangaModel extends Equatable {
     required this.path,
   });
 
-  factory DataMangaModel.fromJson(Map<String, dynamic> json) =>
-      _$DataMangaModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DataMangaModelToJson(this);
-
-  DataMangaEntity toEntity() => DataMangaEntity(
+  DataComicModel toModel() => DataComicModel(
         title: title,
         imageUrl: imageUrl,
         chapter: chapter,

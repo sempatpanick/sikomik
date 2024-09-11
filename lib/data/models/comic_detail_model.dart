@@ -2,26 +2,26 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/convert_image_url.dart';
-import '../../domain/entities/manga_detail_entity.dart';
+import '../../domain/entities/comic_detail_entity.dart';
 
-part 'manga_detail_model.g.dart';
+part 'comic_detail_model.g.dart';
 
 @JsonSerializable()
-class MangaDetailModel extends Equatable {
+class ComicDetailModel extends Equatable {
   final bool? status;
-  final DataMangaDetailModel? data;
+  final DataComicDetailModel? data;
 
-  const MangaDetailModel({
+  const ComicDetailModel({
     required this.status,
     required this.data,
   });
 
-  factory MangaDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$MangaDetailModelFromJson(json);
+  factory ComicDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$ComicDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MangaDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$ComicDetailModelToJson(this);
 
-  MangaDetailEntity toEntity() => MangaDetailEntity(
+  ComicDetailEntity toEntity() => ComicDetailEntity(
         status: status,
         data: data?.toEntity(),
       );
@@ -34,7 +34,7 @@ class MangaDetailModel extends Equatable {
 }
 
 @JsonSerializable()
-class DataMangaDetailModel extends Equatable {
+class DataComicDetailModel extends Equatable {
   final String? title;
   final String? titleIndonesia;
   @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
@@ -47,10 +47,10 @@ class DataMangaDetailModel extends Equatable {
   final String? author;
   final String? status;
   final num? rating;
-  final List<GenreDataMangaDetailModel>? genres;
-  final List<ChapterDataMangaDetailModel>? chapters;
+  final List<GenreDataComicDetailModel>? genres;
+  final List<ChapterDataComicDetailModel>? chapters;
 
-  const DataMangaDetailModel({
+  const DataComicDetailModel({
     required this.title,
     required this.titleIndonesia,
     required this.imageUrl,
@@ -65,12 +65,12 @@ class DataMangaDetailModel extends Equatable {
     required this.chapters,
   });
 
-  factory DataMangaDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$DataMangaDetailModelFromJson(json);
+  factory DataComicDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$DataComicDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataMangaDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$DataComicDetailModelToJson(this);
 
-  DataMangaDetailEntity toEntity() => DataMangaDetailEntity(
+  DataComicDetailEntity toEntity() => DataComicDetailEntity(
         title: title,
         titleIndonesia: titleIndonesia,
         imageUrl: imageUrl,
@@ -103,21 +103,21 @@ class DataMangaDetailModel extends Equatable {
 }
 
 @JsonSerializable()
-class GenreDataMangaDetailModel extends Equatable {
+class GenreDataComicDetailModel extends Equatable {
   final String? name;
   final String? path;
 
-  const GenreDataMangaDetailModel({
+  const GenreDataComicDetailModel({
     required this.name,
     required this.path,
   });
 
-  factory GenreDataMangaDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$GenreDataMangaDetailModelFromJson(json);
+  factory GenreDataComicDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$GenreDataComicDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GenreDataMangaDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$GenreDataComicDetailModelToJson(this);
 
-  GenreDataMangaDetailEntity toEntity() => GenreDataMangaDetailEntity(
+  GenreDataComicDetailEntity toEntity() => GenreDataComicDetailEntity(
         name: name,
         path: path,
       );
@@ -130,25 +130,25 @@ class GenreDataMangaDetailModel extends Equatable {
 }
 
 @JsonSerializable()
-class ChapterDataMangaDetailModel extends Equatable {
+class ChapterDataComicDetailModel extends Equatable {
   final String? name;
   final num? chapter;
   final String? uploadedDate;
   final String? path;
 
-  const ChapterDataMangaDetailModel({
+  const ChapterDataComicDetailModel({
     required this.name,
     required this.chapter,
     required this.uploadedDate,
     required this.path,
   });
 
-  factory ChapterDataMangaDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$ChapterDataMangaDetailModelFromJson(json);
+  factory ChapterDataComicDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$ChapterDataComicDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ChapterDataMangaDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$ChapterDataComicDetailModelToJson(this);
 
-  ChapterDataMangaDetailEntity toEntity() => ChapterDataMangaDetailEntity(
+  ChapterDataComicDetailEntity toEntity() => ChapterDataComicDetailEntity(
         name: name,
         chapter: chapter,
         uploadedDate: uploadedDate,

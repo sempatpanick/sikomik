@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'manga_detail_model.dart';
+part of 'comic_detail_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MangaDetailModel _$MangaDetailModelFromJson(Map<String, dynamic> json) =>
-    MangaDetailModel(
+ComicDetailModel _$ComicDetailModelFromJson(Map<String, dynamic> json) =>
+    ComicDetailModel(
       status: json['status'] as bool?,
       data: json['data'] == null
           ? null
-          : DataMangaDetailModel.fromJson(json['data'] as Map<String, dynamic>),
+          : DataComicDetailModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$MangaDetailModelToJson(MangaDetailModel instance) =>
+Map<String, dynamic> _$ComicDetailModelToJson(ComicDetailModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'data': instance.data,
     };
 
-DataMangaDetailModel _$DataMangaDetailModelFromJson(
+DataComicDetailModel _$DataComicDetailModelFromJson(
         Map<String, dynamic> json) =>
-    DataMangaDetailModel(
+    DataComicDetailModel(
       title: json['title'] as String?,
       titleIndonesia: json['titleIndonesia'] as String?,
       imageUrl: imageUrlFromJson(json['imageUrl']),
@@ -35,16 +35,16 @@ DataMangaDetailModel _$DataMangaDetailModelFromJson(
       rating: json['rating'] as num?,
       genres: (json['genres'] as List<dynamic>?)
           ?.map((e) =>
-              GenreDataMangaDetailModel.fromJson(e as Map<String, dynamic>))
+              GenreDataComicDetailModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       chapters: (json['chapters'] as List<dynamic>?)
           ?.map((e) =>
-              ChapterDataMangaDetailModel.fromJson(e as Map<String, dynamic>))
+              ChapterDataComicDetailModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$DataMangaDetailModelToJson(
-        DataMangaDetailModel instance) =>
+Map<String, dynamic> _$DataComicDetailModelToJson(
+        DataComicDetailModel instance) =>
     <String, dynamic>{
       'title': instance.title,
       'titleIndonesia': instance.titleIndonesia,
@@ -60,31 +60,31 @@ Map<String, dynamic> _$DataMangaDetailModelToJson(
       'chapters': instance.chapters,
     };
 
-GenreDataMangaDetailModel _$GenreDataMangaDetailModelFromJson(
+GenreDataComicDetailModel _$GenreDataComicDetailModelFromJson(
         Map<String, dynamic> json) =>
-    GenreDataMangaDetailModel(
+    GenreDataComicDetailModel(
       name: json['name'] as String?,
       path: json['path'] as String?,
     );
 
-Map<String, dynamic> _$GenreDataMangaDetailModelToJson(
-        GenreDataMangaDetailModel instance) =>
+Map<String, dynamic> _$GenreDataComicDetailModelToJson(
+        GenreDataComicDetailModel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'path': instance.path,
     };
 
-ChapterDataMangaDetailModel _$ChapterDataMangaDetailModelFromJson(
+ChapterDataComicDetailModel _$ChapterDataComicDetailModelFromJson(
         Map<String, dynamic> json) =>
-    ChapterDataMangaDetailModel(
+    ChapterDataComicDetailModel(
       name: json['name'] as String?,
       chapter: json['chapter'] as num?,
       uploadedDate: json['uploadedDate'] as String?,
       path: json['path'] as String?,
     );
 
-Map<String, dynamic> _$ChapterDataMangaDetailModelToJson(
-        ChapterDataMangaDetailModel instance) =>
+Map<String, dynamic> _$ChapterDataComicDetailModelToJson(
+        ChapterDataComicDetailModel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'chapter': instance.chapter,
