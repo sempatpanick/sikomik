@@ -1,17 +1,18 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../common/utils/convert_image_url.dart';
 import '../../domain/entities/manga_entity.dart';
 
 part 'manga_model.g.dart';
 
 @JsonSerializable()
 class MangaModel extends Equatable {
-  final bool status;
-  final int page;
+  final bool? status;
+  final int? page;
   @JsonKey(name: 'max_page')
-  final int maxPage;
-  final List<DataMangaModel> data;
+  final int? maxPage;
+  final List<DataMangaModel>? data;
 
   const MangaModel({
     required this.status,
@@ -20,7 +21,8 @@ class MangaModel extends Equatable {
     required this.data,
   });
 
-  factory MangaModel.fromJson(Map<String, dynamic> json) => _$MangaModelFromJson(json);
+  factory MangaModel.fromJson(Map<String, dynamic> json) =>
+      _$MangaModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MangaModelToJson(this);
 
@@ -28,7 +30,7 @@ class MangaModel extends Equatable {
         status: status,
         page: page,
         maxPage: maxPage,
-        data: data.map((item) => item.toEntity()).toList(),
+        data: data?.map((item) => item.toEntity()).toList(),
       );
 
   @override
@@ -42,39 +44,48 @@ class MangaModel extends Equatable {
 
 @JsonSerializable()
 class DataMangaModel extends Equatable {
-  final String title;
-  final num chapter;
-  final num rating;
-  @JsonKey(name: 'image_path')
-  final String imagePath;
-  final String path;
+  final String? title;
+  @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
+  final String? imageUrl;
+  final num? chapter;
+  final num? rating;
+  final String? status;
+  final String? lastUpdated;
+  final String? path;
 
   const DataMangaModel({
     required this.title,
+    required this.imageUrl,
     required this.chapter,
     required this.rating,
-    required this.imagePath,
+    required this.status,
+    required this.lastUpdated,
     required this.path,
   });
 
-  factory DataMangaModel.fromJson(Map<String, dynamic> json) => _$DataMangaModelFromJson(json);
+  factory DataMangaModel.fromJson(Map<String, dynamic> json) =>
+      _$DataMangaModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataMangaModelToJson(this);
 
   DataMangaEntity toEntity() => DataMangaEntity(
         title: title,
+        imageUrl: imageUrl,
         chapter: chapter,
         rating: rating,
-        imagePath: imagePath,
+        status: status,
+        lastUpdated: lastUpdated,
         path: path,
       );
 
   @override
   List<Object?> get props => [
         title,
+        imageUrl,
         chapter,
         rating,
-        imagePath,
+        status,
+        lastUpdated,
         path,
       ];
 }

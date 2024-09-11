@@ -56,7 +56,9 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   }
 
   @override
-  Future<Either<Failure, MangaDetailEntity>> getMangaDetail({required String path}) async {
+  Future<Either<Failure, MangaDetailEntity>> getMangaDetail({
+    required String path,
+  }) async {
     try {
       final result = await remoteDataSource.getMangaDetail(path: path);
 
@@ -73,7 +75,9 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   }
 
   @override
-  Future<Either<Failure, ChapterEntity>> getChapter({required String path}) async {
+  Future<Either<Failure, ChapterEntity>> getChapter({
+    required String path,
+  }) async {
     try {
       final result = await remoteDataSource.getChapter(path: path);
 

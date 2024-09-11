@@ -42,19 +42,16 @@ class HomePagePhone extends StatelessWidget {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
                       mainAxisExtent: 260,
                     ),
-                    itemCount: controller.searchInputController.text.isEmpty
-                        ? controller.mangas.length
-                        : controller.mangasSearch.length,
+                    itemCount: controller.mangas.length,
                     itemBuilder: (context, index) {
-                      final item = controller.searchInputController.text.isEmpty
-                          ? controller.mangas[index]
-                          : controller.mangasSearch[index];
+                      final item = controller.mangas[index];
 
                       return MangaCardWidget(manga: item);
                     },

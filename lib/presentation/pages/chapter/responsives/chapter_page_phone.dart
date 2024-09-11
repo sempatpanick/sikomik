@@ -38,7 +38,8 @@ class ChapterPagePhone extends StatelessWidget {
         ),
       ),
       body: GetX<ChapterController>(
-        builder: (controller) => controller.stateChapter.value == RequestState.loading ||
+        builder: (controller) => controller.stateChapter.value ==
+                    RequestState.loading ||
                 controller.chapter.value == null
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -47,9 +48,9 @@ class ChapterPagePhone extends StatelessWidget {
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.zero,
-                  itemCount: controller.chapter.value?.images.length ?? 0,
+                  itemCount: controller.chapter.value?.images?.length ?? 0,
                   itemBuilder: (context, index) {
-                    final item = controller.chapter.value!.images[index];
+                    final item = controller.chapter.value!.images![index];
 
                     return Image.network(
                       item,
@@ -58,7 +59,7 @@ class ChapterPagePhone extends StatelessWidget {
                           ? child
                           : SizedBox(
                               width: double.infinity,
-                              height: 60,
+                              height: 300,
                               child: Center(
                                 child: SizedBox(
                                   width: 40,

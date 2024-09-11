@@ -4,11 +4,11 @@ import 'shimmer_effect.dart';
 
 class ShimmerLoadingWidget extends StatefulWidget {
   const ShimmerLoadingWidget({
-    Key? key,
+    super.key,
     required this.isLoading,
     this.childLoading,
     required this.child,
-  }) : super(key: key);
+  });
 
   final bool isLoading;
   final Widget? childLoading;

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
+    final appRouter = AppRouter();
 
     return MaterialApp.router(
       title: 'Si Komik',
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       scrollBehavior: ScrollBehaviorHelper(),
-      routerConfig: _appRouter.config(),
+      routerConfig: appRouter.config(),
     );
   }
 }

@@ -20,19 +20,16 @@ class HomeController extends GetxController {
 
   RxList<DataMangaEntity> mangas = <DataMangaEntity>[].obs;
   RxInt currentPage = 0.obs;
-  RxInt maxPage = 0.obs;
-
-  RxList<DataMangaEntity> mangasSearch = <DataMangaEntity>[].obs;
-  RxInt currentPageSearch = 0.obs;
-  RxInt maxPageSearch = 0.obs;
+  RxBool isLastPage = false.obs;
 
   @override
   void onInit() {
     scrollController.addListener(
       () {
-        if (scrollController.offset > scrollController.position.maxScrollExtent - 200) {
+        if (scrollController.offset >
+            scrollController.position.maxScrollExtent - 200) {
           if (stateMangas.value != RequestState.loading) {
-            if (!(currentPage.value == maxPage.value)) {
+            if (!isLastPage.value) {
               getLatestManga();
             }
           }
@@ -57,12 +54,7 @@ class HomeController extends GetxController {
     if (isClearMangas) {
       mangas.clear();
       currentPage.value = 0;
-      maxPage.value = 0;
-    }
-    if (isClearMangasSearch) {
-      mangasSearch.clear();
-      currentPageSearch.value = 0;
-      maxPageSearch.value = 0;
+      isLastPage.value = false;
     }
 
     final result = await getLatestMangaCase.execute(
@@ -73,15 +65,11 @@ class HomeController extends GetxController {
       failedSnackBar("", l.message);
     }, (r) {
       changeStateMangas(RequestState.loaded);
-      if (searchInputController.text.isEmpty) {
-        currentPage.value = r.page;
-        maxPage.value = r.maxPage;
-        mangas.addAll(r.data);
-      } else {
-        currentPageSearch.value = r.page;
-        maxPageSearch.value = r.maxPage;
-        mangasSearch.addAll(r.data);
+      currentPage.value = currentPage.value + 1;
+      if ((r.data ?? []).isEmpty) {
+        isLastPage.value = true;
       }
+      mangas.addAll(r.data ?? []);
     });
   }
 

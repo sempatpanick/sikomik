@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 import '../../data/models/manga_model.dart';
 
 class MangaEntity extends Equatable {
-  final bool status;
-  final int page;
-  final int maxPage;
-  final List<DataMangaEntity> data;
+  final bool? status;
+  final int? page;
+  final int? maxPage;
+  final List<DataMangaEntity>? data;
 
   const MangaEntity({
     required this.status,
@@ -19,7 +19,7 @@ class MangaEntity extends Equatable {
         status: status,
         page: page,
         maxPage: maxPage,
-        data: data.map((item) => item.toModel()).toList(),
+        data: data?.map((item) => item.toModel()).toList(),
       );
 
   @override
@@ -32,34 +32,42 @@ class MangaEntity extends Equatable {
 }
 
 class DataMangaEntity extends Equatable {
-  final String title;
-  final num chapter;
-  final num rating;
-  final String imagePath;
-  final String path;
+  final String? title;
+  final String? imageUrl;
+  final num? chapter;
+  final num? rating;
+  final String? status;
+  final String? lastUpdated;
+  final String? path;
 
   const DataMangaEntity({
     required this.title,
+    required this.imageUrl,
     required this.chapter,
     required this.rating,
-    required this.imagePath,
+    required this.status,
+    required this.lastUpdated,
     required this.path,
   });
 
   DataMangaModel toModel() => DataMangaModel(
         title: title,
+        imageUrl: imageUrl,
         chapter: chapter,
         rating: rating,
-        imagePath: imagePath,
+        status: status,
+        lastUpdated: lastUpdated,
         path: path,
       );
 
   @override
   List<Object?> get props => [
         title,
+        imageUrl,
         chapter,
         rating,
-        imagePath,
+        status,
+        lastUpdated,
         path,
       ];
 }

@@ -7,8 +7,10 @@ part of 'chapter_model.dart';
 // **************************************************************************
 
 ChapterModel _$ChapterModelFromJson(Map<String, dynamic> json) => ChapterModel(
-      status: json['status'] as bool,
-      data: DataChapterModel.fromJson(json['data'] as Map<String, dynamic>),
+      status: json['status'] as bool?,
+      data: json['data'] == null
+          ? null
+          : DataChapterModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChapterModelToJson(ChapterModel instance) =>
@@ -19,15 +21,17 @@ Map<String, dynamic> _$ChapterModelToJson(ChapterModel instance) =>
 
 DataChapterModel _$DataChapterModelFromJson(Map<String, dynamic> json) =>
     DataChapterModel(
+      title: json['title'] as String?,
+      chapter: (json['chapter'] as num?)?.toInt(),
+      uploadedDate: json['uploadedDate'] as String?,
       images:
-          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      previousChapterPath: json['previous_chapter_path'] as String?,
-      nextChapterPath: json['next_chapter_path'] as String?,
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$DataChapterModelToJson(DataChapterModel instance) =>
     <String, dynamic>{
+      'title': instance.title,
+      'chapter': instance.chapter,
+      'uploadedDate': instance.uploadedDate,
       'images': instance.images,
-      'previous_chapter_path': instance.previousChapterPath,
-      'next_chapter_path': instance.nextChapterPath,
     };

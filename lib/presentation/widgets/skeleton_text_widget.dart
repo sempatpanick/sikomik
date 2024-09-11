@@ -5,9 +5,9 @@ import 'shimmer_loading_widget.dart';
 class SkeletonTextWidget extends StatelessWidget {
   final double? width;
   const SkeletonTextWidget({
-    Key? key,
+    super.key,
     this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

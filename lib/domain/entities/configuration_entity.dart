@@ -4,21 +4,21 @@ import '../../data/models/configuration_model.dart';
 
 class ConfigurationEntity extends Equatable {
   final String appVersion;
-  final String baseKomikUrl;
+  final String url;
 
   const ConfigurationEntity({
     required this.appVersion,
-    required this.baseKomikUrl,
+    required this.url,
   });
 
   ConfigurationModel toModel() => ConfigurationModel(
         appVersion: appVersion,
-        baseKomikUrl: baseKomikUrl,
+        url: url,
       );
 
   @override
   List<Object?> get props => [
         appVersion,
-        baseKomikUrl,
+        url,
       ];
 }

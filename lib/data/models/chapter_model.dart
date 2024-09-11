@@ -7,21 +7,22 @@ part 'chapter_model.g.dart';
 
 @JsonSerializable()
 class ChapterModel extends Equatable {
-  final bool status;
-  final DataChapterModel data;
+  final bool? status;
+  final DataChapterModel? data;
 
   const ChapterModel({
     required this.status,
     required this.data,
   });
 
-  factory ChapterModel.fromJson(Map<String, dynamic> json) => _$ChapterModelFromJson(json);
+  factory ChapterModel.fromJson(Map<String, dynamic> json) =>
+      _$ChapterModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChapterModelToJson(this);
 
   ChapterEntity toEntity() => ChapterEntity(
         status: status,
-        data: data.toEntity(),
+        data: data?.toEntity(),
       );
 
   @override
@@ -33,32 +34,35 @@ class ChapterModel extends Equatable {
 
 @JsonSerializable()
 class DataChapterModel extends Equatable {
-  final List<String> images;
-  @JsonKey(name: 'previous_chapter_path')
-  final String? previousChapterPath;
-  @JsonKey(name: 'next_chapter_path')
-  final String? nextChapterPath;
+  final String? title;
+  final int? chapter;
+  final String? uploadedDate;
+  final List<String>? images;
 
   const DataChapterModel({
+    required this.title,
+    required this.chapter,
+    required this.uploadedDate,
     required this.images,
-    this.previousChapterPath,
-    this.nextChapterPath,
   });
 
-  factory DataChapterModel.fromJson(Map<String, dynamic> json) => _$DataChapterModelFromJson(json);
+  factory DataChapterModel.fromJson(Map<String, dynamic> json) =>
+      _$DataChapterModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataChapterModelToJson(this);
 
   DataChapterEntity toEntity() => DataChapterEntity(
+        title: title,
+        chapter: chapter,
+        uploadedDate: uploadedDate,
         images: images,
-        previousChapterPath: previousChapterPath,
-        nextChapterPath: nextChapterPath,
       );
 
   @override
   List<Object?> get props => [
+        title,
+        chapter,
+        uploadedDate,
         images,
-        previousChapterPath,
-        nextChapterPath,
       ];
 }

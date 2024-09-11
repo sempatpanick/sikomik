@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import '../../data/models/chapter_model.dart';
 
 class ChapterEntity extends Equatable {
-  final bool status;
-  final DataChapterEntity data;
+  final bool? status;
+  final DataChapterEntity? data;
 
   const ChapterEntity({
     required this.status,
@@ -13,7 +13,7 @@ class ChapterEntity extends Equatable {
 
   ChapterModel toModel() => ChapterModel(
         status: status,
-        data: data.toModel(),
+        data: data?.toModel(),
       );
 
   @override
@@ -24,26 +24,30 @@ class ChapterEntity extends Equatable {
 }
 
 class DataChapterEntity extends Equatable {
-  final List<String> images;
-  final String? previousChapterPath;
-  final String? nextChapterPath;
+  final String? title;
+  final int? chapter;
+  final String? uploadedDate;
+  final List<String>? images;
 
   const DataChapterEntity({
+    required this.title,
+    required this.chapter,
+    required this.uploadedDate,
     required this.images,
-    this.previousChapterPath,
-    this.nextChapterPath,
   });
 
   DataChapterModel toModel() => DataChapterModel(
+        title: title,
+        chapter: chapter,
+        uploadedDate: uploadedDate,
         images: images,
-        previousChapterPath: previousChapterPath,
-        nextChapterPath: nextChapterPath,
       );
 
   @override
   List<Object?> get props => [
+        title,
+        chapter,
+        uploadedDate,
         images,
-        previousChapterPath,
-        nextChapterPath,
       ];
 }

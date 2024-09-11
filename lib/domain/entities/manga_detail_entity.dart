@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import '../../data/models/manga_detail_model.dart';
 
 class MangaDetailEntity extends Equatable {
-  final bool status;
-  final DataMangaDetailEntity data;
+  final bool? status;
+  final DataMangaDetailEntity? data;
 
   const MangaDetailEntity({
     required this.status,
@@ -13,7 +13,7 @@ class MangaDetailEntity extends Equatable {
 
   MangaDetailModel toModel() => MangaDetailModel(
         status: status,
-        data: data.toModel(),
+        data: data?.toModel(),
       );
 
   @override
@@ -24,47 +24,69 @@ class MangaDetailEntity extends Equatable {
 }
 
 class DataMangaDetailEntity extends Equatable {
-  final String title;
-  final String? description;
-  final num rating;
-  final List<List<String>> informations;
-  final List<GenreDataMangaDetailEntity> genres;
-  final List<ChapterDataMangaDetailEntity> chapters;
-  final String imagePath;
+  final String? title;
+  final String? titleIndonesia;
+  final String? imageUrl;
+  final String? thumbnailUrl;
+  final String? synopsis;
+  final String? type;
+  final String? storyConcept;
+  final String? author;
+  final String? status;
+  final num? rating;
+  final List<GenreDataMangaDetailEntity>? genres;
+  final List<ChapterDataMangaDetailEntity>? chapters;
 
   const DataMangaDetailEntity({
     required this.title,
-    this.description,
+    required this.titleIndonesia,
+    required this.imageUrl,
+    required this.thumbnailUrl,
+    required this.synopsis,
+    required this.type,
+    required this.storyConcept,
+    required this.author,
+    required this.status,
     required this.rating,
-    required this.informations,
     required this.genres,
     required this.chapters,
-    required this.imagePath,
   });
 
   DataMangaDetailModel toModel() => DataMangaDetailModel(
         title: title,
-        description: description,
+        titleIndonesia: titleIndonesia,
+        imageUrl: imageUrl,
+        thumbnailUrl: thumbnailUrl,
+        synopsis: synopsis,
+        type: type,
+        storyConcept: storyConcept,
+        author: author,
+        status: status,
         rating: rating,
-        informations: informations,
-        genres: genres.map((item) => item.toModel()).toList(),
-        chapters: chapters.map((item) => item.toModel()).toList(),
-        imagePath: imagePath,
+        genres: genres?.map((item) => item.toModel()).toList(),
+        chapters: chapters?.map((item) => item.toModel()).toList(),
       );
 
   @override
   List<Object?> get props => [
         title,
-        description,
+        titleIndonesia,
+        imageUrl,
+        thumbnailUrl,
+        synopsis,
+        type,
+        storyConcept,
+        author,
+        status,
         rating,
-        informations,
-        imagePath,
+        genres,
+        chapters,
       ];
 }
 
 class GenreDataMangaDetailEntity extends Equatable {
-  final String name;
-  final String path;
+  final String? name;
+  final String? path;
 
   const GenreDataMangaDetailEntity({
     required this.name,
@@ -84,26 +106,30 @@ class GenreDataMangaDetailEntity extends Equatable {
 }
 
 class ChapterDataMangaDetailEntity extends Equatable {
-  final num chapter;
-  final String uploadAt;
-  final String path;
+  final String? name;
+  final num? chapter;
+  final String? uploadedDate;
+  final String? path;
 
   const ChapterDataMangaDetailEntity({
+    required this.name,
     required this.chapter,
-    required this.uploadAt,
+    required this.uploadedDate,
     required this.path,
   });
 
   ChapterDataMangaDetailModel toModel() => ChapterDataMangaDetailModel(
+        name: name,
         chapter: chapter,
-        uploadAt: uploadAt,
+        uploadedDate: uploadedDate,
         path: path,
       );
 
   @override
   List<Object?> get props => [
+        name,
         chapter,
-        uploadAt,
+        uploadedDate,
         path,
       ];
 }

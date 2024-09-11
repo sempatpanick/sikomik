@@ -10,11 +10,11 @@ class ConfigurationModel extends Equatable {
   @JsonKey(name: 'app_version')
   final String appVersion;
   @JsonKey(name: 'base_komik_url')
-  final String baseKomikUrl;
+  final String url;
 
   const ConfigurationModel({
     required this.appVersion,
-    required this.baseKomikUrl,
+    required this.url,
   });
 
   factory ConfigurationModel.fromJson(Map<String, dynamic> json) =>
@@ -24,12 +24,12 @@ class ConfigurationModel extends Equatable {
 
   ConfigurationEntity toEntity() => ConfigurationEntity(
         appVersion: appVersion,
-        baseKomikUrl: baseKomikUrl,
+        url: url,
       );
 
   @override
   List<Object?> get props => [
         appVersion,
-        baseKomikUrl,
+        url,
       ];
 }

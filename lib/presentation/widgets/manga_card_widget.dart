@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 
 import '../../common/app_router.gr.dart';
 import '../../domain/entities/manga_entity.dart';
-import '../controllers/main_controller.dart';
 
 class MangaCardWidget extends StatelessWidget {
   final DataMangaEntity manga;
@@ -21,7 +19,10 @@ class MangaCardWidget extends StatelessWidget {
 
     return InkWell(
       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10.0)),
-      onTap: () => context.router.push(MangaDetailRoute(path: manga.path)),
+      onTap: () {
+        if (manga.path == null) return;
+        context.router.push(MangaDetailRoute(path: manga.path!));
+      },
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.black,
@@ -38,9 +39,9 @@ class MangaCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GetBuilder<MainController>(
-              builder: (controller) => Image.network(
-                "${controller.configuration.value?.baseKomikUrl ?? ""}${manga.imagePath}",
+            if (manga.imageUrl != null)
+              Image.network(
+                "${manga.imageUrl}",
                 width: double.infinity,
                 height: 140,
                 fit: BoxFit.cover,
@@ -71,14 +72,24 @@ class MangaCardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            if (manga.imageUrl == null)
+              const SizedBox(
+                height: 140,
+                child: Center(
+                  child: Icon(
+                    Icons.broken_image_outlined,
+                    color: Colors.grey,
+                    size: 40,
+                  ),
+                ),
+              ),
             const SizedBox(
               height: 8.0,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                manga.title,
+                manga.title ?? "",
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelLarge?.copyWith(
@@ -107,7 +118,7 @@ class MangaCardWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: RatingBar.builder(
-                          initialRating: manga.rating / 2,
+                          initialRating: (manga.rating ?? 0) / 2,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
                           ignoreGestures: true,

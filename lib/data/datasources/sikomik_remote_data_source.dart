@@ -38,7 +38,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
     final retryClient = RetryClient(client);
 
     final response = await retryClient.get(
-      Uri.parse("$url/configuration.php"),
+      Uri.parse("$url/configuration"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -60,7 +60,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
     final retryClient = RetryClient(client);
 
     final response = await retryClient.get(
-      Uri.parse("$url/manga.php?page=$page&q=$q"),
+      Uri.parse("$url/newest/page/$page"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -82,7 +82,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
     final retryClient = RetryClient(client);
 
     final response = await retryClient.get(
-      Uri.parse("$url/detail_manga.php?path=$path"),
+      Uri.parse("$url$path"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -104,7 +104,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
     final retryClient = RetryClient(client);
 
     final response = await retryClient.get(
-      Uri.parse("$url/chapter.php?path=$path"),
+      Uri.parse("$url$path"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",

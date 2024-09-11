@@ -73,38 +73,50 @@ class MangaDetailPageContent extends StatelessWidget {
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: Image.network(
-                    "${controller.mainController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, event) => event == null
-                        ? child
-                        : SizedBox(
+                  child: controller.manga.value?.thumbnailUrl != null
+                      ? Image.network(
+                          controller.manga.value!.thumbnailUrl!,
+                          width: double.infinity,
+                          height: 200,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, event) =>
+                              event == null
+                                  ? child
+                                  : SizedBox(
+                                      height: 140,
+                                      child: Center(
+                                        child: SizedBox(
+                                          width: 40,
+                                          height: 40,
+                                          child: CircularProgressIndicator(
+                                            value: event.cumulativeBytesLoaded /
+                                                (event.expectedTotalBytes ?? 1),
+                                            color: theme.primaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                          errorBuilder: (context, url, error) => const SizedBox(
                             height: 140,
                             child: Center(
-                              child: SizedBox(
-                                width: 40,
-                                height: 40,
-                                child: CircularProgressIndicator(
-                                  value: event.cumulativeBytesLoaded /
-                                      (event.expectedTotalBytes ?? 1),
-                                  color: theme.primaryColor,
-                                ),
+                              child: Icon(
+                                Icons.broken_image_outlined,
+                                color: Colors.grey,
+                                size: 40,
                               ),
                             ),
                           ),
-                    errorBuilder: (context, url, error) => const SizedBox(
-                      height: 140,
-                      child: Center(
-                        child: Icon(
-                          Icons.broken_image_outlined,
-                          color: Colors.grey,
-                          size: 40,
+                        )
+                      : const SizedBox(
+                          height: 140,
+                          child: Center(
+                            child: Icon(
+                              Icons.broken_image_outlined,
+                              color: Colors.grey,
+                              size: 40,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
                 const SizedBox(
                   height: 16.0,
@@ -118,7 +130,8 @@ class MangaDetailPageContent extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: theme.primaryColor,
                         borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(10.0)),
+                          top: Radius.circular(10.0),
+                        ),
                         border: Border.all(
                           color: Colors.grey,
                         ),
@@ -192,7 +205,7 @@ class MangaDetailPageContent extends StatelessWidget {
                         height: 16.0,
                       ),
                       Text(
-                        controller.manga.value?.description ?? "",
+                        controller.manga.value?.synopsis ?? "",
                         style: theme.textTheme.labelLarge?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
@@ -219,26 +232,80 @@ class MangaDetailPageContent extends StatelessWidget {
                           ],
                         ),
                         child: Table(
-                          children: (controller.manga.value?.informations ?? [])
-                              .map((item) => TableRow(children: [
-                                    Text(
-                                      item[0],
-                                      style:
-                                          theme.textTheme.labelLarge?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      item[1],
-                                      style:
-                                          theme.textTheme.labelLarge?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ]))
-                              .toList(),
+                          children: [
+                            TableRow(
+                              children: [
+                                Text(
+                                  "Penulis",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  controller.manga.value?.author ?? "",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                Text(
+                                  "Tipe",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  controller.manga.value?.type ?? "",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                Text(
+                                  "Alur Cerita",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  controller.manga.value?.storyConcept ?? "",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                Text(
+                                  "Status",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  controller.manga.value?.status ?? "",
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -258,13 +325,20 @@ class MangaDetailPageContent extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         separatorBuilder: (context, index) =>
                             const Divider(height: 1),
-                        itemCount: controller.manga.value?.chapters.length ?? 0,
+                        itemCount:
+                            controller.manga.value?.chapters?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final item = controller.manga.value!.chapters[index];
+                          final item = controller.manga.value!.chapters![index];
 
                           return ListTile(
-                            onTap: () => context.router
-                                .push(ChapterRoute(path: item.path)),
+                            onTap: () {
+                              if (item.path == null) return;
+                              context.router.push(
+                                ChapterRoute(
+                                  path: item.path!,
+                                ),
+                              );
+                            },
                             title: Text(
                               "Chapter ${item.chapter}",
                               style: theme.textTheme.labelLarge?.copyWith(
@@ -273,7 +347,7 @@ class MangaDetailPageContent extends StatelessWidget {
                               ),
                             ),
                             trailing: Text(
-                              item.uploadAt,
+                              item.uploadedDate ?? "",
                               style: theme.textTheme.labelLarge?.copyWith(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.normal,
@@ -290,40 +364,52 @@ class MangaDetailPageContent extends StatelessWidget {
             Positioned(
               left: 24.0,
               top: 110,
-              child: Image.network(
-                "${controller.mainController.configuration.value?.baseKomikUrl ?? ""}${controller.manga.value?.imagePath}",
-                width: 130,
-                height: 200,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, event) => event == null
-                    ? child
-                    : SizedBox(
+              child: controller.manga.value?.imageUrl != null
+                  ? Image.network(
+                      controller.manga.value!.imageUrl!,
+                      width: 130,
+                      height: 200,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, event) => event == null
+                          ? child
+                          : SizedBox(
+                              width: 130,
+                              height: 200,
+                              child: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    value: event.cumulativeBytesLoaded /
+                                        (event.expectedTotalBytes ?? 1),
+                                    color: theme.primaryColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                      errorBuilder: (context, url, error) => const SizedBox(
                         width: 130,
                         height: 200,
                         child: Center(
-                          child: SizedBox(
-                            width: 40,
-                            height: 40,
-                            child: CircularProgressIndicator(
-                              value: event.cumulativeBytesLoaded /
-                                  (event.expectedTotalBytes ?? 1),
-                              color: theme.primaryColor,
-                            ),
+                          child: Icon(
+                            Icons.broken_image_outlined,
+                            color: Colors.grey,
+                            size: 40,
                           ),
                         ),
                       ),
-                errorBuilder: (context, url, error) => const SizedBox(
-                  width: 130,
-                  height: 200,
-                  child: Center(
-                    child: Icon(
-                      Icons.broken_image_outlined,
-                      color: Colors.grey,
-                      size: 40,
+                    )
+                  : const SizedBox(
+                      width: 130,
+                      height: 200,
+                      child: Center(
+                        child: Icon(
+                          Icons.broken_image_outlined,
+                          color: Colors.grey,
+                          size: 40,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
             ),
           ],
         ),

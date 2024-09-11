@@ -1,27 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../common/utils/convert_image_url.dart';
 import '../../domain/entities/manga_detail_entity.dart';
 
 part 'manga_detail_model.g.dart';
 
 @JsonSerializable()
 class MangaDetailModel extends Equatable {
-  final bool status;
-  final DataMangaDetailModel data;
+  final bool? status;
+  final DataMangaDetailModel? data;
 
   const MangaDetailModel({
     required this.status,
     required this.data,
   });
 
-  factory MangaDetailModel.fromJson(Map<String, dynamic> json) => _$MangaDetailModelFromJson(json);
+  factory MangaDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$MangaDetailModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MangaDetailModelToJson(this);
 
   MangaDetailEntity toEntity() => MangaDetailEntity(
         status: status,
-        data: data.toEntity(),
+        data: data?.toEntity(),
       );
 
   @override
@@ -33,23 +35,34 @@ class MangaDetailModel extends Equatable {
 
 @JsonSerializable()
 class DataMangaDetailModel extends Equatable {
-  final String title;
-  final String? description;
-  final num rating;
-  final List<List<String>> informations;
-  final List<GenreDataMangaDetailModel> genres;
-  final List<ChapterDataMangaDetailModel> chapters;
-  @JsonKey(name: 'image_path')
-  final String imagePath;
+  final String? title;
+  final String? titleIndonesia;
+  @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
+  final String? imageUrl;
+  @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
+  final String? thumbnailUrl;
+  final String? synopsis;
+  final String? type;
+  final String? storyConcept;
+  final String? author;
+  final String? status;
+  final num? rating;
+  final List<GenreDataMangaDetailModel>? genres;
+  final List<ChapterDataMangaDetailModel>? chapters;
 
   const DataMangaDetailModel({
     required this.title,
-    this.description,
+    required this.titleIndonesia,
+    required this.imageUrl,
+    required this.thumbnailUrl,
+    required this.synopsis,
+    required this.type,
+    required this.storyConcept,
+    required this.author,
+    required this.status,
     required this.rating,
-    required this.informations,
     required this.genres,
     required this.chapters,
-    required this.imagePath,
   });
 
   factory DataMangaDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -59,30 +72,40 @@ class DataMangaDetailModel extends Equatable {
 
   DataMangaDetailEntity toEntity() => DataMangaDetailEntity(
         title: title,
-        description: description,
+        titleIndonesia: titleIndonesia,
+        imageUrl: imageUrl,
+        thumbnailUrl: thumbnailUrl,
+        synopsis: synopsis,
+        type: type,
+        storyConcept: storyConcept,
+        author: author,
+        status: status,
         rating: rating,
-        informations: informations,
-        genres: genres.map((item) => item.toEntity()).toList(),
-        chapters: chapters.map((item) => item.toEntity()).toList(),
-        imagePath: imagePath,
+        genres: genres?.map((item) => item.toEntity()).toList(),
+        chapters: chapters?.map((item) => item.toEntity()).toList(),
       );
 
   @override
   List<Object?> get props => [
         title,
-        description,
+        titleIndonesia,
+        imageUrl,
+        thumbnailUrl,
+        synopsis,
+        type,
+        storyConcept,
+        author,
+        status,
         rating,
-        informations,
         genres,
         chapters,
-        imagePath,
       ];
 }
 
 @JsonSerializable()
 class GenreDataMangaDetailModel extends Equatable {
-  final String name;
-  final String path;
+  final String? name;
+  final String? path;
 
   const GenreDataMangaDetailModel({
     required this.name,
@@ -108,14 +131,15 @@ class GenreDataMangaDetailModel extends Equatable {
 
 @JsonSerializable()
 class ChapterDataMangaDetailModel extends Equatable {
-  final num chapter;
-  @JsonKey(name: 'upload_at')
-  final String uploadAt;
-  final String path;
+  final String? name;
+  final num? chapter;
+  final String? uploadedDate;
+  final String? path;
 
   const ChapterDataMangaDetailModel({
+    required this.name,
     required this.chapter,
-    required this.uploadAt,
+    required this.uploadedDate,
     required this.path,
   });
 
@@ -125,15 +149,17 @@ class ChapterDataMangaDetailModel extends Equatable {
   Map<String, dynamic> toJson() => _$ChapterDataMangaDetailModelToJson(this);
 
   ChapterDataMangaDetailEntity toEntity() => ChapterDataMangaDetailEntity(
+        name: name,
         chapter: chapter,
-        uploadAt: uploadAt,
+        uploadedDate: uploadedDate,
         path: path,
       );
 
   @override
   List<Object?> get props => [
+        name,
         chapter,
-        uploadAt,
+        uploadedDate,
         path,
       ];
 }
