@@ -54,7 +54,7 @@ class ChapterPagePhone extends StatelessWidget {
 
                     return Image.network(
                       item,
-                      width: double.infinity,
+                      fit: BoxFit.fill,
                       loadingBuilder: (context, child, event) => event == null
                           ? child
                           : SizedBox(
