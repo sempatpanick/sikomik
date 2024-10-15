@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -6,7 +5,6 @@ import '../../../common/const.dart';
 import '../../widgets/shimmer_effect.dart';
 import '../../widgets/skeleton_text_widget.dart';
 
-@RoutePage()
 class BrowserInAppPage extends StatefulWidget {
   static const String routeName = "/browser_in_app";
   final String url;

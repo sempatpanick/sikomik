@@ -5,16 +5,18 @@ import '../../common/state_enum.dart';
 import '../../domain/entities/chapter_entity.dart';
 import '../../domain/usecases/get_chapter_case.dart';
 import '../../injection.dart';
-import 'main_controller.dart';
 
 class ChapterController extends GetxController {
   final GetChapterCase getChapterCase = locator();
 
-  final MainController mainController = Get.find<MainController>();
-
   Rx<RequestState> stateChapter = RequestState.empty.obs;
 
   Rxn<DataChapterEntity> chapter = Rxn();
+  RxString path = "".obs;
+
+  void changePath(String value) {
+    path.value = value;
+  }
 
   Future<void> getChapter({required String path}) async {
     final result = await getChapterCase.execute(path: path);

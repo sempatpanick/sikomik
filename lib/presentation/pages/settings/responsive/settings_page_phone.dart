@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sikomik/presentation/pages/browser_in_app/browser_in_app_page.dart';
 
-import '../../../../common/app_router.gr.dart';
 import '../../../../common/theme.dart';
 
 class SettingsPagePhone extends StatelessWidget {
@@ -18,8 +18,8 @@ class SettingsPagePhone extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              onTap: () => context.router.push(
-                BrowserInAppRoute(
+              onTap: () => Get.to(
+                BrowserInAppPage(
                     url: "https://komik.ddg.my.id/privacy-police.html"),
               ),
               title: Text(
@@ -31,8 +31,8 @@ class SettingsPagePhone extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () => context.router.push(
-                BrowserInAppRoute(
+              onTap: () => Get.to(
+                BrowserInAppPage(
                     url: "https://komik.ddg.my.id/terms-and-conditions.html"),
               ),
               title: Text(

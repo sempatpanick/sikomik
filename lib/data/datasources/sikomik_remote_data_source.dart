@@ -41,8 +41,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       Uri.parse("$url/configuration"),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Access_Control_Allow_Origin": "*",
+        "Accept": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -64,7 +63,6 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Access_Control_Allow_Origin": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -86,7 +84,6 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Access_Control_Allow_Origin": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -108,7 +105,6 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Access_Control_Allow_Origin": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {

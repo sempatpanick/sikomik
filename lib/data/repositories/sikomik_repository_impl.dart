@@ -78,18 +78,18 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   Future<Either<Failure, ChapterEntity>> getChapter({
     required String path,
   }) async {
-    try {
-      final result = await remoteDataSource.getChapter(path: path);
+    // try {
+    final result = await remoteDataSource.getChapter(path: path);
 
-      return Right(result.toEntity());
-    } on ResponseFailure catch (e) {
-      return Left(e);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message ?? ''));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
-    } catch (e) {
-      return Left(Exception(e.toString()));
-    }
+    return Right(result.toEntity());
+    // } on ResponseFailure catch (e) {
+    //   return Left(e);
+    // } on ServerException catch (e) {
+    //   return Left(ServerFailure(e.message ?? ''));
+    // } on SocketException {
+    //   return const Left(ConnectionFailure('Failed to connect to the network'));
+    // } catch (e) {
+    //   return Left(Exception(e.toString()));
+    // }
   }
 }

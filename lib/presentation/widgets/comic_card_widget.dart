@@ -1,9 +1,12 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image/flutter_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
-import '../../common/app_router.gr.dart';
 import '../../domain/entities/comic_entity.dart';
+import '../pages/comic_detail/comic_detail_page.dart';
 
 class ComicCardWidget extends StatelessWidget {
   final DataComicEntity comic;
@@ -21,7 +24,12 @@ class ComicCardWidget extends StatelessWidget {
       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10.0)),
       onTap: () {
         if (comic.path == null) return;
-        context.router.push(ComicDetailRoute(path: comic.path!));
+        Get.toNamed(
+          ComicDetailPage.routeName,
+          parameters: {
+            'path': comic.path!,
+          },
+        );
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -39,9 +47,15 @@ class ComicCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (comic.imageUrl != null)
-              Image.network(
-                "${comic.imageUrl}",
+            if ((comic.imageUrl ?? "").isNotEmpty)
+              Image(
+                image: kIsWeb || kIsWasm
+                    ? CachedNetworkImageProvider(
+                        comic.imageUrl!,
+                      )
+                    : NetworkImageWithRetry(
+                        comic.imageUrl!,
+                      ),
                 width: double.infinity,
                 height: 140,
                 fit: BoxFit.cover,
@@ -72,7 +86,7 @@ class ComicCardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            if (comic.imageUrl == null)
+            if ((comic.imageUrl ?? "").isEmpty)
               const SizedBox(
                 height: 140,
                 child: Center(

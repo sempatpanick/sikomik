@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toastification/toastification.dart';
 
 Future<bool?> successSnackBar(
   String title,
@@ -8,7 +11,25 @@ Future<bool?> successSnackBar(
   double width = 400,
   bool isShowIcon = false,
   Color backgroundColor = Colors.green,
-}) {
+}) async {
+  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+    toastification.show(
+      title: title.isEmpty ? null : Text(title),
+      description: message.isEmpty ? null : Text(message),
+      autoCloseDuration: Duration(seconds: durationSecond),
+      type: ToastificationType.error,
+      style: ToastificationStyle.flatColored,
+      alignment: Alignment.topRight,
+      primaryColor: Colors.white,
+      backgroundColor: backgroundColor,
+      foregroundColor: Colors.white,
+      borderSide: BorderSide.none,
+      padding: EdgeInsets.all(8),
+      icon: !isShowIcon ? null : const Icon(Icons.check_circle_outline),
+    );
+    await Future.delayed(Duration(seconds: durationSecond));
+    return true;
+  }
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
@@ -17,37 +38,6 @@ Future<bool?> successSnackBar(
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
-  // return Get.snackbar(
-  //   title,
-  //   message,
-  //   margin: const EdgeInsets.only(top: 16, left: 16.0, right: 16.0),
-  //   padding: title.isEmpty
-  //       ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 15.0)
-  //       : null,
-  //   titleText: title.isEmpty ? const SizedBox() : null,
-  //   messageText: isShowIcon || title.isNotEmpty
-  //       ? Text(
-  //           message,
-  //           style: const TextStyle(
-  //             color: Colors.white,
-  //           ),
-  //         )
-  //       : Center(
-  //           child: Text(
-  //             message,
-  //             style: const TextStyle(
-  //               color: Colors.white,
-  //             ),
-  //           ),
-  //         ),
-  //   icon: isShowIcon ? const Icon(Icons.check_circle_outline) : null,
-  //   duration: Duration(seconds: durationSecond),
-  //   colorText: Colors.white,
-  //   backgroundColor: backgroundColor,
-  //   maxWidth: Get.size.width <= 700 ? width : 400,
-  //   dismissDirection: DismissDirection.horizontal,
-  //   borderRadius: 8.0,
-  // );
 }
 
 Future<bool?> failedSnackBar(
@@ -56,8 +46,26 @@ Future<bool?> failedSnackBar(
   int durationSecond = 3,
   double width = 400,
   bool isShowIcon = false,
-  Color backgroundColor = Colors.red,
-}) {
+  Color backgroundColor = Colors.redAccent,
+}) async {
+  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+    toastification.show(
+      title: Text(title),
+      description: Text(message),
+      autoCloseDuration: Duration(seconds: durationSecond),
+      type: ToastificationType.error,
+      style: ToastificationStyle.flatColored,
+      alignment: Alignment.topRight,
+      primaryColor: Colors.white,
+      backgroundColor: backgroundColor,
+      foregroundColor: Colors.white,
+      borderSide: BorderSide.none,
+      padding: EdgeInsets.all(8),
+      icon: !isShowIcon ? null : const Icon(Icons.cancel_outlined),
+    );
+    await Future.delayed(Duration(seconds: durationSecond));
+    return true;
+  }
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
@@ -66,40 +74,4 @@ Future<bool?> failedSnackBar(
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
-  // return Get.snackbar(
-  //   title,
-  //   message,
-  //   margin: const EdgeInsets.only(top: 16, left: 16.0, right: 16.0),
-  //   padding: title.isEmpty
-  //       ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 15.0)
-  //       : null,
-  //   titleText: title.isEmpty ? const SizedBox() : null,
-  //   messageText: isShowIcon || title.isNotEmpty
-  //       ? Text(
-  //           message,
-  //           style: const TextStyle(
-  //             color: Colors.white,
-  //           ),
-  //         )
-  //       : Center(
-  //           child: Text(
-  //             message,
-  //             style: const TextStyle(
-  //               color: Colors.white,
-  //             ),
-  //           ),
-  //         ),
-  //   icon: isShowIcon
-  //       ? const Icon(
-  //           Icons.close,
-  //           color: Colors.white,
-  //         )
-  //       : null,
-  //   duration: Duration(seconds: durationSecond),
-  //   colorText: Colors.white,
-  //   backgroundColor: backgroundColor,
-  //   maxWidth: Get.size.width <= 700 ? width : 400,
-  //   dismissDirection: DismissDirection.horizontal,
-  //   borderRadius: 8.0,
-  // );
 }

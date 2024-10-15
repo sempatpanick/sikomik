@@ -1,11 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/main_controller.dart';
 import 'responsives/main_page_phone.dart';
 
-@RoutePage()
 class MainPage extends StatelessWidget {
   static const String routeName = "/main";
 

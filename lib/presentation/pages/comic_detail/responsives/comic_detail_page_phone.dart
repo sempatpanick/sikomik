@@ -1,14 +1,17 @@
 import 'dart:ui';
 
-import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image/flutter_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:sikomik/common/theme.dart';
 
-import '../../../../common/app_router.gr.dart';
 import '../../../../common/state_enum.dart';
 import '../../../controllers/comic_detail_controller.dart';
+import '../../chapter/chapter_page.dart';
+import '../../main/main_page.dart';
 
 class ComicDetailPagePhone extends StatelessWidget {
   const ComicDetailPagePhone({super.key});
@@ -26,10 +29,9 @@ class ComicDetailPagePhone extends StatelessWidget {
         scrolledUnderElevation: 0,
         leading: IconButton(
           onPressed: () async {
-            final autoRouter = AutoRouter.of(context);
             final isCanPop = await Navigator.of(context).maybePop();
             if (!isCanPop) {
-              autoRouter.back();
+              Get.offNamed(MainPage.routeName);
             }
           },
           icon: CircleAvatar(
@@ -73,9 +75,15 @@ class ComicDetailPageContent extends StatelessWidget {
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: controller.comic.value?.thumbnailUrl != null
-                      ? Image.network(
-                          controller.comic.value!.thumbnailUrl!,
+                  child: (controller.comic.value?.thumbnailUrl ?? "").isNotEmpty
+                      ? Image(
+                          image: kIsWeb || kIsWasm
+                              ? CachedNetworkImageProvider(
+                                  controller.comic.value!.thumbnailUrl!,
+                                )
+                              : NetworkImageWithRetry(
+                                  controller.comic.value!.thumbnailUrl!,
+                                ),
                           width: double.infinity,
                           height: 200,
                           fit: BoxFit.cover,
@@ -333,10 +341,11 @@ class ComicDetailPageContent extends StatelessWidget {
                           return ListTile(
                             onTap: () {
                               if (item.path == null) return;
-                              context.router.push(
-                                ChapterRoute(
-                                  path: item.path!,
-                                ),
+                              Get.toNamed(
+                                ChapterPage.routeName,
+                                parameters: {
+                                  'path': item.path!,
+                                },
                               );
                             },
                             title: Text(
@@ -364,9 +373,15 @@ class ComicDetailPageContent extends StatelessWidget {
             Positioned(
               left: 24.0,
               top: 110,
-              child: controller.comic.value?.imageUrl != null
-                  ? Image.network(
-                      controller.comic.value!.imageUrl!,
+              child: (controller.comic.value?.imageUrl ?? "").isNotEmpty
+                  ? Image(
+                      image: kIsWeb || kIsWasm
+                          ? CachedNetworkImageProvider(
+                              controller.comic.value!.imageUrl!,
+                            )
+                          : NetworkImageWithRetry(
+                              controller.comic.value!.imageUrl!,
+                            ),
                       width: 130,
                       height: 200,
                       fit: BoxFit.cover,

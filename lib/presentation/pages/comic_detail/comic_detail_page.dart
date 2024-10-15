@@ -1,19 +1,14 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/comic_detail_controller.dart';
 import 'responsives/comic_detail_page_phone.dart';
 
-@RoutePage()
 class ComicDetailPage extends StatelessWidget {
-  static const String routeName = "/chapter:path";
-
-  final String path;
+  static const String routeName = "/comic";
 
   const ComicDetailPage({
     super.key,
-    @PathParam('path') required this.path,
   });
 
   @override
@@ -25,7 +20,13 @@ class ComicDetailPage extends StatelessWidget {
       init: ComicDetailController(),
       didChangeDependencies: (state) =>
           WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.getComic(path: path),
+        (_) {
+          if (Get.parameters['path'] == null) return;
+          state.controller?.changePath(Get.parameters['path']!);
+          state.controller?.getComic(
+            path: state.controller?.path.value ?? "",
+          );
+        },
       ),
       builder: (_) {
         // if (ResponsiveBreakpoints.of(context).isMobile) {

@@ -1,11 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/main_controller.dart';
 import 'responsive/settings_page_phone.dart';
 
-@RoutePage()
 class SettingsPage extends StatelessWidget {
   static const String routeName = "/settings";
 

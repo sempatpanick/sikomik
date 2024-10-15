@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../common/utils/convert_image_url.dart';
 import '../../domain/entities/chapter_entity.dart';
 
 part 'chapter_model.g.dart';
@@ -35,12 +36,15 @@ class ChapterModel extends Equatable {
 @JsonSerializable()
 class DataChapterModel extends Equatable {
   final String? title;
+  final String? comicPath;
   final int? chapter;
   final String? uploadedDate;
+  @JsonKey(fromJson: imageUrlListFromJson, toJson: imageUrlListToJson)
   final List<String>? images;
 
   const DataChapterModel({
     required this.title,
+    required this.comicPath,
     required this.chapter,
     required this.uploadedDate,
     required this.images,
@@ -53,6 +57,7 @@ class DataChapterModel extends Equatable {
 
   DataChapterEntity toEntity() => DataChapterEntity(
         title: title,
+        comicPath: comicPath,
         chapter: chapter,
         uploadedDate: uploadedDate,
         images: images,
@@ -61,6 +66,7 @@ class DataChapterModel extends Equatable {
   @override
   List<Object?> get props => [
         title,
+        comicPath,
         chapter,
         uploadedDate,
         images,

@@ -1,19 +1,14 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/chapter_controller.dart';
 import 'responsives/chapter_page_phone.dart';
 
-@RoutePage()
 class ChapterPage extends StatelessWidget {
-  static const String routeName = "/chapter:path";
-
-  final String path;
+  static const String routeName = "/chapter";
 
   const ChapterPage({
     super.key,
-    @PathParam('path') required this.path,
   });
 
   @override
@@ -23,8 +18,15 @@ class ChapterPage extends StatelessWidget {
     return GetBuilder<ChapterController>(
       autoRemove: true,
       init: ChapterController(),
-      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.getChapter(path: path),
+      didChangeDependencies: (state) =>
+          WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          if (Get.parameters['path'] == null) return;
+          state.controller?.changePath(Get.parameters['path']!);
+          state.controller?.getChapter(
+            path: state.controller?.path.value ?? "",
+          );
+        },
       ),
       builder: (_) {
         // if (ResponsiveBreakpoints.of(context).isMobile) {
