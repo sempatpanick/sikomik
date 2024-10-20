@@ -342,10 +342,10 @@ class ComicDetailPageContent extends StatelessWidget {
                             onTap: () {
                               if (item.path == null) return;
                               Get.toNamed(
-                                ChapterPage.routeName,
-                                parameters: {
-                                  'path': item.path!,
-                                },
+                                ChapterPage.routeName.replaceAll(
+                                  "/:detail/:chapter/:path",
+                                  item.path!,
+                                ),
                               );
                             },
                             title: Text(

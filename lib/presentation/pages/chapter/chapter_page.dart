@@ -5,7 +5,7 @@ import '../../controllers/chapter_controller.dart';
 import 'responsives/chapter_page_phone.dart';
 
 class ChapterPage extends StatelessWidget {
-  static const String routeName = "/chapter";
+  static const String routeName = "/:detail/:chapter/:path";
 
   const ChapterPage({
     super.key,
@@ -22,7 +22,8 @@ class ChapterPage extends StatelessWidget {
           WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (Get.parameters['path'] == null) return;
-          state.controller?.changePath(Get.parameters['path']!);
+          state.controller?.changePath(
+              "/${Get.parameters['detail']!}/${Get.parameters['chapter']!}/${Get.parameters['path']!}/");
           state.controller?.getChapter(
             path: state.controller?.path.value ?? "",
           );

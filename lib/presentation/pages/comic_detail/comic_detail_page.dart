@@ -5,7 +5,7 @@ import '../../controllers/comic_detail_controller.dart';
 import 'responsives/comic_detail_page_phone.dart';
 
 class ComicDetailPage extends StatelessWidget {
-  static const String routeName = "/comic";
+  static const String routeName = "/:detail/:path";
 
   const ComicDetailPage({
     super.key,
@@ -21,8 +21,10 @@ class ComicDetailPage extends StatelessWidget {
       didChangeDependencies: (state) =>
           WidgetsBinding.instance.addPostFrameCallback(
         (_) {
-          if (Get.parameters['path'] == null) return;
-          state.controller?.changePath(Get.parameters['path']!);
+          if (Get.parameters['detail'] == null &&
+              Get.parameters['path'] == null) return;
+          state.controller?.changePath(
+              "/${Get.parameters['detail']!}/${Get.parameters['path']!}/");
           state.controller?.getComic(
             path: state.controller?.path.value ?? "",
           );

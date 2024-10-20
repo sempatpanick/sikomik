@@ -25,17 +25,18 @@ class ComicCardWidget extends StatelessWidget {
       onTap: () {
         if (comic.path == null) return;
         Get.toNamed(
-          ComicDetailPage.routeName,
-          parameters: {
-            'path': comic.path!,
-          },
+          ComicDetailPage.routeName.replaceFirst(
+            "/:detail/:path",
+            comic.path!,
+          ),
         );
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius:
-              const BorderRadius.vertical(bottom: Radius.circular(10.0)),
+          borderRadius: const BorderRadius.vertical(
+            bottom: Radius.circular(10.0),
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.3),

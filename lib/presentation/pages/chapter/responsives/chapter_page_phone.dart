@@ -36,10 +36,10 @@ class ChapterPagePhone extends StatelessWidget {
                   return;
                 }
                 Get.offNamed(
-                  ComicDetailPage.routeName,
-                  parameters: {
-                    'path': controller.chapter.value!.comicPath!,
-                  },
+                  ComicDetailPage.routeName.replaceFirst(
+                    "/:detail/:path",
+                    controller.chapter.value!.comicPath!,
+                  ),
                 );
               }
             },

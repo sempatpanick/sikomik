@@ -1,5 +1,6 @@
 import 'dart:io';
 
+4import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toastification/toastification.dart';
@@ -12,7 +13,11 @@ Future<bool?> successSnackBar(
   bool isShowIcon = false,
   Color backgroundColor = Colors.green,
 }) async {
-  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+  if (Platform.isWindows ||
+      Platform.isMacOS ||
+      Platform.isLinux ||
+      kIsWeb ||
+      kIsWasm) {
     toastification.show(
       title: title.isEmpty ? null : Text(title),
       description: message.isEmpty ? null : Text(message),
@@ -48,7 +53,11 @@ Future<bool?> failedSnackBar(
   bool isShowIcon = false,
   Color backgroundColor = Colors.redAccent,
 }) async {
-  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+  if (Platform.isWindows ||
+      Platform.isMacOS ||
+      Platform.isLinux ||
+      kIsWeb ||
+      kIsWasm) {
     toastification.show(
       title: Text(title),
       description: Text(message),

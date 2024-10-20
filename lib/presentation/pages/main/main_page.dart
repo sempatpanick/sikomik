@@ -5,7 +5,7 @@ import '../../controllers/main_controller.dart';
 import 'responsives/main_page_phone.dart';
 
 class MainPage extends StatelessWidget {
-  static const String routeName = "/main";
+  static const String routeName = "/";
 
   const MainPage({super.key});
 
@@ -16,7 +16,8 @@ class MainPage extends StatelessWidget {
     return GetBuilder<MainController>(
       autoRemove: true,
       init: MainController(),
-      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
+      didChangeDependencies: (state) =>
+          WidgetsBinding.instance.addPostFrameCallback(
         (_) => state.controller?.getConfiguration(),
       ),
       builder: (_) {
