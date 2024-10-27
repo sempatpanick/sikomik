@@ -13,11 +13,11 @@ Future<bool?> successSnackBar(
   bool isShowIcon = false,
   Color backgroundColor = Colors.green,
 }) async {
-  if (Platform.isWindows ||
+  if (kIsWeb ||
+      kIsWasm ||
+      Platform.isWindows ||
       Platform.isMacOS ||
-      Platform.isLinux ||
-      kIsWeb ||
-      kIsWasm) {
+      Platform.isLinux) {
     toastification.show(
       title: title.isEmpty ? null : Text(title),
       description: message.isEmpty ? null : Text(message),
@@ -53,11 +53,11 @@ Future<bool?> failedSnackBar(
   bool isShowIcon = false,
   Color backgroundColor = Colors.redAccent,
 }) async {
-  if (Platform.isWindows ||
+  if (kIsWeb ||
+      kIsWasm ||
+      Platform.isWindows ||
       Platform.isMacOS ||
-      Platform.isLinux ||
-      kIsWeb ||
-      kIsWasm) {
+      Platform.isLinux) {
     toastification.show(
       title: Text(title),
       description: Text(message),
