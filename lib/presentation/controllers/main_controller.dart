@@ -35,9 +35,6 @@ class MainController extends GetxController {
   ];
 
   void initialize() {
-    if (Get.arguments is int) {
-      changeSelectedIndexNav(Get.arguments);
-    }
     getConfiguration();
     getUser();
   }

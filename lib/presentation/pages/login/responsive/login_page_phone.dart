@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../common/enums.dart';
 import '../../../../common/theme.dart';
 import '../../../controllers/login_controller.dart';
+import '../../../controllers/main_controller.dart';
 import '../../main/main_page.dart';
 import '../../register/register_page.dart';
 
@@ -25,6 +26,8 @@ class LoginPagePhone extends StatelessWidget {
           onPressed: () async {
             final isCanPop = await Navigator.of(context).maybePop();
             if (!isCanPop) {
+              final mainController = Get.find<MainController>();
+              mainController.changeSelectedIndexNav(1);
               Get.offAllNamed(
                 MainPage.routeName,
                 arguments: 1,
