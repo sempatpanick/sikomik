@@ -33,7 +33,7 @@ class ComicCardWidget extends StatelessWidget {
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.cardColor,
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(10.0),
           ),
