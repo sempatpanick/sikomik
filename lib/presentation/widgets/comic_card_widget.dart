@@ -33,7 +33,7 @@ class ComicCardWidget extends StatelessWidget {
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.white,
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(10.0),
           ),
@@ -99,70 +99,84 @@ class ComicCardWidget extends StatelessWidget {
                 ),
               ),
             const SizedBox(
-              height: 8.0,
+              height: 12.0,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 comic.title ?? "",
-                maxLines: 3,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelLarge?.copyWith(
-                  color: Colors.white,
+                  color: theme.primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Chapter ${comic.chapter}",
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
+                  if (comic.lastUpdated != null)
+                    Text(
+                      "Last Updated ${comic.lastUpdated}",
+                      maxLines: 1,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.primaryColor,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 2.0,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: RatingBar.builder(
-                          initialRating: (comic.rating ?? 0) / 2,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          ignoreGestures: true,
-                          glowColor: Colors.amber,
-                          glowRadius: 10,
-                          unratedColor: Colors.white,
-                          itemSize: 12,
-                          itemPadding: EdgeInsets.zero,
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                  if (comic.chapter != null)
+                    Text(
+                      "Chapter ${comic.chapter}",
+                      maxLines: 1,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.primaryColor,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  if (comic.chapter != null)
+                    const SizedBox(
+                      height: 2.0,
+                    ),
+                  if (comic.rating != null)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RatingBar.builder(
+                            initialRating: (comic.rating ?? 0) / 2,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            ignoreGestures: true,
+                            glowColor: Colors.amber,
+                            glowRadius: 10,
+                            unratedColor: theme.primaryColor,
+                            itemSize: 12,
+                            itemPadding: EdgeInsets.zero,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {},
                           ),
-                          onRatingUpdate: (rating) {},
                         ),
-                      ),
-                      Text(
-                        "${comic.rating}",
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal,
+                        Text(
+                          "${comic.rating}",
+                          maxLines: 1,
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.primaryColor,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),
             const SizedBox(
-              height: 8.0,
+              height: 12.0,
             ),
           ],
         ),

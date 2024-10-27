@@ -129,71 +129,76 @@ class ComicDetailPageContent extends StatelessWidget {
                 const SizedBox(
                   height: 16.0,
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 160.0, right: 24.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: theme.primaryColor,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(10.0),
+                if (controller.comic.value?.rating == null)
+                  SizedBox(
+                    height: 90,
+                  ),
+                if (controller.comic.value?.rating != null)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 160.0, right: 24.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: theme.primaryColor,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(10.0),
+                          ),
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(.3),
+                              offset: const Offset(1, 1),
+                              blurRadius: 15.0,
+                            ),
+                          ],
                         ),
-                        border: Border.all(
-                          color: Colors.grey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Rating",
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            Text(
+                              "${controller.comic.value?.rating ?? 0}",
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            RatingBar.builder(
+                              initialRating:
+                                  (controller.comic.value?.rating ?? 1) / 2,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              ignoreGestures: true,
+                              glowColor: Colors.amber,
+                              glowRadius: 10,
+                              unratedColor: Colors.white,
+                              itemSize: 20,
+                              itemPadding: EdgeInsets.zero,
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {},
+                            ),
+                          ],
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.3),
-                            offset: const Offset(1, 1),
-                            blurRadius: 15.0,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Rating",
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          Text(
-                            "${controller.comic.value?.rating ?? 0}",
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          RatingBar.builder(
-                            initialRating:
-                                (controller.comic.value?.rating ?? 1) / 2,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            ignoreGestures: true,
-                            glowColor: Colors.amber,
-                            glowRadius: 10,
-                            unratedColor: Colors.white,
-                            itemSize: 20,
-                            itemPadding: EdgeInsets.zero,
-                            itemBuilder: (context, _) => const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            onRatingUpdate: (rating) {},
-                          ),
-                        ],
                       ),
                     ),
                   ),
-                ),
                 const SizedBox(
                   height: 16.0,
                 ),
