@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
+import 'data/datasources/sikomik_firebase_auth_data_source.dart';
 import 'data/datasources/sikomik_remote_data_source.dart';
 import 'data/repositories/sikomik_repository_impl.dart';
 import 'domain/repositories/sikomik_repository.dart';
+import 'domain/usecases/authentication_case.dart';
 import 'domain/usecases/get_chapter_case.dart';
 import 'domain/usecases/get_comic_detail_case.dart';
 import 'domain/usecases/get_configuration_case.dart';
@@ -25,11 +28,15 @@ void init() {
   locator.registerLazySingleton(
     () => GetChapterCase(repository: locator()),
   );
+  locator.registerLazySingleton(
+    () => AuthenticationCase(repository: locator()),
+  );
 
   // repository
   locator.registerLazySingleton<SiKomikRepository>(
     () => SiKomikRepositoryImpl(
       remoteDataSource: locator(),
+      firebaseAuthDataSource: locator(),
     ),
   );
 
@@ -39,9 +46,15 @@ void init() {
       client: locator(),
     ),
   );
+  locator.registerLazySingleton<SiKomikFirebaseAuthDataSource>(
+    () => SiKomikFirebaseAuthDataSourceImpl(
+      client: locator(),
+    ),
+  );
 
   // helper
 
   // external
   locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => FirebaseAuth.instance);
 }

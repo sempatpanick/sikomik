@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../common/enums.dart';
 import '../../common/snackbar.dart';
-import '../../common/state_enum.dart';
 import '../../domain/entities/comic_detail_entity.dart';
 import '../../domain/usecases/get_comic_detail_case.dart';
 import '../../injection.dart';

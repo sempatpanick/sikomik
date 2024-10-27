@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common/enums.dart';
 import '../../common/snackbar.dart';
-import '../../common/state_enum.dart';
 import '../../domain/entities/comic_entity.dart';
 import '../../domain/usecases/get_latest_comic_case.dart';
 import '../../injection.dart';

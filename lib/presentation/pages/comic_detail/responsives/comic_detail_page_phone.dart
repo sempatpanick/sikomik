@@ -8,7 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:sikomik/common/theme.dart';
 
-import '../../../../common/state_enum.dart';
+import '../../../../common/enums.dart';
 import '../../../controllers/comic_detail_controller.dart';
 import '../../chapter/chapter_page.dart';
 import '../../main/main_page.dart';

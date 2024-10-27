@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/state_enum.dart';
+import '../../../../common/enums.dart';
 import '../../../../common/theme.dart';
 import '../../../controllers/chapter_controller.dart';
 import '../../comic_detail/comic_detail_page.dart';
