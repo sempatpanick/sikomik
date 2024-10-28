@@ -25,7 +25,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if ((!kIsWeb && !kIsWasm) &&
       (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
-    setWindowTitle('Si Komik');
+    setWindowTitle('Si Komik | Baca Komik Bahasa Indonesia');
     setWindowMinSize(const Size(450, 600));
     setWindowMaxSize(Size.infinite);
   }
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToastificationWrapper(
       child: GetMaterialApp(
-        title: 'Si Komik',
+        title: 'Si Komik | Baca Komik Bahasa Indonesia',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
