@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/common/theme.dart';
 
 import '../../../../common/enums.dart';
+import '../../../../common/theme.dart';
 import '../../../controllers/home_controller.dart';
 import '../../../widgets/comic_card_widget.dart';
 

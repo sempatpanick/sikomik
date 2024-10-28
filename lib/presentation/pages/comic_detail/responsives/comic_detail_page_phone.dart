@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/common/theme.dart';
 
 import '../../../../common/enums.dart';
+import '../../../../common/theme.dart';
 import '../../../controllers/comic_detail_controller.dart';
 import '../../chapter/chapter_page.dart';
 import '../../main/main_page.dart';

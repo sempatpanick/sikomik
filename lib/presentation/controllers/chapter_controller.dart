@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:sikomik/common/snackbar.dart';
 
 import '../../common/enums.dart';
+import '../../common/snackbar.dart';
 import '../../domain/entities/chapter_entity.dart';
 import '../../domain/usecases/get_chapter_case.dart';
 import '../../injection.dart';

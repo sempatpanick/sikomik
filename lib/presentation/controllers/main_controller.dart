@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/common/snackbar.dart';
 
 import '../../common/enums.dart';
+import '../../common/snackbar.dart';
 import '../../domain/entities/configuration_entity.dart';
 import '../../domain/usecases/authentication_case.dart';
 import '../../domain/usecases/get_configuration_case.dart';
