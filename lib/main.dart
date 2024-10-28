@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/presentation/controllers/main_controller.dart';
 import 'package:toastification/toastification.dart';
-import 'package:url_strategy/url_strategy.dart';
 
 import 'common/scroll_behavior_helper.dart';
+import 'common/utils/url_strategy/url_strategy.dart';
 import 'firebase_options.dart';
 import 'injection.dart';
+import 'presentation/controllers/main_controller.dart';
 import 'presentation/pages/browser_in_app/browser_in_app_page.dart';
 import 'presentation/pages/chapter/chapter_page.dart';
 import 'presentation/pages/comic_detail/comic_detail_page.dart';

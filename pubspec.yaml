@@ -18,6 +18,8 @@ dependencies:
   firebase_auth: ^5.3.1
   firebase_core: ^3.6.0
   flutter_rating_bar: ^4.0.1
+  flutter_web_plugins:
+    sdk: flutter
   fluttertoast: ^8.2.8
   flutter_image: ^4.1.11
   font_awesome_flutter: ^10.7.0
@@ -29,7 +31,6 @@ dependencies:
   json_annotation: ^4.9.0
   responsive_framework: ^1.5.1
   toastification: ^2.3.0
-  url_strategy: ^0.3.0
   webview_flutter: ^4.10.0
 
 dev_dependencies:
