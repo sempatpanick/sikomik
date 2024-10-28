@@ -12,6 +12,7 @@ class HomePagePhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -42,9 +43,8 @@ class HomePagePhone extends StatelessWidget {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (size.width / 250).round(),
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
                       mainAxisExtent: 260,
