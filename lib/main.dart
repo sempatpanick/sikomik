@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
+import 'package:window_size/window_size.dart';
 
 import 'common/scroll_behavior_helper.dart';
 import 'common/utils/url_strategy/url_strategy.dart';
@@ -19,6 +23,12 @@ import 'presentation/pages/settings/settings_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if ((!kIsWeb || !kIsWasm) &&
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    setWindowTitle('Si Komik');
+    setWindowMinSize(const Size(450, 600));
+    setWindowMaxSize(Size.infinite);
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
