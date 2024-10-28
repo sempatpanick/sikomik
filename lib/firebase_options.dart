@@ -60,24 +60,24 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD5eUmhjxTFN_6XW3qNnxOW2uZ8eY-aGMI',
-    appId: '1:504193950692:ios:bdfc544e355503671fddf1',
+    appId: '1:504193950692:ios:bc2450abc2af61db1fddf1',
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     storageBucket: 'sikomik-86156.appspot.com',
     androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId: '504193950692-e1livvo3iqd9kg6ofrclbgggpsmrav0m.apps.googleusercontent.com',
-    iosBundleId: 'com.example.sikomik',
+    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    iosBundleId: 'com.sempatpanick.sikomik',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD5eUmhjxTFN_6XW3qNnxOW2uZ8eY-aGMI',
-    appId: '1:504193950692:ios:bdfc544e355503671fddf1',
+    appId: '1:504193950692:ios:bc2450abc2af61db1fddf1',
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     storageBucket: 'sikomik-86156.appspot.com',
     androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId: '504193950692-e1livvo3iqd9kg6ofrclbgggpsmrav0m.apps.googleusercontent.com',
-    iosBundleId: 'com.example.sikomik',
+    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    iosBundleId: 'com.sempatpanick.sikomik',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
