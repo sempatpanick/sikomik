@@ -23,7 +23,7 @@ import 'presentation/pages/settings/settings_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if ((!kIsWeb || !kIsWasm) &&
+  if ((!kIsWeb && !kIsWasm) &&
       (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     setWindowTitle('Si Komik');
     setWindowMinSize(const Size(450, 600));
