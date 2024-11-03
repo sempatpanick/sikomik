@@ -64,9 +64,10 @@ class SettingsPagePhone extends StatelessWidget {
               ),
               const Divider(),
               ListTile(
-                onTap: () => Get.to(
-                  BrowserInAppPage(
-                    url: "https://komik.ddg.my.id/privacy-police.html",
+                onTap: () => Get.toNamed(
+                  BrowserInAppPage.routeName.replaceAll(
+                    "/:path",
+                    "/privacy-policy",
                   ),
                 ),
                 title: Text(
@@ -78,9 +79,10 @@ class SettingsPagePhone extends StatelessWidget {
                 ),
               ),
               ListTile(
-                onTap: () => Get.to(
-                  BrowserInAppPage(
-                    url: "https://komik.ddg.my.id/terms-and-conditions.html",
+                onTap: () => Get.toNamed(
+                  BrowserInAppPage.routeName.replaceAll(
+                    "/:path",
+                    "/terms-and-conditions",
                   ),
                 ),
                 title: Text(

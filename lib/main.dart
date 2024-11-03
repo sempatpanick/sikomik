@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 import 'package:window_size/window_size.dart';
@@ -21,6 +22,8 @@ import 'presentation/pages/main/main_page.dart';
 import 'presentation/pages/register/register_page.dart';
 import 'presentation/pages/settings/settings_page.dart';
 
+WebViewEnvironment? webViewEnvironment;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if ((!kIsWeb && !kIsWasm) &&
@@ -32,6 +35,25 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
+    final availableVersion = await WebViewEnvironment.getAvailableVersion();
+    assert(
+      availableVersion != null,
+      'Failed to find an installed WebView2 Runtime or non-stable Microsoft Edge installation.',
+    );
+
+    webViewEnvironment = await WebViewEnvironment.create(
+      settings: WebViewEnvironmentSettings(
+        userDataFolder: 'YOUR_CUSTOM_PATH',
+      ),
+    );
+  }
+
+  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
+    await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
+  }
+
   init();
   setPathUrlStrategy();
   runApp(const MyApp());
@@ -77,6 +99,14 @@ class MyApp extends StatelessWidget {
             page: () => HomePage(),
           ),
           GetPage(
+            name: SettingsPage.routeName,
+            page: () => SettingsPage(),
+          ),
+          GetPage(
+            name: BrowserInAppPage.routeName,
+            page: () => BrowserInAppPage(),
+          ),
+          GetPage(
             name: ComicDetailPage.routeName,
             page: () => ComicDetailPage(),
           ),
@@ -85,22 +115,12 @@ class MyApp extends StatelessWidget {
             page: () => ChapterPage(),
           ),
           GetPage(
-            name: SettingsPage.routeName,
-            page: () => SettingsPage(),
-          ),
-          GetPage(
             name: LoginPage.routeName,
             page: () => LoginPage(),
           ),
           GetPage(
             name: RegisterPage.routeName,
             page: () => RegisterPage(),
-          ),
-          GetPage(
-            name: BrowserInAppPage.routeName,
-            page: () => BrowserInAppPage(
-              url: Get.parameters['url']!,
-            ),
           ),
         ],
       ),
