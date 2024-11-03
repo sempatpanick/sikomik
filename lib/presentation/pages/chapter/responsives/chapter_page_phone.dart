@@ -77,11 +77,29 @@ class ChapterPagePhone extends StatelessWidget {
                           ? CachedNetworkImageProvider(item)
                           : NetworkImageWithRetry(item),
                       fit: BoxFit.fill,
+                      frameBuilder: (context, child, value, state) {
+                        if (value == null) {
+                          return SizedBox(
+                            width: double.infinity,
+                            height: 100,
+                            child: Center(
+                              child: SizedBox(
+                                width: 40,
+                                height: 40,
+                                child: CircularProgressIndicator(
+                                  color: theme.primaryColor,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        return child;
+                      },
                       loadingBuilder: (context, child, event) => event == null
                           ? child
                           : SizedBox(
                               width: double.infinity,
-                              height: 300,
+                              height: 100,
                               child: Center(
                                 child: SizedBox(
                                   width: 40,

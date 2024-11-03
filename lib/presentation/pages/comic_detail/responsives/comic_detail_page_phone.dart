@@ -87,6 +87,24 @@ class ComicDetailPageContent extends StatelessWidget {
                           width: double.infinity,
                           height: 200,
                           fit: BoxFit.cover,
+                          frameBuilder: (context, child, value, state) {
+                            if (value == null) {
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 140,
+                                child: Center(
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: CircularProgressIndicator(
+                                      color: theme.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            return child;
+                          },
                           loadingBuilder: (context, child, event) =>
                               event == null
                                   ? child
@@ -390,6 +408,24 @@ class ComicDetailPageContent extends StatelessWidget {
                       width: 130,
                       height: 200,
                       fit: BoxFit.cover,
+                      frameBuilder: (context, child, value, state) {
+                        if (value == null) {
+                          return SizedBox(
+                            width: 130,
+                            height: 200,
+                            child: Center(
+                              child: SizedBox(
+                                width: 40,
+                                height: 40,
+                                child: CircularProgressIndicator(
+                                  color: theme.primaryColor,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        return child;
+                      },
                       loadingBuilder: (context, child, event) => event == null
                           ? child
                           : SizedBox(
