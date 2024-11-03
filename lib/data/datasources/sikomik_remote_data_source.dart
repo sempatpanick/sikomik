@@ -62,7 +62,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       Uri.parse("$url/newest/page/$page"),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        "Accept": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -83,7 +83,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       Uri.parse("$url$path"),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        "Accept": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -104,7 +104,7 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
       Uri.parse("$url$path"),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        "Accept": "*",
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
