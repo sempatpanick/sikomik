@@ -9,7 +9,6 @@ import 'package:toastification/toastification.dart';
 import 'package:window_size/window_size.dart';
 
 import 'common/scroll_behavior_helper.dart';
-import 'common/utils/url_strategy/url_strategy.dart';
 import 'firebase_options.dart';
 import 'injection.dart';
 import 'presentation/controllers/main_controller.dart';
@@ -55,7 +54,7 @@ Future<void> main() async {
   }
 
   init();
-  setPathUrlStrategy();
+  // setPathUrlStrategy();
   runApp(const MyApp());
 }
 
