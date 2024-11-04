@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
@@ -74,7 +73,7 @@ class ChapterPagePhone extends StatelessWidget {
 
                     return Image(
                       image: kIsWeb || kIsWasm
-                          ? CachedNetworkImageProvider(item)
+                          ? NetworkImage(item)
                           : NetworkImageWithRetry(item),
                       fit: BoxFit.fill,
                       frameBuilder: (context, child, value, state) {
