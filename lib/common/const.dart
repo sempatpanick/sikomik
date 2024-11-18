@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-const String baseUrl = "https://comic.ddg.my.id";
-const String baseUrlImage = "https://cover.komiku.id/wp-content/uploads";
-const String baseUrlImageCdn = "https://cdn.komiku.id";
+const String baseUrl = "https://comic-v2.ddg.my.id";
+const String baseUrlImage =
+    "https://i2.wp.com/bacakomik.net/wp-content/uploads";
+const String baseUrlImageCdn = "https://5ln1h5525y2q.kentut.xyz/data";
 const String appName = "Si Komik";
 
 const linearGradientShimmer = LinearGradient(
