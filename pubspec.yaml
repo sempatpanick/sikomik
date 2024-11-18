@@ -13,7 +13,7 @@ dependencies:
 
   cached_network_image: ^3.4.1
   cached_network_image_platform_interface: ^4.1.1
-  cloud_firestore: ^5.4.4
+  cloud_firestore: ^5.5.0
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   equatable: ^2.0.5
