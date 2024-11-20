@@ -75,14 +75,19 @@ class ComicDetailPageContent extends StatelessWidget {
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: (controller.comic.value?.thumbnailUrl ?? "").isNotEmpty
+                  child: (controller.comic.value?.thumbnailUrl ??
+                              controller.comic.value?.imageUrl ??
+                              "")
+                          .isNotEmpty
                       ? Image(
                           image: kIsWeb || kIsWasm
                               ? CachedNetworkImageProvider(
-                                  controller.comic.value!.thumbnailUrl!,
+                                  controller.comic.value?.thumbnailUrl ??
+                                      controller.comic.value!.imageUrl!,
                                 )
                               : NetworkImageWithRetry(
-                                  controller.comic.value!.thumbnailUrl!,
+                                  controller.comic.value?.thumbnailUrl ??
+                                      controller.comic.value!.imageUrl!,
                                 ),
                           width: double.infinity,
                           height: 200,
@@ -91,7 +96,7 @@ class ComicDetailPageContent extends StatelessWidget {
                             if (value == null) {
                               return SizedBox(
                                 width: double.infinity,
-                                height: 140,
+                                height: 200,
                                 child: Center(
                                   child: SizedBox(
                                     width: 40,
@@ -109,7 +114,7 @@ class ComicDetailPageContent extends StatelessWidget {
                               event == null
                                   ? child
                                   : SizedBox(
-                                      height: 140,
+                                      height: 200,
                                       child: Center(
                                         child: SizedBox(
                                           width: 40,
@@ -123,7 +128,7 @@ class ComicDetailPageContent extends StatelessWidget {
                                       ),
                                     ),
                           errorBuilder: (context, url, error) => const SizedBox(
-                            height: 140,
+                            height: 200,
                             child: Center(
                               child: Icon(
                                 Icons.broken_image_outlined,
@@ -134,7 +139,7 @@ class ComicDetailPageContent extends StatelessWidget {
                           ),
                         )
                       : const SizedBox(
-                          height: 140,
+                          height: 200,
                           child: Center(
                             child: Icon(
                               Icons.broken_image_outlined,
