@@ -1,13 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../common/utils/convert_image_url.dart';
 import '../../common/utils/timestamp_converter.dart';
-import '../../domain/entities/comic_entity.dart';
 import 'chapter_model.dart';
 import 'comic_detail_model.dart';
 
-part 'comic_model.g.dart';
+part 'user_comic_model.g.dart';
 
 @JsonSerializable()
 class UserComicModel extends Equatable {
@@ -34,14 +33,14 @@ class UserComicModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$UserComicModelToJson(this);
 
-  UserComicEntity toEntity() => UserComicEntity(
-        comic: comic,
-        readChapters: readChapters,
-        lastReadChapter: lastReadChapter,
-        isFavorite: isFavorite,
-        createdAt: createdAt,
-        lastUpdated: lastUpdated,
-      );
+  // UserComicEntity toEntity() => UserComicEntity(
+  //       comic: comic,
+  //       readChapters: readChapters,
+  //       lastReadChapter: lastReadChapter,
+  //       isFavorite: isFavorite,
+  //       createdAt: createdAt,
+  //       lastUpdated: lastUpdated,
+  //     );
 
   @override
   List<Object?> get props => [

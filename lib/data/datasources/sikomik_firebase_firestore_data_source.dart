@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../common/enums.dart';
-
 abstract class SiKomikFirebaseFirestoreDataSource {
   Future<UserCredential> setFavorite({
     String? path,
@@ -12,7 +10,8 @@ abstract class SiKomikFirebaseFirestoreDataSource {
   Future<Stream<User?>> streamUser();
 }
 
-class SiKomikFirebaseAuthDataSourceImpl extends SiKomikFirebaseAuthDataSource {
+class SiKomikFirebaseAuthDataSourceImpl
+    extends SiKomikFirebaseFirestoreDataSource {
   final FirebaseAuth client;
 
   SiKomikFirebaseAuthDataSourceImpl({
@@ -20,68 +19,32 @@ class SiKomikFirebaseAuthDataSourceImpl extends SiKomikFirebaseAuthDataSource {
   });
 
   @override
-  Future<UserCredential> login({
-    String? email,
-    String? password,
-    required LoginType type,
-  }) async {
-    if (client.currentUser != null) {
-      await logout();
-    }
-
-    UserCredential? userCredential;
-
-    switch (type) {
-      case LoginType.email:
-        if (email == null || password == null) {
-          throw Exception("Email or password is not passed");
-        }
-
-        userCredential = await client.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        break;
-      case LoginType.google:
-        userCredential = await client.signInWithProvider(
-          GoogleAuthProvider(),
-        );
-        break;
-      case LoginType.facebook:
-        userCredential = await client.signInWithProvider(
-          FacebookAuthProvider(),
-        );
-        break;
-    }
-
-    return userCredential;
+  Future<void> getFavoriteById() {
+    // TODO: implement getFavoriteById
+    throw UnimplementedError();
   }
 
   @override
-  Future<UserCredential> register({
-    required String email,
-    required String password,
-  }) async {
-    final userCredential = await client.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    return userCredential;
+  Future<UserCredential> getFavorites() {
+    // TODO: implement getFavorites
+    throw UnimplementedError();
   }
 
   @override
-  Future<void> logout() async {
-    return client.signOut();
+  Future<User?> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
   }
 
   @override
-  Future<User?> getUser() async {
-    return client.currentUser;
+  Future<UserCredential> setFavorite({String? path}) {
+    // TODO: implement setFavorite
+    throw UnimplementedError();
   }
 
   @override
-  Future<Stream<User?>> streamUser() async {
-    return client.userChanges();
+  Future<Stream<User?>> streamUser() {
+    // TODO: implement streamUser
+    throw UnimplementedError();
   }
 }
