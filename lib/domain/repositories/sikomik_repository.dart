@@ -7,6 +7,8 @@ import '../entities/chapter_entity.dart';
 import '../entities/comic_detail_entity.dart';
 import '../entities/comic_entity.dart';
 import '../entities/configuration_entity.dart';
+import '../entities/user_comic_entity.dart';
+import '../entities/user_entity.dart';
 
 abstract class SiKomikRepository {
   Future<Either<Failure, ConfigurationEntity>> getConfiguration();
@@ -20,6 +22,29 @@ abstract class SiKomikRepository {
   Future<Either<Failure, ChapterEntity>> getChapter({
     required String path,
   });
+
+  Future<Either<Failure, UserEntity>> setUser({
+    required UserEntity user,
+  });
+  Future<Either<Failure, UserEntity>> getUserDetail({
+    required String userId,
+  });
+  Future<Either<Failure, UserComicEntity>> setUserComic({
+    required String userId,
+    required UserComicEntity userComic,
+  });
+  Future<Either<Failure, UserComicEntity>> getUserComicById({
+    required String userId,
+    required String id,
+  });
+  Future<Either<Failure, List<UserComicEntity>>> getFavorites({
+    required String userId,
+  });
+  Future<Either<Failure, UserComicEntity>> getFavoriteById({
+    required String userId,
+    required String id,
+  });
+
   Future<Either<Failure, UserCredential>> login({
     String? email,
     String? password,

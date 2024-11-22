@@ -27,6 +27,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if ((!kIsWeb && !kIsWasm) &&
       (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    setWindowFrame(
+      Rect.fromLTWH(0, 0, 500, 800),
+    );
     setWindowTitle('Si Komik | Baca Komik Bahasa Indonesia');
     setWindowMinSize(const Size(450, 600));
     setWindowMaxSize(Size.infinite);

@@ -17,7 +17,7 @@ ComicDetailModel _$ComicDetailModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ComicDetailModelToJson(ComicDetailModel instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
     };
 
 DataComicDetailModel _$DataComicDetailModelFromJson(
@@ -56,8 +56,8 @@ Map<String, dynamic> _$DataComicDetailModelToJson(
       'author': instance.author,
       'status': instance.status,
       'rating': instance.rating,
-      'genres': instance.genres,
-      'chapters': instance.chapters,
+      'genres': instance.genres?.map((e) => e.toJson()).toList(),
+      'chapters': instance.chapters?.map((e) => e.toJson()).toList(),
     };
 
 GenreDataComicDetailModel _$GenreDataComicDetailModelFromJson(

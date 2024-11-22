@@ -75,14 +75,19 @@ class ComicDetailPageContent extends StatelessWidget {
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: (controller.comic.value?.thumbnailUrl ?? "").isNotEmpty
+                  child: (controller.comic.value?.thumbnailUrl ??
+                              controller.comic.value?.imageUrl ??
+                              "")
+                          .isNotEmpty
                       ? Image(
                           image: kIsWeb || kIsWasm
                               ? CachedNetworkImageProvider(
-                                  controller.comic.value!.thumbnailUrl!,
+                                  controller.comic.value?.thumbnailUrl ??
+                                      controller.comic.value!.imageUrl!,
                                 )
                               : NetworkImageWithRetry(
-                                  controller.comic.value!.thumbnailUrl!,
+                                  controller.comic.value?.thumbnailUrl ??
+                                      controller.comic.value!.imageUrl!,
                                 ),
                           width: double.infinity,
                           height: 200,
@@ -91,7 +96,7 @@ class ComicDetailPageContent extends StatelessWidget {
                             if (value == null) {
                               return SizedBox(
                                 width: double.infinity,
-                                height: 140,
+                                height: 200,
                                 child: Center(
                                   child: SizedBox(
                                     width: 40,
@@ -109,7 +114,7 @@ class ComicDetailPageContent extends StatelessWidget {
                               event == null
                                   ? child
                                   : SizedBox(
-                                      height: 140,
+                                      height: 200,
                                       child: Center(
                                         child: SizedBox(
                                           width: 40,
@@ -123,7 +128,7 @@ class ComicDetailPageContent extends StatelessWidget {
                                       ),
                                     ),
                           errorBuilder: (context, url, error) => const SizedBox(
-                            height: 140,
+                            height: 200,
                             child: Center(
                               child: Icon(
                                 Icons.broken_image_outlined,
@@ -134,7 +139,7 @@ class ComicDetailPageContent extends StatelessWidget {
                           ),
                         )
                       : const SizedBox(
-                          height: 140,
+                          height: 200,
                           child: Center(
                             child: Icon(
                               Icons.broken_image_outlined,
@@ -154,66 +159,64 @@ class ComicDetailPageContent extends StatelessWidget {
                 if (controller.comic.value?.rating != null)
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 160.0, right: 24.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: theme.primaryColor,
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(10.0),
-                          ),
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(.3),
-                              offset: const Offset(1, 1),
-                              blurRadius: 15.0,
-                            ),
-                          ],
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.only(right: 24.0),
+                      decoration: BoxDecoration(
+                        color: theme.primaryColor,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(10.0),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Rating",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.titleLarge?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            Text(
-                              "${controller.comic.value?.rating ?? 0}",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.titleLarge?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            RatingBar.builder(
-                              initialRating:
-                                  (controller.comic.value?.rating ?? 1) / 2,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              ignoreGestures: true,
-                              glowColor: Colors.amber,
-                              glowRadius: 10,
-                              unratedColor: Colors.white,
-                              itemSize: 20,
-                              itemPadding: EdgeInsets.zero,
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              onRatingUpdate: (rating) {},
-                            ),
-                          ],
+                        border: Border.all(
+                          color: Colors.grey,
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(.3),
+                            offset: const Offset(1, 1),
+                            blurRadius: 15.0,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Rating",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          Text(
+                            "${controller.comic.value?.rating ?? 0}",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          RatingBar.builder(
+                            initialRating:
+                                (controller.comic.value?.rating ?? 1) / 2,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            ignoreGestures: true,
+                            glowColor: Colors.amber,
+                            glowRadius: 10,
+                            unratedColor: Colors.white,
+                            itemSize: 20,
+                            itemPadding: EdgeInsets.zero,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {},
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -225,12 +228,47 @@ class ComicDetailPageContent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        controller.comic.value?.title ?? "",
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              controller.comic.value?.title ?? "",
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: controller.setFavorite,
+                            style: ElevatedButton.styleFrom(
+                              maximumSize: Size(130, 150),
+                            ),
+                            icon: controller.stateFavorite.value ==
+                                    RequestState.loading
+                                ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Icon(
+                                    (controller.userComic.value?.isFavorite ??
+                                            false)
+                                        ? Icons.bookmark
+                                        : Icons.bookmark_add_outlined,
+                                    size: 30,
+                                  ),
+                            label: Text(
+                              (controller.userComic.value?.isFavorite ?? false)
+                                  ? "Remove Favorite"
+                                  : "Add to Favorite",
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 16.0,

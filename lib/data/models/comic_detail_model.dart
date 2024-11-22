@@ -6,7 +6,7 @@ import '../../domain/entities/comic_detail_entity.dart';
 
 part 'comic_detail_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ComicDetailModel extends Equatable {
   final bool? status;
   final DataComicDetailModel? data;
@@ -33,7 +33,7 @@ class ComicDetailModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class DataComicDetailModel extends Equatable {
   final String? title;
   final String? titleIndonesia;
@@ -102,7 +102,7 @@ class DataComicDetailModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GenreDataComicDetailModel extends Equatable {
   final String? name;
   final String? path;
@@ -129,7 +129,7 @@ class GenreDataComicDetailModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ChapterDataComicDetailModel extends Equatable {
   final String? name;
   final num? chapter;

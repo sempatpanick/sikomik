@@ -110,6 +110,7 @@ class RegisterPagePhone extends StatelessWidget {
                       controller.loadingState.value == RequestState.loading
                           ? null
                           : (_) => controller.register(
+                                context: context,
                                 type: LoginType.email,
                               ),
                 ),
@@ -124,6 +125,7 @@ class RegisterPagePhone extends StatelessWidget {
                         controller.loadingState.value == RequestState.loading
                             ? null
                             : () => controller.register(
+                                  context: context,
                                   type: LoginType.email,
                                 ),
                     style: ElevatedButton.styleFrom(
@@ -165,6 +167,7 @@ class RegisterPagePhone extends StatelessWidget {
                         controller.loadingState.value == RequestState.loading
                             ? null
                             : () => controller.register(
+                                  context: context,
                                   type: LoginType.google,
                                 ),
                     style: ElevatedButton.styleFrom(
@@ -187,6 +190,7 @@ class RegisterPagePhone extends StatelessWidget {
                         controller.loadingState.value == RequestState.loading
                             ? null
                             : () => controller.register(
+                                  context: context,
                                   type: LoginType.facebook,
                                 ),
                     style: ElevatedButton.styleFrom(
