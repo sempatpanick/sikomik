@@ -159,82 +159,65 @@ class ComicDetailPageContent extends StatelessWidget {
                 if (controller.comic.value?.rating != null)
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.bookmark_add_outlined),
-                            label: Text("Add to Favorite"),
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.only(right: 24.0),
+                      decoration: BoxDecoration(
+                        color: theme.primaryColor,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(10.0),
+                        ),
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(.3),
+                            offset: const Offset(1, 1),
+                            blurRadius: 15.0,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(8.0),
-                          margin: const EdgeInsets.only(right: 24.0),
-                          decoration: BoxDecoration(
-                            color: theme.primaryColor,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(10.0),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Rating",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
                             ),
-                            border: Border.all(
-                              color: Colors.grey,
+                          ),
+                          Text(
+                            "${controller.comic.value?.rating ?? 0}",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(.3),
-                                offset: const Offset(1, 1),
-                                blurRadius: 15.0,
-                              ),
-                            ],
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "Rating",
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                              Text(
-                                "${controller.comic.value?.rating ?? 0}",
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              RatingBar.builder(
-                                initialRating:
-                                    (controller.comic.value?.rating ?? 1) / 2,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                ignoreGestures: true,
-                                glowColor: Colors.amber,
-                                glowRadius: 10,
-                                unratedColor: Colors.white,
-                                itemSize: 20,
-                                itemPadding: EdgeInsets.zero,
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {},
-                              ),
-                            ],
+                          RatingBar.builder(
+                            initialRating:
+                                (controller.comic.value?.rating ?? 1) / 2,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            ignoreGestures: true,
+                            glowColor: Colors.amber,
+                            glowRadius: 10,
+                            unratedColor: Colors.white,
+                            itemSize: 20,
+                            itemPadding: EdgeInsets.zero,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {},
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 const SizedBox(
@@ -245,12 +228,33 @@ class ComicDetailPageContent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        controller.comic.value?.title ?? "",
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              controller.comic.value?.title ?? "",
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              maximumSize: Size(130, 150),
+                            ),
+                            icon: Icon(
+                              Icons.bookmark_add_outlined,
+                              size: 30,
+                            ),
+                            label: Text("Add to Favorite"),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 16.0,
