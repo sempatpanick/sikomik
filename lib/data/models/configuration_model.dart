@@ -5,7 +5,7 @@ import '../../domain/entities/configuration_entity.dart';
 
 part 'configuration_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ConfigurationModel extends Equatable {
   @JsonKey(name: 'app_version')
   final String appVersion;

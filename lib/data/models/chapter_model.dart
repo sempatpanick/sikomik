@@ -6,7 +6,7 @@ import '../../domain/entities/chapter_entity.dart';
 
 part 'chapter_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ChapterModel extends Equatable {
   final bool? status;
   final DataChapterModel? data;
@@ -33,7 +33,7 @@ class ChapterModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class DataChapterModel extends Equatable {
   final String? title;
   final String? comicPath;

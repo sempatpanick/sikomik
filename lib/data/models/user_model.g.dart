@@ -1,38 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_comic_model.dart';
+part of 'user_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserComicModel _$UserComicModelFromJson(Map<String, dynamic> json) =>
-    UserComicModel(
+UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       id: json['id'] as String?,
-      comic: json['comic'] == null
-          ? null
-          : ComicDetailModel.fromJson(json['comic'] as Map<String, dynamic>),
-      readChapters: (json['readChapters'] as List<dynamic>?)
-          ?.map((e) => DataChapterModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      lastReadChapter: json['lastReadChapter'] == null
-          ? null
-          : DataChapterModel.fromJson(
-              json['lastReadChapter'] as Map<String, dynamic>),
-      isFavorite: json['isFavorite'] as bool?,
+      avatarUrl: json['avatarUrl'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const TimestampConverter().fromJson),
       lastUpdated: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['lastUpdated'], const TimestampConverter().fromJson),
     );
 
-Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) {
+Map<String, dynamic> _$UserModelToJson(UserModel instance) {
   final val = <String, dynamic>{
     'id': instance.id,
-    'comic': instance.comic?.toJson(),
-    'readChapters': instance.readChapters?.map((e) => e.toJson()).toList(),
-    'lastReadChapter': instance.lastReadChapter?.toJson(),
-    'isFavorite': instance.isFavorite,
+    'avatarUrl': instance.avatarUrl,
+    'name': instance.name,
+    'email': instance.email,
+    'phoneNumber': instance.phoneNumber,
   };
 
   void writeNotNull(String key, dynamic value) {

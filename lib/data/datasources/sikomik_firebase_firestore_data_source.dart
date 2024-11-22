@@ -1,50 +1,138 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../models/user_comic_model.dart';
+import '../models/user_model.dart';
 
 abstract class SiKomikFirebaseFirestoreDataSource {
-  Future<UserCredential> setFavorite({
-    String? path,
+  Future<UserModel?> setUser({
+    required UserModel user,
   });
-  Future<UserCredential> getFavorites();
-  Future<void> getFavoriteById();
-  Future<User?> getUser();
-  Future<Stream<User?>> streamUser();
+  Future<UserModel?> getUser({
+    required String userId,
+  });
+  Future<UserComicModel?> setUserComic({
+    required String userId,
+    required UserComicModel userComic,
+  });
+  Future<UserComicModel?> getUserComicById({
+    required String userId,
+    required String id,
+  });
+  Future<List<UserComicModel>> getFavorites({
+    required String userId,
+  });
+  Future<UserComicModel?> getFavoriteById({
+    required String userId,
+    required String id,
+  });
 }
 
-class SiKomikFirebaseAuthDataSourceImpl
+class SiKomikFirebaseFirestoreDataSourceImpl
     extends SiKomikFirebaseFirestoreDataSource {
-  final FirebaseAuth client;
+  final FirebaseFirestore client;
 
-  SiKomikFirebaseAuthDataSourceImpl({
+  SiKomikFirebaseFirestoreDataSourceImpl({
     required this.client,
   });
 
+  final usersCollectionName = "users";
+  final userComicsCollectionName = "comics";
+
   @override
-  Future<void> getFavoriteById() {
-    // TODO: implement getFavoriteById
-    throw UnimplementedError();
+  Future<UserModel?> setUser({required UserModel user}) async {
+    await client.collection(usersCollectionName).doc(user.id).set(
+          user.toJson(),
+          SetOptions(merge: true),
+        );
+
+    return await getUser(userId: user.id ?? "");
   }
 
   @override
-  Future<UserCredential> getFavorites() {
-    // TODO: implement getFavorites
-    throw UnimplementedError();
+  Future<UserModel?> getUser({required String userId}) async {
+    final getData =
+        await client.collection(usersCollectionName).doc(userId).get();
+
+    if (getData.data() == null || (getData.data() ?? {}).isEmpty) {
+      return null;
+    }
+    return UserModel.fromJson(getData.data()!);
   }
 
   @override
-  Future<User?> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<UserComicModel?> setUserComic({
+    required String userId,
+    required UserComicModel userComic,
+  }) async {
+    await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .doc(userComic.id)
+        .set(
+          userComic.toJson(),
+          SetOptions(merge: true),
+        );
+
+    return await getUserComicById(userId: userId, id: userComic.id ?? "");
   }
 
   @override
-  Future<UserCredential> setFavorite({String? path}) {
-    // TODO: implement setFavorite
-    throw UnimplementedError();
+  Future<UserComicModel?> getUserComicById({
+    required String userId,
+    required String id,
+  }) async {
+    final getData = await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .where(
+          "id",
+          isEqualTo: id,
+        )
+        .limit(1)
+        .get();
+
+    if (getData.size <= 0) {
+      return null;
+    }
+    return UserComicModel.fromJson(getData.docs.first.data());
   }
 
   @override
-  Future<Stream<User?>> streamUser() {
-    // TODO: implement streamUser
-    throw UnimplementedError();
+  Future<List<UserComicModel>> getFavorites({required String userId}) async {
+    final getData = await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .where("isFavorite", isEqualTo: true)
+        .get();
+
+    return getData.docs
+        .map((item) => UserComicModel.fromJson(item.data()))
+        .toList();
+  }
+
+  @override
+  Future<UserComicModel?> getFavoriteById({
+    required String userId,
+    required String id,
+  }) async {
+    final getData = await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .where(
+          "id",
+          isEqualTo: id,
+        )
+        .where("isFavorite", isEqualTo: true)
+        .limit(1)
+        .get();
+
+    if (getData.size <= 0) {
+      return null;
+    }
+    return UserComicModel.fromJson(getData.docs.first.data());
   }
 }

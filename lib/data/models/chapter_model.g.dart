@@ -16,7 +16,7 @@ ChapterModel _$ChapterModelFromJson(Map<String, dynamic> json) => ChapterModel(
 Map<String, dynamic> _$ChapterModelToJson(ChapterModel instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
     };
 
 DataChapterModel _$DataChapterModelFromJson(Map<String, dynamic> json) =>

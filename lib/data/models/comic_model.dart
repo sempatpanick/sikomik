@@ -6,7 +6,7 @@ import '../../domain/entities/comic_entity.dart';
 
 part 'comic_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ComicModel extends Equatable {
   final bool? status;
   final int? page;
@@ -42,7 +42,7 @@ class ComicModel extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class DataComicModel extends Equatable {
   final String? title;
   @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)

@@ -20,7 +20,7 @@ Map<String, dynamic> _$ComicModelToJson(ComicModel instance) =>
       'status': instance.status,
       'page': instance.page,
       'max_page': instance.maxPage,
-      'data': instance.data,
+      'data': instance.data?.map((e) => e.toJson()).toList(),
     };
 
 DataComicModel _$DataComicModelFromJson(Map<String, dynamic> json) =>
