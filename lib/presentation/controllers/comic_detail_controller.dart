@@ -41,7 +41,7 @@ class ComicDetailController extends GetxController {
     });
   }
 
-  Future<void> getFavorite() async {
+  Future<void> getUserComic() async {
     if (path.value.isEmpty) return;
     if (mainController.user.value == null) return;
 
@@ -66,7 +66,7 @@ class ComicDetailController extends GetxController {
     if (mainController.user.value == null) {
       await Get.toNamed(LoginPage.routeName);
 
-      await getFavorite();
+      await getUserComic();
     }
 
     if (mainController.user.value == null) return;

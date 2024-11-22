@@ -28,6 +28,7 @@ class ComicDetailPage extends StatelessWidget {
           state.controller?.getComic(
             path: state.controller?.path.value ?? "",
           );
+          state.controller?.getUserComic();
         },
       ),
       builder: (_) {
