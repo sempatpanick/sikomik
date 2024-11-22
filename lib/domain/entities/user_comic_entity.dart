@@ -6,7 +6,7 @@ import 'comic_detail_entity.dart';
 
 class UserComicEntity extends Equatable {
   final String? id;
-  final ComicDetailEntity? comic;
+  final DataComicDetailEntity? comic;
   final List<DataChapterEntity>? readChapters;
   final DataChapterEntity? lastReadChapter;
   final bool? isFavorite;
@@ -15,10 +15,10 @@ class UserComicEntity extends Equatable {
 
   const UserComicEntity({
     required this.id,
-    required this.comic,
-    required this.readChapters,
-    required this.lastReadChapter,
-    required this.isFavorite,
+    this.comic,
+    this.readChapters,
+    this.lastReadChapter,
+    this.isFavorite,
     this.createdAt,
     this.lastUpdated,
   });

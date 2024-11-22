@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../common/utils/encode_decode_text.dart';
 import '../models/user_comic_model.dart';
 import '../models/user_model.dart';
 
@@ -68,7 +69,7 @@ class SiKomikFirebaseFirestoreDataSourceImpl
         .collection(usersCollectionName)
         .doc(userId)
         .collection(userComicsCollectionName)
-        .doc(userComic.id)
+        .doc(encodeText(userComic.id!))
         .set(
           userComic.toJson(),
           SetOptions(merge: true),
@@ -86,17 +87,13 @@ class SiKomikFirebaseFirestoreDataSourceImpl
         .collection(usersCollectionName)
         .doc(userId)
         .collection(userComicsCollectionName)
-        .where(
-          "id",
-          isEqualTo: id,
-        )
-        .limit(1)
+        .doc(encodeText(id))
         .get();
 
-    if (getData.size <= 0) {
+    if (getData.data() == null) {
       return null;
     }
-    return UserComicModel.fromJson(getData.docs.first.data());
+    return UserComicModel.fromJson(getData.data()!);
   }
 
   @override

@@ -244,15 +244,29 @@ class ComicDetailPageContent extends StatelessWidget {
                             width: 8.0,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: controller.setFavorite,
                             style: ElevatedButton.styleFrom(
                               maximumSize: Size(130, 150),
                             ),
-                            icon: Icon(
-                              Icons.bookmark_add_outlined,
-                              size: 30,
+                            icon: controller.stateFavorite.value ==
+                                    RequestState.loading
+                                ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Icon(
+                                    (controller.userComic.value?.isFavorite ??
+                                            false)
+                                        ? Icons.bookmark
+                                        : Icons.bookmark_add_outlined,
+                                    size: 30,
+                                  ),
+                            label: Text(
+                              (controller.userComic.value?.isFavorite ?? false)
+                                  ? "Remove Favorite"
+                                  : "Add to Favorite",
                             ),
-                            label: Text("Add to Favorite"),
                           ),
                         ],
                       ),

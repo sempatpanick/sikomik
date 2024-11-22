@@ -11,7 +11,8 @@ UserComicModel _$UserComicModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       comic: json['comic'] == null
           ? null
-          : ComicDetailModel.fromJson(json['comic'] as Map<String, dynamic>),
+          : DataComicDetailModel.fromJson(
+              json['comic'] as Map<String, dynamic>),
       readChapters: (json['readChapters'] as List<dynamic>?)
           ?.map((e) => DataChapterModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -29,10 +30,6 @@ UserComicModel _$UserComicModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) {
   final val = <String, dynamic>{
     'id': instance.id,
-    'comic': instance.comic?.toJson(),
-    'readChapters': instance.readChapters?.map((e) => e.toJson()).toList(),
-    'lastReadChapter': instance.lastReadChapter?.toJson(),
-    'isFavorite': instance.isFavorite,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -41,6 +38,11 @@ Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) {
     }
   }
 
+  writeNotNull('comic', instance.comic?.toJson());
+  writeNotNull(
+      'readChapters', instance.readChapters?.map((e) => e.toJson()).toList());
+  writeNotNull('lastReadChapter', instance.lastReadChapter?.toJson());
+  writeNotNull('isFavorite', instance.isFavorite);
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<Timestamp, DateTime>(

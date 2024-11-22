@@ -12,9 +12,13 @@ part 'user_comic_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UserComicModel extends Equatable {
   final String? id;
-  final ComicDetailModel? comic;
+  @JsonKey(includeIfNull: false)
+  final DataComicDetailModel? comic;
+  @JsonKey(includeIfNull: false)
   final List<DataChapterModel>? readChapters;
+  @JsonKey(includeIfNull: false)
   final DataChapterModel? lastReadChapter;
+  @JsonKey(includeIfNull: false)
   final bool? isFavorite;
   @JsonKey(includeIfNull: false)
   @TimestampConverter()
