@@ -10,10 +10,12 @@ import '../pages/comic_detail/comic_detail_page.dart';
 
 class ComicFavoriteCardWidget extends StatelessWidget {
   final UserComicEntity userComic;
+  final void Function()? afterCloseComic;
 
   const ComicFavoriteCardWidget({
     super.key,
     required this.userComic,
+    this.afterCloseComic,
   });
 
   @override
@@ -22,15 +24,17 @@ class ComicFavoriteCardWidget extends StatelessWidget {
 
     return InkWell(
       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10.0)),
-      onTap: () {
+      onTap: () async {
         if (userComic.id == null) return;
 
-        Get.toNamed(
+        await Get.toNamed(
           ComicDetailPage.routeName.replaceFirst(
             "/:detail/:path",
             userComic.id!,
           ),
         );
+
+        if (afterCloseComic != null) afterCloseComic!();
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -140,7 +144,7 @@ class ComicFavoriteCardWidget extends StatelessWidget {
                 children: [
                   if (userComic.lastReadChapter?.chapter != null)
                     Text(
-                      "Last Read ${userComic.lastReadChapter?.chapter ?? ""}",
+                      "Last Read Chapter ${userComic.lastReadChapter?.chapter ?? ""}",
                       maxLines: 1,
                       style: theme.textTheme.labelLarge?.copyWith(
                         color: theme.primaryColor,

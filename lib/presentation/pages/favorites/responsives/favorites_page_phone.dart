@@ -62,7 +62,10 @@ class FavoritesPagePhone extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = controller.favorites[index];
 
-                        return ComicFavoriteCardWidget(userComic: item);
+                        return ComicFavoriteCardWidget(
+                          userComic: item,
+                          afterCloseComic: controller.getFavorites,
+                        );
                       },
                     ),
                   if (controller.stateFavorites.value == RequestState.loading)

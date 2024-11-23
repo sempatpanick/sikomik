@@ -400,14 +400,15 @@ class ComicDetailPageContent extends StatelessWidget {
                           final item = controller.comic.value!.chapters![index];
 
                           return ListTile(
-                            onTap: () {
+                            onTap: () async {
                               if (item.path == null) return;
-                              Get.toNamed(
+                              await Get.toNamed(
                                 ChapterPage.routeName.replaceAll(
                                   "/:detail/:chapter/:path",
                                   item.path!,
                                 ),
                               );
+                              controller.getUserComic();
                             },
                             title: Text(
                               "Chapter ${item.chapter}",
