@@ -139,7 +139,7 @@ class ComicCardWidget extends StatelessWidget {
                 children: [
                   if (comic.lastUpdated != null)
                     Text(
-                      "Last Updated ${comic.lastUpdated}",
+                      "${comic.lastUpdated} ago",
                       maxLines: 1,
                       style: theme.textTheme.labelLarge?.copyWith(
                         color: theme.primaryColor,
