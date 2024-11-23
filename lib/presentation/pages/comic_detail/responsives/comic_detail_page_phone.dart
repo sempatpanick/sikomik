@@ -469,7 +469,7 @@ class ComicDetailPageContent extends StatelessWidget {
                                     ],
                                   ),
                             trailing: Text(
-                              item.uploadedDate ?? "",
+                              "${item.uploadedDate ?? " "} ago",
                               style: theme.textTheme.labelLarge?.copyWith(
                                 color: Colors.white54,
                                 fontWeight: FontWeight.normal,
