@@ -8,7 +8,9 @@ import '../../domain/entities/configuration_entity.dart';
 import '../../domain/usecases/authentication_case.dart';
 import '../../domain/usecases/get_configuration_case.dart';
 import '../../injection.dart';
+import '../pages/favorites/favorites_page.dart';
 import '../pages/home/home_page.dart';
+import '../pages/search/search_page.dart';
 import '../pages/settings/settings_page.dart';
 
 class MainController extends GetxController {
@@ -23,14 +25,20 @@ class MainController extends GetxController {
 
   List<Widget> menus = [
     const HomePage(),
+    const SearchPage(),
+    const FavoritesPage(),
     const SettingsPage(),
   ];
   List<IconData> icons = [
     Icons.home,
+    Icons.search,
+    Icons.bookmarks,
     Icons.settings,
   ];
   List<String> labels = [
     "Home",
+    "Search",
+    "Favorites",
     "Settings",
   ];
 

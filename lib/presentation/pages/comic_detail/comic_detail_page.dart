@@ -23,12 +23,9 @@ class ComicDetailPage extends StatelessWidget {
         (_) {
           if (Get.parameters['detail'] == null &&
               Get.parameters['path'] == null) return;
-          state.controller?.changePath(
-              "/${Get.parameters['detail']!}/${Get.parameters['path']!}/");
-          state.controller?.getComic(
-            path: state.controller?.path.value ?? "",
+          state.controller?.initialize(
+            "/${Get.parameters['detail']!}/${Get.parameters['path']!}/",
           );
-          state.controller?.getUserComic();
         },
       ),
       builder: (_) {

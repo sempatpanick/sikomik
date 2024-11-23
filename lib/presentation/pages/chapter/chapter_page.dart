@@ -22,10 +22,8 @@ class ChapterPage extends StatelessWidget {
           WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (Get.parameters['path'] == null) return;
-          state.controller?.changePath(
-              "/${Get.parameters['detail']!}/${Get.parameters['chapter']!}/${Get.parameters['path']!}/");
-          state.controller?.getChapter(
-            path: state.controller?.path.value ?? "",
+          state.controller?.initialize(
+            "/${Get.parameters['detail']!}/${Get.parameters['chapter']!}/${Get.parameters['path']!}/",
           );
         },
       ),

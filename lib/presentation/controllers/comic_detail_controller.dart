@@ -23,6 +23,14 @@ class ComicDetailController extends GetxController {
   Rxn<UserComicEntity> userComic = Rxn();
   RxString path = "".obs;
 
+  Future<void> initialize(String path) async {
+    changePath(path);
+    getComic(
+      path: path,
+    );
+    getUserComic();
+  }
+
   void changePath(String value) {
     path.value = value;
   }
@@ -53,7 +61,6 @@ class ComicDetailController extends GetxController {
 
     result.fold((l) {
       changeStateFavorite(RequestState.error);
-      failedSnackBar("", l.message);
     }, (r) {
       userComic.value = r;
       userComic.refresh();
