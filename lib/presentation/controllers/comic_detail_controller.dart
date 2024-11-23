@@ -53,7 +53,6 @@ class ComicDetailController extends GetxController {
 
     result.fold((l) {
       changeStateFavorite(RequestState.error);
-      failedSnackBar("", l.message);
     }, (r) {
       userComic.value = r;
       userComic.refresh();
