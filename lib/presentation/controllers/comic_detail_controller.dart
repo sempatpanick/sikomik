@@ -23,6 +23,14 @@ class ComicDetailController extends GetxController {
   Rxn<UserComicEntity> userComic = Rxn();
   RxString path = "".obs;
 
+  Future<void> initialize(String path) async {
+    changePath(path);
+    getComic(
+      path: path,
+    );
+    getUserComic();
+  }
+
   void changePath(String value) {
     path.value = value;
   }

@@ -398,8 +398,19 @@ class ComicDetailPageContent extends StatelessWidget {
                             controller.comic.value?.chapters?.length ?? 0,
                         itemBuilder: (context, index) {
                           final item = controller.comic.value!.chapters![index];
+                          final isRead = controller
+                                  .userComic.value?.readChapters
+                                  ?.firstWhereOrNull(
+                                      (read) => read.chapter == item.chapter) !=
+                              null;
+                          final isLastRead = controller
+                                  .userComic.value?.lastReadChapter?.chapter ==
+                              item.chapter;
 
                           return ListTile(
+                            tileColor: !isRead
+                                ? null
+                                : theme.primaryColor.withOpacity(.4),
                             onTap: () async {
                               if (item.path == null) return;
                               await Get.toNamed(
@@ -417,10 +428,50 @@ class ComicDetailPageContent extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            subtitle: !isLastRead
+                                ? null
+                                : Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                            color: theme.primaryColor,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.last_page,
+                                              color: theme.primaryColor,
+                                            ),
+                                            SizedBox(
+                                              width: 2.0,
+                                            ),
+                                            Text(
+                                              "Last Read",
+                                              style: theme.textTheme.labelLarge
+                                                  ?.copyWith(
+                                                color: theme.primaryColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                             trailing: Text(
                               item.uploadedDate ?? "",
                               style: theme.textTheme.labelLarge?.copyWith(
-                                color: Colors.grey,
+                                color: Colors.white54,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
