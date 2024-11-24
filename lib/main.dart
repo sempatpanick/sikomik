@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: GetMaterialApp(
+      child: GetMaterialApp.router(
         title: 'Si Komik | Baca Komik Bahasa Indonesia',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -90,39 +90,48 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        initialRoute: MainPage.routeName,
+        // initialRoute: MainPage.routeName,
+        routerDelegate: GetDelegate(
+          showHashOnUrl: true,
+          pages: [
+            GetPage(
+              name: MainPage.routeName,
+              page: () => MainPage(),
+            ),
+            GetPage(
+              name: HomePage.routeName,
+              page: () => HomePage(),
+            ),
+            GetPage(
+              name: SettingsPage.routeName,
+              page: () => SettingsPage(),
+            ),
+            GetPage(
+              name: BrowserInAppPage.routeName,
+              page: () => BrowserInAppPage(),
+            ),
+            GetPage(
+              name: ComicDetailPage.routeName,
+              page: () => ComicDetailPage(),
+            ),
+            GetPage(
+              name: ChapterPage.routeName,
+              page: () => ChapterPage(),
+            ),
+            GetPage(
+              name: LoginPage.routeName,
+              page: () => LoginPage(),
+            ),
+            GetPage(
+              name: RegisterPage.routeName,
+              page: () => RegisterPage(),
+            ),
+          ],
+        ),
         getPages: [
           GetPage(
             name: MainPage.routeName,
             page: () => MainPage(),
-          ),
-          GetPage(
-            name: HomePage.routeName,
-            page: () => HomePage(),
-          ),
-          GetPage(
-            name: SettingsPage.routeName,
-            page: () => SettingsPage(),
-          ),
-          GetPage(
-            name: BrowserInAppPage.routeName,
-            page: () => BrowserInAppPage(),
-          ),
-          GetPage(
-            name: ComicDetailPage.routeName,
-            page: () => ComicDetailPage(),
-          ),
-          GetPage(
-            name: ChapterPage.routeName,
-            page: () => ChapterPage(),
-          ),
-          GetPage(
-            name: LoginPage.routeName,
-            page: () => LoginPage(),
-          ),
-          GetPage(
-            name: RegisterPage.routeName,
-            page: () => RegisterPage(),
           ),
         ],
       ),
