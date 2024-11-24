@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const String baseUrl = "https://comic-v2.ddg.my.id";
 const String baseUrlImage =
-    "https://i2.wp.com/bacakomik.net/wp-content/uploads";
+    "https://i2.wp.com/bacakomik.one/wp-content/uploads";
 const String baseUrlImageCdn = "https://5ln1h5525y2q.kentut.xyz/data";
 const String appName = "Si Komik";
 
