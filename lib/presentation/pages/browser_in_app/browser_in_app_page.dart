@@ -38,6 +38,7 @@ class _BrowserInAppPageState extends State<BrowserInAppPage> {
       url = "$baseUrl/${Get.parameters['path']!}";
     }
     pullToRefreshController = kIsWeb ||
+            kIsWasm ||
             ![TargetPlatform.iOS, TargetPlatform.android]
                 .contains(defaultTargetPlatform)
         ? null
