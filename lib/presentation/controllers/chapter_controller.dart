@@ -141,7 +141,13 @@ class ChapterController extends GetxController {
 
   Future<void> getUserComic() async {
     if (chapter.value?.comicPath == null) return;
-    if (mainController.user.value == null) return;
+    if (mainController.user.value == null) {
+      if (mainController.user.value == null) {
+        await retryCheckUserId();
+
+        if (mainController.user.value == null) return;
+      }
+    }
 
     final result = await userComicCase.getUserComicById(
       userId: mainController.user.value?.uid ?? "",
@@ -155,8 +161,13 @@ class ChapterController extends GetxController {
   }
 
   Future<void> setLastReadComic() async {
-    if (mainController.user.value == null || chapter.value?.comicPath == null) {
-      return;
+    if (chapter.value?.comicPath == null) return;
+    if (mainController.user.value == null) {
+      if (mainController.user.value == null) {
+        await retryCheckUserId();
+
+        if (mainController.user.value == null) return;
+      }
     }
 
     final readChapters = List<DataChapterEntity>.of(
@@ -181,6 +192,14 @@ class ChapterController extends GetxController {
         lastReadChapter: chapter.value,
       ),
     );
+  }
+
+  Future<void> retryCheckUserId() async {
+    int count = 3;
+    while (mainController.user.value == null && count > 0) {
+      await Future.delayed(Duration(seconds: 1));
+      count--;
+    }
   }
 
   void changeStateChapter(RequestState state) {

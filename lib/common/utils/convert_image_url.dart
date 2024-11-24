@@ -18,7 +18,12 @@ String? imageUrlFromJson(dynamic data) {
 }
 
 String? imageUrlToJson(String? data) {
-  if (data?.startsWith(baseUrlImageCdn) ?? false) {
+  if (data?.startsWith("$baseUrl/images") ?? false) {
+    return kIsWeb || kIsWasm
+        ? data?.replaceFirst("$baseUrl/images", "/images")
+        : data;
+  }
+  if (data?.startsWith("$baseUrl/images/cdn") ?? false) {
     return kIsWeb || kIsWasm
         ? data?.replaceFirst("$baseUrl/images/cdn", baseUrlImageCdn)
         : data;
@@ -49,10 +54,15 @@ List<String>? imageUrlListFromJson(dynamic data) {
 
 List<String>? imageUrlListToJson(List<String>? data) {
   return data?.map((item) {
-    if (item.startsWith(baseUrlImageCdn)) {
+    if (item.toString().startsWith("$baseUrl/images")) {
       return kIsWeb || kIsWasm
-          ? item.replaceFirst("$baseUrl/images/cdn", baseUrlImageCdn)
-          : item;
+          ? item.toString().replaceFirst("$baseUrl/images", "/images")
+          : item.toString();
+    }
+    if (item.toString().startsWith("$baseUrl/images/cdn")) {
+      return kIsWeb || kIsWasm
+          ? item.toString().replaceFirst("$baseUrl/images/cdn", baseUrlImageCdn)
+          : item.toString();
     }
     return kIsWeb || kIsWasm
         ? "$baseUrl$item"

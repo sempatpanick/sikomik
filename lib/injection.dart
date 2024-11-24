@@ -13,6 +13,7 @@ import 'domain/usecases/get_chapter_case.dart';
 import 'domain/usecases/get_comic_detail_case.dart';
 import 'domain/usecases/get_configuration_case.dart';
 import 'domain/usecases/get_latest_comic_case.dart';
+import 'domain/usecases/search_comic_case.dart';
 import 'domain/usecases/user_comic_case.dart';
 import 'domain/usecases/user_detail_case.dart';
 
@@ -31,6 +32,9 @@ void init() {
   );
   locator.registerLazySingleton(
     () => GetChapterCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => SearchComicCase(repository: locator()),
   );
   locator.registerLazySingleton(
     () => AuthenticationCase(repository: locator()),

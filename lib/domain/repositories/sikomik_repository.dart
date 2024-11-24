@@ -22,6 +22,9 @@ abstract class SiKomikRepository {
   Future<Either<Failure, ChapterEntity>> getChapter({
     required String path,
   });
+  Future<Either<Failure, ComicEntity>> searchComic({
+    required String query,
+  });
 
   Future<Either<Failure, UserEntity>> setUser({
     required UserEntity user,

@@ -51,7 +51,11 @@ class ComicDetailController extends GetxController {
 
   Future<void> getUserComic() async {
     if (path.value.isEmpty) return;
-    if (mainController.user.value == null) return;
+    if (mainController.user.value == null) {
+      await retryCheckUserId();
+
+      if (mainController.user.value == null) return;
+    }
 
     changeStateFavorite(RequestState.loading);
     final result = await userComicCase.getUserComicById(
@@ -96,6 +100,14 @@ class ComicDetailController extends GetxController {
       userComic.refresh();
       changeStateFavorite(RequestState.loaded);
     });
+  }
+
+  Future<void> retryCheckUserId() async {
+    int count = 3;
+    while (mainController.user.value == null && count > 0) {
+      await Future.delayed(Duration(seconds: 1));
+      count--;
+    }
   }
 
   void changeStateComic(RequestState state) {
