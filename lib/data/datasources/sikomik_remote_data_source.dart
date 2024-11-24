@@ -22,6 +22,9 @@ abstract class SiKomikRemoteDataSource {
   Future<ChapterModel> getChapter({
     required String path,
   });
+  Future<ComicModel> searchComic({
+    required String query,
+  });
 }
 
 class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
@@ -112,6 +115,27 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
     } else {
       throw ResponseFailure(
         'Error get chapter',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<ComicModel> searchComic({required String query}) async {
+    final retryClient = RetryClient(client);
+
+    final response = await retryClient.get(
+      Uri.parse("$url/search?query=$query"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*",
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ComicModel.fromJson(json.decode(response.body));
+    } else {
+      throw ResponseFailure(
+        'Error search comic',
         statusCode: response.statusCode,
       );
     }
