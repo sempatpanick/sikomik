@@ -18,12 +18,11 @@ class ComicDetailPage extends StatelessWidget {
     return GetBuilder<ComicDetailController>(
       autoRemove: true,
       init: ComicDetailController(),
-      didChangeDependencies: (state) =>
-          WidgetsBinding.instance.addPostFrameCallback(
+      initState: (state) => WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (Get.parameters['detail'] == null &&
               Get.parameters['path'] == null) return;
-          state.controller?.initialize(
+          state.controller.initialize(
             "/${Get.parameters['detail']!}/${Get.parameters['path']!}/",
           );
         },

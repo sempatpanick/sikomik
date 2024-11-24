@@ -38,6 +38,7 @@ class _BrowserInAppPageState extends State<BrowserInAppPage> {
       url = "$baseUrl/${Get.parameters['path']!}";
     }
     pullToRefreshController = kIsWeb ||
+            kIsWasm ||
             ![TargetPlatform.iOS, TargetPlatform.android]
                 .contains(defaultTargetPlatform)
         ? null
@@ -171,7 +172,6 @@ class _BrowserInAppPageState extends State<BrowserInAppPage> {
         },
         onUpdateVisitedHistory: (controller, url, androidIsReload) {},
         onTitleChanged: (controller, title) {
-          print("titleChanged: $title");
           setState(() {
             this.title = title ?? "";
           });

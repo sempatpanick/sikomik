@@ -16,9 +16,8 @@ class FavoritesPage extends StatelessWidget {
     return GetBuilder<FavoritesController>(
       autoRemove: true,
       init: FavoritesController(),
-      didChangeDependencies: (state) =>
-          WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.initialize(),
+      initState: (state) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => state.controller.initialize(),
       ),
       builder: (_) {
         // if (ResponsiveBreakpoints.of(context).isMobile) {
