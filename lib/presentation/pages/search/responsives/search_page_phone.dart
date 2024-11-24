@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sikomik/presentation/widgets/comic_card_widget.dart';
@@ -41,7 +44,13 @@ class SearchPagePhone extends StatelessWidget {
                     controller: controller.searchInputController,
                     autofocus: true,
                     textInputAction: TextInputAction.send,
-                    textAlignVertical: TextAlignVertical.top,
+                    textAlignVertical: kIsWeb || kIsWasm
+                        ? TextAlignVertical.center
+                        : Platform.isWindows ||
+                                Platform.isMacOS ||
+                                Platform.isLinux
+                            ? TextAlignVertical.top
+                            : TextAlignVertical.center,
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       filled: true,
