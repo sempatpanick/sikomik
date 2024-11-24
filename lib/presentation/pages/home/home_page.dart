@@ -16,8 +16,8 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
       autoRemove: true,
       init: HomeController(),
-      didChangeDependencies: (state) => WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.controller?.initialize(),
+      initState: (state) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => state.controller.initialize(),
       ),
       builder: (_) {
         // if (ResponsiveBreakpoints.of(context).isMobile) {

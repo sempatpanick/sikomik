@@ -172,7 +172,6 @@ class _BrowserInAppPageState extends State<BrowserInAppPage> {
         },
         onUpdateVisitedHistory: (controller, url, androidIsReload) {},
         onTitleChanged: (controller, title) {
-          print("titleChanged: $title");
           setState(() {
             this.title = title ?? "";
           });

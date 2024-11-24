@@ -18,11 +18,10 @@ class ChapterPage extends StatelessWidget {
     return GetBuilder<ChapterController>(
       autoRemove: true,
       init: ChapterController(),
-      didChangeDependencies: (state) =>
-          WidgetsBinding.instance.addPostFrameCallback(
+      initState: (state) => WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (Get.parameters['path'] == null) return;
-          state.controller?.initialize(
+          state.controller.initialize(
             "/${Get.parameters['detail']!}/${Get.parameters['chapter']!}/${Get.parameters['path']!}/",
           );
         },

@@ -81,9 +81,9 @@ class MyApp extends StatelessWidget {
             OverlayEntry(
               builder: (_) => GetBuilder<MainController>(
                 init: MainController(),
-                didChangeDependencies: (state) =>
+                initState: (state) =>
                     WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => state.controller?.initialize(),
+                  (_) => state.controller.initialize(),
                 ),
                 builder: (_) => child ?? SizedBox(),
               ),
