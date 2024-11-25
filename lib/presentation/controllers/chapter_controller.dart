@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import '../../common/enums.dart';
@@ -19,16 +23,72 @@ class ChapterController extends GetxController {
 
   final mainController = Get.find<MainController>();
 
+  final keyAppBar = GlobalKey();
+  final keyBottomBar = GlobalKey();
+
   Rx<RequestState> stateChapter = RequestState.empty.obs;
   Rx<RequestState> stateComicDetail = RequestState.empty.obs;
+  Rx<ScrollController> scrollController = ScrollController().obs;
 
   Rxn<DataChapterEntity> chapter = Rxn();
   Rxn<DataComicDetailEntity> comic = Rxn();
   Rxn<UserComicEntity> userComic = Rxn();
   RxString path = "".obs;
 
+  RxDouble positionTopAppBar = 0.0.obs;
+  RxDouble positionBottomBottomBar = 0.0.obs;
+
   Future<void> initialize(String path) async {
     changePath(path);
+
+    scrollController.value.addListener(() {
+      if (scrollController.value.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        if (keyAppBar.currentContext != null) {
+          positionTopAppBar.value =
+              positionTopAppBar.value >= 0 ? 0 : positionTopAppBar.value + 1;
+        }
+        if (keyBottomBar.currentContext != null) {
+          positionBottomBottomBar.value = positionBottomBottomBar.value >= 0
+              ? 0
+              : positionBottomBottomBar.value + 1;
+        }
+      } else if (scrollController.value.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (keyAppBar.currentContext != null &&
+            (scrollController.value.offset <
+                scrollController.value.position.maxScrollExtent -
+                    keyAppBar.currentContext!.size!.height)) {
+          positionTopAppBar.value = positionTopAppBar.value <=
+                  -(keyAppBar.currentContext?.size?.height ?? 0)
+              ? -(keyAppBar.currentContext?.size?.height ?? 0)
+              : positionTopAppBar.value - 1;
+        }
+        if (keyBottomBar.currentContext != null &&
+            (scrollController.value.offset <
+                scrollController.value.position.maxScrollExtent -
+                    keyBottomBar.currentContext!.size!.height)) {
+          positionBottomBottomBar.value = positionBottomBottomBar.value <=
+                  -(keyBottomBar.currentContext?.size?.height ?? 0)
+              ? -(keyBottomBar.currentContext?.size?.height ?? 0)
+              : positionBottomBottomBar.value - 1;
+        }
+        if (keyAppBar.currentContext?.size != null &&
+            keyBottomBar.currentContext?.size != null) {
+          final height = max(keyAppBar.currentContext!.size!.height,
+              keyBottomBar.currentContext!.size!.height);
+
+          if (scrollController.value.offset >=
+              scrollController.value.position.maxScrollExtent - height) {
+            positionTopAppBar.value = positionTopAppBar.value =
+                positionTopAppBar.value >= 0 ? 0 : positionTopAppBar.value + 1;
+            positionBottomBottomBar.value = positionBottomBottomBar.value >= 0
+                ? 0
+                : positionBottomBottomBar.value + 1;
+          }
+        }
+      }
+    });
     await getChapter(
       path: path,
     );
@@ -99,7 +159,8 @@ class ChapterController extends GetxController {
   }
 
   void refreshChapter() {
-    getChapter(path: path.value);
+    print(keyBottomBar.currentContext?.size?.height);
+    // getChapter(path: path.value);
   }
 
   Future<void> getChapter({required String path}) async {

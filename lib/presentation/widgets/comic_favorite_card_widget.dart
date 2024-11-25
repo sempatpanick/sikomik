@@ -145,7 +145,7 @@ class ComicFavoriteCardWidget extends StatelessWidget {
                   if (userComic.lastReadChapter?.chapter != null)
                     Text(
                       "Last Read Chapter ${userComic.lastReadChapter?.chapter ?? ""}",
-                      maxLines: 1,
+                      maxLines: 2,
                       style: theme.textTheme.labelLarge?.copyWith(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.w300,
