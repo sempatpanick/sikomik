@@ -147,6 +147,8 @@ class ChapterPagePhone extends StatelessWidget {
                                     label: Text(
                                       "Previous",
                                     ),
+                                  ).fadeIn(
+                                    duration: Duration(seconds: 1),
                                   ),
                           ),
                           SizedBox(
@@ -159,6 +161,8 @@ class ChapterPagePhone extends StatelessWidget {
                               foregroundColor: theme.colorScheme.onPrimary,
                             ),
                             icon: Icon(Icons.refresh),
+                          ).fadeIn(
+                            duration: Duration(seconds: 1),
                           ),
                           SizedBox(
                             width: 12,
@@ -175,6 +179,8 @@ class ChapterPagePhone extends StatelessWidget {
                                     label: Text(
                                       "Next",
                                     ),
+                                  ).fadeIn(
+                                    duration: Duration(seconds: 1),
                                   ),
                           ),
                         ],

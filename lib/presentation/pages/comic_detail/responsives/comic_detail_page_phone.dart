@@ -544,6 +544,8 @@ class ComicDetailPageContent extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ).fadeIn(
+                      duration: Duration(milliseconds: 500),
                     )
                   : const SizedBox(
                       width: 130,
