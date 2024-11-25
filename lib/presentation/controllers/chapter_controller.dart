@@ -14,6 +14,7 @@ import '../../domain/usecases/get_comic_detail_case.dart';
 import '../../domain/usecases/user_comic_case.dart';
 import '../../injection.dart';
 import '../pages/chapter/chapter_page.dart';
+import 'comic_detail_controller.dart';
 import 'main_controller.dart';
 
 class ChapterController extends GetxController {
@@ -92,6 +93,7 @@ class ChapterController extends GetxController {
     await getChapter(
       path: path,
     );
+    await getComicDetail();
     await getUserComic();
     await setLastReadComic();
   }
@@ -159,8 +161,7 @@ class ChapterController extends GetxController {
   }
 
   void refreshChapter() {
-    print(keyBottomBar.currentContext?.size?.height);
-    // getChapter(path: path.value);
+    getChapter(path: path.value);
   }
 
   Future<void> getChapter({required String path}) async {
@@ -177,7 +178,6 @@ class ChapterController extends GetxController {
       changeStateChapter(RequestState.loaded);
       chapter.value = r.data;
       chapter.refresh();
-      getComicDetail();
     });
   }
 
@@ -218,6 +218,11 @@ class ChapterController extends GetxController {
     result.fold((l) {}, (r) {
       userComic.value = r;
       userComic.refresh();
+      if (Get.isRegistered<ComicDetailController>()) {
+        final comicDetailController = Get.find<ComicDetailController>();
+        comicDetailController.userComic.value = r;
+        comicDetailController.userComic.refresh();
+      }
     });
   }
 
