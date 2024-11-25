@@ -19,39 +19,6 @@ class ChapterPagePhone extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        leading: GetBuilder<ChapterController>(
-          builder: (controller) => IconButton(
-            onPressed: () async {
-              final isCanPop = await Navigator.of(context).maybePop();
-              if (!isCanPop) {
-                if (controller.chapter.value?.comicPath == null) {
-                  Get.offAllNamed(
-                    MainPage.routeName,
-                  );
-                  return;
-                }
-                Get.offNamed(
-                  ComicDetailPage.routeName.replaceFirst(
-                    "/:detail/:path",
-                    controller.chapter.value!.comicPath!,
-                  ),
-                );
-              }
-            },
-            icon: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.arrow_back_outlined,
-                color: theme.primaryColor,
-              ),
-            ),
-          ),
-        ),
-      ),
       body: GetX<ChapterController>(
         builder: (controller) => controller.stateChapter.value ==
                     RequestState.loading ||
@@ -63,6 +30,7 @@ class ChapterPagePhone extends StatelessWidget {
                 children: [
                   InteractiveViewer(
                     child: ListView.builder(
+                      controller: controller.scrollController.value,
                       physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.zero,
                       itemCount: controller.chapter.value?.images?.length ?? 0,
@@ -129,63 +97,97 @@ class ChapterPagePhone extends StatelessWidget {
                       },
                     ),
                   ),
-                  if (controller.stateComicDetail.value != RequestState.loading)
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: !controller.isCanGoPreviousChapter().$1
-                                ? SizedBox()
-                                : ElevatedButton.icon(
-                                    onPressed: controller.goPreviousChapter,
-                                    icon: Icon(
-                                      Icons.arrow_circle_left_outlined,
-                                    ),
-                                    label: Text(
-                                      "Previous",
-                                    ),
-                                  ).fadeIn(
-                                    duration: Duration(seconds: 1),
-                                  ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          IconButton(
-                            onPressed: controller.refreshChapter,
-                            style: IconButton.styleFrom(
-                              backgroundColor: theme.colorScheme.primary,
-                              foregroundColor: theme.colorScheme.onPrimary,
+                  Positioned(
+                    key: controller.keyAppBar,
+                    top: controller.positionTopAppBar.value,
+                    left: 0,
+                    child: IconButton(
+                      onPressed: () async {
+                        final isCanPop = await Navigator.of(context).maybePop();
+                        if (!isCanPop) {
+                          if (controller.chapter.value?.comicPath == null) {
+                            Get.offAllNamed(
+                              MainPage.routeName,
+                            );
+                            return;
+                          }
+                          Get.offNamed(
+                            ComicDetailPage.routeName.replaceFirst(
+                              "/:detail/:path",
+                              controller.chapter.value!.comicPath!,
                             ),
-                            icon: Icon(Icons.refresh),
-                          ).fadeIn(
-                            duration: Duration(seconds: 1),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Expanded(
-                            child: !controller.isCanGoNextChapter().$1
-                                ? SizedBox()
-                                : ElevatedButton.icon(
-                                    onPressed: controller.goNextChapter,
-                                    icon: Icon(
-                                      Icons.arrow_circle_right_outlined,
-                                    ),
-                                    iconAlignment: IconAlignment.end,
-                                    label: Text(
-                                      "Next",
-                                    ),
-                                  ).fadeIn(
-                                    duration: Duration(seconds: 1),
-                                  ),
-                          ),
-                        ],
+                          );
+                        }
+                      },
+                      icon: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.arrow_back_outlined,
+                          color: theme.primaryColor,
+                        ),
                       ),
                     ),
+                  ),
+                  Positioned(
+                    key: controller.keyBottomBar,
+                    bottom: controller.positionBottomBottomBar.value,
+                    left: 0,
+                    right: 0,
+                    child: (controller.stateComicDetail.value ==
+                            RequestState.loading)
+                        ? SizedBox()
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: !controller.isCanGoPreviousChapter().$1
+                                    ? SizedBox()
+                                    : ElevatedButton.icon(
+                                        onPressed: controller.goPreviousChapter,
+                                        icon: Icon(
+                                          Icons.arrow_circle_left_outlined,
+                                        ),
+                                        label: Text(
+                                          "Previous",
+                                        ),
+                                      ).fadeIn(
+                                        duration: Duration(seconds: 1),
+                                      ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
+                              IconButton(
+                                onPressed: controller.refreshChapter,
+                                style: IconButton.styleFrom(
+                                  backgroundColor: theme.colorScheme.primary,
+                                  foregroundColor: theme.colorScheme.onPrimary,
+                                ),
+                                icon: Icon(Icons.refresh),
+                              ).fadeIn(
+                                duration: Duration(seconds: 1),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                child: !controller.isCanGoNextChapter().$1
+                                    ? SizedBox()
+                                    : ElevatedButton.icon(
+                                        onPressed: controller.goNextChapter,
+                                        icon: Icon(
+                                          Icons.arrow_circle_right_outlined,
+                                        ),
+                                        iconAlignment: IconAlignment.end,
+                                        label: Text(
+                                          "Next",
+                                        ),
+                                      ).fadeIn(
+                                        duration: Duration(seconds: 1),
+                                      ),
+                              ),
+                            ],
+                          ),
+                  )
                 ],
               ),
       ),
