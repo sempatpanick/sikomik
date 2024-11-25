@@ -411,15 +411,14 @@ class ComicDetailPageContent extends StatelessWidget {
                             tileColor: !isRead
                                 ? null
                                 : theme.primaryColor.withOpacity(.4),
-                            onTap: () async {
+                            onTap: () {
                               if (item.path == null) return;
-                              await Get.toNamed(
+                              Get.toNamed(
                                 ChapterPage.routeName.replaceAll(
                                   "/:detail/:chapter/:path",
                                   item.path!,
                                 ),
                               );
-                              controller.getUserComic();
                             },
                             title: Text(
                               "Chapter ${item.chapter}",
