@@ -31,6 +31,16 @@ class SettingsPagePhone extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    if (controller.user.value != null)
+                      Expanded(
+                        child: Text(
+                          "Welcome ${(controller.user.value?.displayName ?? "").isNotEmpty ? controller.user.value?.displayName : (controller.user.value?.email ?? "").isNotEmpty ? controller.user.value?.email : ""}",
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
                     if (controller.user.value == null)
                       ElevatedButton(
                         onPressed: () => Get.toNamed(LoginPage.routeName),
