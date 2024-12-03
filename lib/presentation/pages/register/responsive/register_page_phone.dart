@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -137,71 +140,75 @@ class RegisterPagePhone extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "OR",
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.w500,
+                if (!kIsWasm && !kIsWeb && Platform.isAndroid && Platform.isIOS)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "OR",
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Divider(),
+                      ),
+                    ],
+                  ),
+                if (!kIsWasm && !kIsWeb && Platform.isAndroid && Platform.isIOS)
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: ElevatedButton.icon(
+                      onPressed:
+                          controller.loadingState.value == RequestState.loading
+                              ? null
+                              : () => controller.register(
+                                    context: context,
+                                    type: LoginType.google,
+                                  ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 45),
+                      ),
+                      icon: Icon(FontAwesomeIcons.google),
+                      label: Text(
+                        "Continue with Google",
                       ),
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: Divider(),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: ElevatedButton.icon(
-                    onPressed:
-                        controller.loadingState.value == RequestState.loading
-                            ? null
-                            : () => controller.register(
-                                  context: context,
-                                  type: LoginType.google,
-                                ),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 45),
-                    ),
-                    icon: Icon(FontAwesomeIcons.google),
-                    label: Text(
-                      "Continue with Google",
+                  ),
+                if (!kIsWasm && !kIsWeb && Platform.isAndroid && Platform.isIOS)
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                if (!kIsWasm && !kIsWeb && Platform.isAndroid && Platform.isIOS)
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: ElevatedButton.icon(
+                      onPressed:
+                          controller.loadingState.value == RequestState.loading
+                              ? null
+                              : () => controller.register(
+                                    context: context,
+                                    type: LoginType.facebook,
+                                  ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 45),
+                      ),
+                      icon: Icon(FontAwesomeIcons.facebook),
+                      label: Text(
+                        "Continue with Facebook",
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: ElevatedButton.icon(
-                    onPressed:
-                        controller.loadingState.value == RequestState.loading
-                            ? null
-                            : () => controller.register(
-                                  context: context,
-                                  type: LoginType.facebook,
-                                ),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 45),
-                    ),
-                    icon: Icon(FontAwesomeIcons.facebook),
-                    label: Text(
-                      "Continue with Facebook",
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 16.0,
                 ),

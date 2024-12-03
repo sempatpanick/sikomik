@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,8 @@ class ChapterController extends GetxController {
   RxDouble positionTopAppBar = 0.0.obs;
   RxDouble positionBottomBottomBar = 0.0.obs;
 
+  RxInt counterScrollEffect = (kIsWasm || kIsWeb ? 2 : 1).obs;
+
   Future<void> initialize(String path) async {
     changePath(path);
 
@@ -46,13 +49,14 @@ class ChapterController extends GetxController {
       if (scrollController.value.position.userScrollDirection ==
           ScrollDirection.forward) {
         if (keyAppBar.currentContext != null) {
-          positionTopAppBar.value =
-              positionTopAppBar.value >= 0 ? 0 : positionTopAppBar.value + 1;
+          positionTopAppBar.value = positionTopAppBar.value >= 0
+              ? 0
+              : positionTopAppBar.value + counterScrollEffect.value;
         }
         if (keyBottomBar.currentContext != null) {
           positionBottomBottomBar.value = positionBottomBottomBar.value >= 0
               ? 0
-              : positionBottomBottomBar.value + 1;
+              : positionBottomBottomBar.value + counterScrollEffect.value;
         }
       } else if (scrollController.value.position.userScrollDirection ==
           ScrollDirection.reverse) {
@@ -63,7 +67,7 @@ class ChapterController extends GetxController {
           positionTopAppBar.value = positionTopAppBar.value <=
                   -(keyAppBar.currentContext?.size?.height ?? 0)
               ? -(keyAppBar.currentContext?.size?.height ?? 0)
-              : positionTopAppBar.value - 1;
+              : positionTopAppBar.value - counterScrollEffect.value;
         }
         if (keyBottomBar.currentContext != null &&
             (scrollController.value.offset <
@@ -72,7 +76,7 @@ class ChapterController extends GetxController {
           positionBottomBottomBar.value = positionBottomBottomBar.value <=
                   -(keyBottomBar.currentContext?.size?.height ?? 0)
               ? -(keyBottomBar.currentContext?.size?.height ?? 0)
-              : positionBottomBottomBar.value - 1;
+              : positionBottomBottomBar.value - counterScrollEffect.value;
         }
         if (keyAppBar.currentContext?.size != null &&
             keyBottomBar.currentContext?.size != null) {
@@ -82,10 +86,12 @@ class ChapterController extends GetxController {
           if (scrollController.value.offset >=
               scrollController.value.position.maxScrollExtent - height) {
             positionTopAppBar.value = positionTopAppBar.value =
-                positionTopAppBar.value >= 0 ? 0 : positionTopAppBar.value + 1;
+                positionTopAppBar.value >= 0
+                    ? 0
+                    : positionTopAppBar.value + counterScrollEffect.value;
             positionBottomBottomBar.value = positionBottomBottomBar.value >= 0
                 ? 0
-                : positionBottomBottomBar.value + 1;
+                : positionBottomBottomBar.value + counterScrollEffect.value;
           }
         }
       }
