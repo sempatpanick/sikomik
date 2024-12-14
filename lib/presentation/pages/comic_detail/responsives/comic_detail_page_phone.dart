@@ -8,7 +8,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/enums.dart';
-import '../../../../common/theme.dart';
 import '../../../controllers/comic_detail_controller.dart';
 import '../../chapter/chapter_page.dart';
 import '../../main/main_page.dart';
@@ -21,7 +20,6 @@ class ComicDetailPagePhone extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,

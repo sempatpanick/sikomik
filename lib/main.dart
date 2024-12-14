@@ -9,6 +9,7 @@ import 'package:toastification/toastification.dart';
 import 'package:window_size/window_size.dart';
 
 import 'common/scroll_behavior_helper.dart';
+import 'common/theme.dart';
 import 'firebase_options.dart';
 import 'injection.dart';
 import 'presentation/controllers/main_controller.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
+          scaffoldBackgroundColor: bgColor,
         ),
         debugShowCheckedModeBanner: false,
         scrollBehavior: ScrollBehaviorHelper(),
@@ -90,7 +92,6 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        // initialRoute: MainPage.routeName,
         routerDelegate: GetDelegate(
           showHashOnUrl: true,
           pages: [

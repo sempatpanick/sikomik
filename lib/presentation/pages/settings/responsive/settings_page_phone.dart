@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/theme.dart';
 import '../../../controllers/main_controller.dart';
 import '../../browser_in_app/browser_in_app_page.dart';
 import '../../login/login_page.dart';
@@ -15,7 +14,6 @@ class SettingsPagePhone extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: bgColor,
       body: GetX<MainController>(
         builder: (controller) => SafeArea(
           child: Column(

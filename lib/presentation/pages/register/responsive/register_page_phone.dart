@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/enums.dart';
-import '../../../../common/theme.dart';
 import '../../../controllers/main_controller.dart';
 import '../../../controllers/register_controller.dart';
 import '../../login/login_page.dart';
@@ -20,7 +19,6 @@ class RegisterPagePhone extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
