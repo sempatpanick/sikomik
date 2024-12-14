@@ -48,6 +48,7 @@ class ComicDetailPageContent extends StatelessWidget {
             thumbVisibility: true,
             radius: Radius.circular(25),
             child: SingleChildScrollView(
+              controller: controller.scrollController,
               physics: const BouncingScrollPhysics(),
               child: Stack(
                 children: [

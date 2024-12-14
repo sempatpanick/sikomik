@@ -13,6 +13,8 @@ class SearchComicController extends GetxController {
 
   final mainController = Get.find<MainController>();
 
+  final ScrollController scrollController = ScrollController();
+
   final TextEditingController searchInputController = TextEditingController();
 
   Rx<RequestState> stateSearch = RequestState.empty.obs;
