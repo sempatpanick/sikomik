@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/enums.dart';
@@ -15,6 +16,8 @@ class ComicDetailController extends GetxController {
   final UserComicCase userComicCase = locator();
 
   final MainController mainController = Get.find<MainController>();
+
+  final ScrollController scrollController = ScrollController();
 
   Rx<RequestState> stateComic = RequestState.empty.obs;
   Rx<RequestState> stateFavorite = RequestState.empty.obs;

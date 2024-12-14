@@ -30,85 +30,91 @@ class ChapterPagePhone extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                   )
-                : SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: 900),
-                        child: InteractiveViewer(
-                          child: ListView.builder(
-                            controller: controller.scrollController.value,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            itemCount:
-                                controller.chapter.value?.images?.length ?? 0,
-                            itemBuilder: (context, index) {
-                              if (controller.chapter.value?.images == null) {
-                                return SizedBox();
-                              }
+                : Scrollbar(
+                    controller: controller.scrollController.value,
+                    interactive: true,
+                    thumbVisibility: true,
+                    radius: Radius.circular(25),
+                    child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: 900),
+                          child: InteractiveViewer(
+                            child: ListView.builder(
+                              controller: controller.scrollController.value,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              itemCount:
+                                  controller.chapter.value?.images?.length ?? 0,
+                              itemBuilder: (context, index) {
+                                if (controller.chapter.value?.images == null) {
+                                  return SizedBox();
+                                }
 
-                              final item =
-                                  controller.chapter.value!.images![index];
+                                final item =
+                                    controller.chapter.value!.images![index];
 
-                              return Image(
-                                image: kIsWeb || kIsWasm
-                                    ? NetworkImage(item)
-                                    : NetworkImageWithRetry(item),
-                                fit: BoxFit.fill,
-                                frameBuilder: (context, child, value, state) {
-                                  if (value == null) {
-                                    return SizedBox(
-                                      width: double.infinity,
-                                      height: 100,
-                                      child: Center(
-                                        child: SizedBox(
-                                          width: 40,
-                                          height: 40,
-                                          child: CircularProgressIndicator(
-                                            color: theme.primaryColor,
+                                return Image(
+                                  image: kIsWeb || kIsWasm
+                                      ? NetworkImage(item)
+                                      : NetworkImageWithRetry(item),
+                                  fit: BoxFit.fill,
+                                  frameBuilder: (context, child, value, state) {
+                                    if (value == null) {
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        height: 100,
+                                        child: Center(
+                                          child: SizedBox(
+                                            width: 40,
+                                            height: 40,
+                                            child: CircularProgressIndicator(
+                                              color: theme.primaryColor,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  return child;
-                                },
-                                loadingBuilder: (context, child, event) =>
-                                    event == null
-                                        ? child
-                                        : SizedBox(
-                                            width: double.infinity,
-                                            height: 100,
-                                            child: Center(
-                                              child: SizedBox(
-                                                width: 40,
-                                                height: 40,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  value: event
-                                                          .cumulativeBytesLoaded /
-                                                      (event.expectedTotalBytes ??
-                                                          1),
-                                                  color: theme.primaryColor,
+                                      );
+                                    }
+                                    return child;
+                                  },
+                                  loadingBuilder: (context, child, event) =>
+                                      event == null
+                                          ? child
+                                          : SizedBox(
+                                              width: double.infinity,
+                                              height: 100,
+                                              child: Center(
+                                                child: SizedBox(
+                                                  width: 40,
+                                                  height: 40,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: event
+                                                            .cumulativeBytesLoaded /
+                                                        (event.expectedTotalBytes ??
+                                                            1),
+                                                    color: theme.primaryColor,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                errorBuilder: (context, url, error) =>
-                                    const SizedBox(
-                                  width: double.infinity,
-                                  height: 100,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.broken_image_outlined,
-                                      color: Colors.grey,
-                                      size: 40,
+                                  errorBuilder: (context, url, error) =>
+                                      const SizedBox(
+                                    width: double.infinity,
+                                    height: 100,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.broken_image_outlined,
+                                        color: Colors.grey,
+                                        size: 40,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),

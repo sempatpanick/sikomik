@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/enums.dart';
@@ -10,6 +11,8 @@ class FavoritesController extends GetxController {
   final UserComicCase userComicCase = locator();
 
   final MainController mainController = Get.find<MainController>();
+
+  final ScrollController scrollController = ScrollController();
 
   Rx<RequestState> stateFavorites = RequestState.loading.obs;
 

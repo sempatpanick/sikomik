@@ -29,97 +29,104 @@ class SearchPagePhone extends StatelessWidget {
       body: GetX<SearchComicController>(
         builder: (controller) => RefreshIndicator(
           onRefresh: controller.search,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
-                horizontal: 16.0,
-              ),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: controller.searchInputController,
-                    autofocus: true,
-                    textInputAction: TextInputAction.send,
-                    textAlignVertical: kIsWeb || kIsWasm
-                        ? TextAlignVertical.center
-                        : Platform.isWindows ||
-                                Platform.isMacOS ||
-                                Platform.isLinux
-                            ? TextAlignVertical.top
-                            : TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      labelText: "Search",
-                      hintText: "Search comic here",
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      contentPadding: EdgeInsets.symmetric(vertical: 8),
-                      suffixIcon: controller.query.value.isEmpty
-                          ? null
-                          : IconButton(
-                              onPressed: controller.clearQuery,
-                              icon: Icon(
-                                Icons.close,
-                                color: theme.primaryColor,
+          child: Scrollbar(
+            controller: controller.scrollController,
+            interactive: true,
+            thumbVisibility: true,
+            radius: Radius.circular(25),
+            child: SingleChildScrollView(
+              controller: controller.scrollController,
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 24.0,
+                  horizontal: 16.0,
+                ),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: controller.searchInputController,
+                      autofocus: true,
+                      textInputAction: TextInputAction.send,
+                      textAlignVertical: kIsWeb || kIsWasm
+                          ? TextAlignVertical.center
+                          : Platform.isWindows ||
+                                  Platform.isMacOS ||
+                                  Platform.isLinux
+                              ? TextAlignVertical.top
+                              : TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        labelText: "Search",
+                        hintText: "Search comic here",
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        contentPadding: EdgeInsets.symmetric(vertical: 8),
+                        suffixIcon: controller.query.value.isEmpty
+                            ? null
+                            : IconButton(
+                                onPressed: controller.clearQuery,
+                                icon: Icon(
+                                  Icons.close,
+                                  color: theme.primaryColor,
+                                ),
                               ),
-                            ),
-                      prefixIcon: Icon(
-                        Icons.search,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                    onChanged: controller.changeQuery,
-                    onTapOutside: (_) =>
-                        FocusManager.instance.primaryFocus?.unfocus(),
-                    onFieldSubmitted: (value) => controller.search(),
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  if (controller.comics.isEmpty &&
-                      controller.stateSearch.value == RequestState.loaded)
-                    Center(
-                      child: Text(
-                        "Comic not found",
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal,
+                        prefixIcon: Icon(
+                          Icons.search,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
                       ),
+                      onChanged: controller.changeQuery,
+                      onTapOutside: (_) =>
+                          FocusManager.instance.primaryFocus?.unfocus(),
+                      onFieldSubmitted: (value) => controller.search(),
                     ),
-                  if (controller.comics.isNotEmpty &&
-                      controller.stateSearch.value == RequestState.loaded)
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: (size.width / 250).round(),
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                        mainAxisExtent: 260,
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    if (controller.comics.isEmpty &&
+                        controller.stateSearch.value == RequestState.loaded)
+                      Center(
+                        child: Text(
+                          "Comic not found",
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                       ),
-                      itemCount: controller.comics.length,
-                      itemBuilder: (context, index) {
-                        final item = controller.comics[index];
+                    if (controller.comics.isNotEmpty &&
+                        controller.stateSearch.value == RequestState.loaded)
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: (size.width / 250).round(),
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                          mainAxisExtent: 260,
+                        ),
+                        itemCount: controller.comics.length,
+                        itemBuilder: (context, index) {
+                          final item = controller.comics[index];
 
-                        return ComicCardWidget(
-                          comic: item,
-                        );
-                      },
-                    ),
-                  if (controller.stateSearch.value == RequestState.loading)
-                    const SizedBox(
-                      height: 100,
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                          return ComicCardWidget(
+                            comic: item,
+                          );
+                        },
                       ),
-                    ),
-                ],
+                    if (controller.stateSearch.value == RequestState.loading)
+                      const SizedBox(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

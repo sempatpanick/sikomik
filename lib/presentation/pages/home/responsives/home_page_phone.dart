@@ -28,40 +28,46 @@ class HomePagePhone extends StatelessWidget {
           onRefresh: () => controller.searchInputController.text.isEmpty
               ? controller.getLatestComics(isClearComics: true)
               : controller.getLatestComics(isClearSearch: true),
-          child: SingleChildScrollView(
+          child: Scrollbar(
             controller: controller.scrollController,
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
-                horizontal: 16.0,
-              ),
-              child: Column(
-                children: [
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: (size.width / 250).round(),
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
-                      mainAxisExtent: 260,
-                    ),
-                    itemCount: controller.comics.length,
-                    itemBuilder: (context, index) {
-                      final item = controller.comics[index];
-
-                      return ComicCardWidget(comic: item);
-                    },
-                  ),
-                  if (controller.stateComics.value == RequestState.loading)
-                    const SizedBox(
-                      height: 100,
-                      child: Center(
-                        child: CircularProgressIndicator(),
+            interactive: true,
+            thumbVisibility: true,
+            radius: Radius.circular(25),
+            child: SingleChildScrollView(
+              controller: controller.scrollController,
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 24.0,
+                  horizontal: 16.0,
+                ),
+                child: Column(
+                  children: [
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: (size.width / 250).round(),
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                        mainAxisExtent: 260,
                       ),
+                      itemCount: controller.comics.length,
+                      itemBuilder: (context, index) {
+                        final item = controller.comics[index];
+
+                        return ComicCardWidget(comic: item);
+                      },
                     ),
-                ],
+                    if (controller.stateComics.value == RequestState.loading)
+                      const SizedBox(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
