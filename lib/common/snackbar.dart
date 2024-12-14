@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sikomik/common/utils/color_converter.dart';
 import 'package:toastification/toastification.dart';
 
 Future<bool?> successSnackBar(
@@ -38,8 +39,7 @@ Future<bool?> successSnackBar(
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
-    webBgColor:
-        "#${backgroundColor.value.toRadixString(16).substring(2, backgroundColor.value.toRadixString(16).length)}",
+    webBgColor: backgroundColor.getWebColor(),
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
@@ -78,8 +78,7 @@ Future<bool?> failedSnackBar(
   return Fluttertoast.showToast(
     msg: message,
     backgroundColor: backgroundColor,
-    webBgColor:
-        "#${backgroundColor.value.toRadixString(16).substring(2, backgroundColor.value.toRadixString(16).length)}",
+    webBgColor: backgroundColor.getWebColor(),
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );

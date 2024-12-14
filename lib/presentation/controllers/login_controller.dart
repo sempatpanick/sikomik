@@ -69,20 +69,22 @@ class LoginController extends GetxController {
         );
       }
       changeLoadingState(RequestState.loaded);
-      final isCanPop = await Navigator.of(context).maybePop();
-      if (!isCanPop) {
-        final mainController = Get.find<MainController>();
-        mainController.changeSelectedIndexNav(1);
-        Get.offAllNamed(
-          MainPage.routeName,
-          arguments: 1,
+      if (context.mounted) {
+        final isCanPop = await Navigator.of(context).maybePop();
+        if (!isCanPop) {
+          final mainController = Get.find<MainController>();
+          mainController.changeSelectedIndexNav(1);
+          Get.offAllNamed(
+            MainPage.routeName,
+            arguments: 1,
+          );
+        }
+        successSnackBar(
+          "Success",
+          "Login Success",
         );
+        mainController.getUser();
       }
-      successSnackBar(
-        "Success",
-        "Login Success",
-      );
-      mainController.getUser();
     });
   }
 

@@ -17,8 +17,6 @@ class ComicDetailPagePhone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
     return Scaffold(
       body: GetX<ComicDetailController>(
         builder: (controller) =>
@@ -154,7 +152,7 @@ class ComicDetailPageContent extends StatelessWidget {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(.3),
+                                color: Colors.black.withValues(alpha: .3),
                                 offset: const Offset(1, 1),
                                 blurRadius: 15.0,
                               ),
@@ -278,7 +276,7 @@ class ComicDetailPageContent extends StatelessWidget {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(.3),
+                                  color: Colors.black.withValues(alpha: .3),
                                   offset: const Offset(1, 1),
                                   blurRadius: 15.0,
                                 ),
@@ -404,7 +402,7 @@ class ComicDetailPageContent extends StatelessWidget {
                               return ListTile(
                                 tileColor: !isRead
                                     ? null
-                                    : theme.primaryColor.withOpacity(.4),
+                                    : theme.primaryColor.withValues(alpha: .4),
                                 onTap: () {
                                   if (item.path == null) return;
                                   Get.toNamed(

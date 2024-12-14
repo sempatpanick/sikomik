@@ -78,22 +78,24 @@ class RegisterController extends GetxController {
         );
       }
       changeLoadingState(RequestState.loaded);
-      final isCanPop = await Navigator.of(context).maybePop();
-      if (!isCanPop) {
-        final mainController = Get.find<MainController>();
-        mainController.changeSelectedIndexNav(1);
-        Get.offAllNamed(
-          MainPage.routeName,
-          arguments: 1,
+      if (context.mounted) {
+        final isCanPop = await Navigator.of(context).maybePop();
+        if (!isCanPop) {
+          final mainController = Get.find<MainController>();
+          mainController.changeSelectedIndexNav(1);
+          Get.offAllNamed(
+            MainPage.routeName,
+            arguments: 1,
+          );
+        }
+        changeLoadingState(RequestState.loaded);
+        Get.back();
+        successSnackBar(
+          "Success",
+          "Register Success",
         );
+        mainController.getUser();
       }
-      changeLoadingState(RequestState.loaded);
-      Get.back();
-      successSnackBar(
-        "Success",
-        "Register Success",
-      );
-      mainController.getUser();
     });
   }
 
