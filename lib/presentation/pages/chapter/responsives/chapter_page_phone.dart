@@ -31,6 +31,7 @@ class ChapterPagePhone extends StatelessWidget {
                     ),
                   )
                 : SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Center(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxWidth: 900),

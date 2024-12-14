@@ -74,10 +74,25 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
           scaffoldBackgroundColor: bgColor,
+          scrollbarTheme: ScrollbarThemeData(
+            thumbVisibility: WidgetStateProperty.resolveWith((state) {
+              if (state.contains(WidgetState.error) ||
+                  state.contains(WidgetState.disabled)) {
+                return false;
+              }
+              return true;
+            }),
+            thumbColor: WidgetStateProperty.resolveWith((state) {
+              if (state.contains(WidgetState.error) ||
+                  state.contains(WidgetState.disabled)) {
+                return Colors.transparent;
+              }
+              return Colors.grey;
+            }),
+          ),
         ),
         debugShowCheckedModeBanner: false,
         scrollBehavior: ScrollBehaviorHelper(),
-        // routerConfig: appRouter.config(),
         builder: (context, child) => Overlay(
           initialEntries: [
             OverlayEntry(
