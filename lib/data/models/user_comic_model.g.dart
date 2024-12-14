@@ -27,32 +27,25 @@ UserComicModel _$UserComicModelFromJson(Map<String, dynamic> json) =>
           json['lastUpdated'], const TimestampConverter().fromJson),
     );
 
-Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('comic', instance.comic?.toJson());
-  writeNotNull(
-      'readChapters', instance.readChapters?.map((e) => e.toJson()).toList());
-  writeNotNull('lastReadChapter', instance.lastReadChapter?.toJson());
-  writeNotNull('isFavorite', instance.isFavorite);
-  writeNotNull(
-      'createdAt',
-      _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.createdAt, const TimestampConverter().toJson));
-  writeNotNull(
-      'lastUpdated',
-      _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.lastUpdated, const TimestampConverter().toJson));
-  return val;
-}
+Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      if (instance.comic?.toJson() case final value?) 'comic': value,
+      if (instance.readChapters?.map((e) => e.toJson()).toList()
+          case final value?)
+        'readChapters': value,
+      if (instance.lastReadChapter?.toJson() case final value?)
+        'lastReadChapter': value,
+      if (instance.isFavorite case final value?) 'isFavorite': value,
+      if (_$JsonConverterToJson<Timestamp, DateTime>(
+              instance.createdAt, const TimestampConverter().toJson)
+          case final value?)
+        'createdAt': value,
+      if (_$JsonConverterToJson<Timestamp, DateTime>(
+              instance.lastUpdated, const TimestampConverter().toJson)
+          case final value?)
+        'lastUpdated': value,
+    };
 
 Value? _$JsonConverterFromJson<Json, Value>(
   Object? json,

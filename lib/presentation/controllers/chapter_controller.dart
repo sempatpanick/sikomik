@@ -25,12 +25,13 @@ class ChapterController extends GetxController {
 
   final mainController = Get.find<MainController>();
 
+  final ScrollController scrollController = ScrollController();
+
   final keyAppBar = GlobalKey();
   final keyBottomBar = GlobalKey();
 
   Rx<RequestState> stateChapter = RequestState.empty.obs;
   Rx<RequestState> stateComicDetail = RequestState.empty.obs;
-  Rx<ScrollController> scrollController = ScrollController().obs;
 
   Rxn<DataChapterEntity> chapter = Rxn();
   Rxn<DataComicDetailEntity> comic = Rxn();
@@ -45,8 +46,8 @@ class ChapterController extends GetxController {
   Future<void> initialize(String path) async {
     changePath(path);
 
-    scrollController.value.addListener(() {
-      if (scrollController.value.position.userScrollDirection ==
+    scrollController.addListener(() {
+      if (scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
         if (keyAppBar.currentContext != null) {
           positionTopAppBar.value = positionTopAppBar.value >= 0
@@ -58,11 +59,11 @@ class ChapterController extends GetxController {
               ? 0
               : positionBottomBottomBar.value + counterScrollEffect.value;
         }
-      } else if (scrollController.value.position.userScrollDirection ==
+      } else if (scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
         if (keyAppBar.currentContext != null &&
-            (scrollController.value.offset <
-                scrollController.value.position.maxScrollExtent -
+            (scrollController.offset <
+                scrollController.position.maxScrollExtent -
                     keyAppBar.currentContext!.size!.height)) {
           positionTopAppBar.value = positionTopAppBar.value <=
                   -(keyAppBar.currentContext?.size?.height ?? 0)
@@ -70,8 +71,8 @@ class ChapterController extends GetxController {
               : positionTopAppBar.value - counterScrollEffect.value;
         }
         if (keyBottomBar.currentContext != null &&
-            (scrollController.value.offset <
-                scrollController.value.position.maxScrollExtent -
+            (scrollController.offset <
+                scrollController.position.maxScrollExtent -
                     keyBottomBar.currentContext!.size!.height)) {
           positionBottomBottomBar.value = positionBottomBottomBar.value <=
                   -(keyBottomBar.currentContext?.size?.height ?? 0)
@@ -83,8 +84,8 @@ class ChapterController extends GetxController {
           final height = max(keyAppBar.currentContext!.size!.height,
               keyBottomBar.currentContext!.size!.height);
 
-          if (scrollController.value.offset >=
-              scrollController.value.position.maxScrollExtent - height) {
+          if (scrollController.offset >=
+              scrollController.position.maxScrollExtent - height) {
             positionTopAppBar.value = positionTopAppBar.value =
                 positionTopAppBar.value >= 0
                     ? 0

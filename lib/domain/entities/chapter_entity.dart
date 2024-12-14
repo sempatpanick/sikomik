@@ -26,7 +26,7 @@ class ChapterEntity extends Equatable {
 class DataChapterEntity extends Equatable {
   final String? title;
   final String? comicPath;
-  final int? chapter;
+  final num? chapter;
   final String? uploadedDate;
   final List<String>? images;
 

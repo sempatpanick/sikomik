@@ -23,7 +23,7 @@ DataChapterModel _$DataChapterModelFromJson(Map<String, dynamic> json) =>
     DataChapterModel(
       title: json['title'] as String?,
       comicPath: json['comicPath'] as String?,
-      chapter: (json['chapter'] as num?)?.toInt(),
+      chapter: json['chapter'] as num?,
       uploadedDate: json['uploadedDate'] as String?,
       images: imageUrlListFromJson(json['images']),
     );
