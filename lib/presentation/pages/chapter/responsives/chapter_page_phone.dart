@@ -31,18 +31,18 @@ class ChapterPagePhone extends StatelessWidget {
                     ),
                   )
                 : Scrollbar(
-                    controller: controller.scrollController.value,
+                    controller: controller.scrollController,
                     interactive: true,
                     thumbVisibility: true,
                     radius: Radius.circular(25),
                     child: SingleChildScrollView(
+                      controller: controller.scrollController,
                       physics: BouncingScrollPhysics(),
                       child: Center(
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 900),
                           child: InteractiveViewer(
                             child: ListView.builder(
-                              controller: controller.scrollController.value,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
