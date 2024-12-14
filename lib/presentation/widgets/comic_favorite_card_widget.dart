@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
@@ -56,7 +55,7 @@ class ComicFavoriteCardWidget extends StatelessWidget {
             if ((userComic.comic?.imageUrl ?? "").isNotEmpty)
               Image(
                 image: kIsWeb || kIsWasm
-                    ? CachedNetworkImageProvider(
+                    ? NetworkImage(
                         userComic.comic!.imageUrl!,
                       )
                     : NetworkImageWithRetry(

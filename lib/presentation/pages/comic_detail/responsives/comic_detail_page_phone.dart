@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
@@ -58,7 +57,7 @@ class ComicDetailPageContent extends StatelessWidget {
                               .isNotEmpty
                           ? Image(
                               image: kIsWeb || kIsWasm
-                                  ? CachedNetworkImageProvider(
+                                  ? NetworkImage(
                                       controller.comic.value?.thumbnailUrl ??
                                           controller.comic.value!.imageUrl!,
                                     )
@@ -482,7 +481,7 @@ class ComicDetailPageContent extends StatelessWidget {
                   child: (controller.comic.value?.imageUrl ?? "").isNotEmpty
                       ? Image(
                           image: kIsWeb || kIsWasm
-                              ? CachedNetworkImageProvider(
+                              ? NetworkImage(
                                   controller.comic.value!.imageUrl!,
                                 )
                               : NetworkImageWithRetry(
