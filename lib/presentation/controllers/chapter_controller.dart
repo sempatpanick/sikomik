@@ -166,8 +166,11 @@ class ChapterController extends GetxController {
     );
   }
 
-  void refreshChapter() {
-    getChapter(path: path.value);
+  Future<void> refreshChapter() async {
+    await getChapter(path: path.value);
+    await getComicDetail();
+    await getUserComic();
+    await setLastReadComic();
   }
 
   Future<void> getChapter({required String path}) async {

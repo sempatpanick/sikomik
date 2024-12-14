@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/enums.dart';
-import '../../../../common/theme.dart';
 import '../../../controllers/favorites_controller.dart';
 import '../../../widgets/comic_favorite_card_widget.dart';
 
@@ -15,7 +14,6 @@ class FavoritesPagePhone extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
           "Komik Favorite",

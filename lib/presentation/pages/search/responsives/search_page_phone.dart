@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:sikomik/presentation/widgets/comic_card_widget.dart';
 
 import '../../../../common/enums.dart';
-import '../../../../common/theme.dart';
 import '../../../controllers/search_comic_controller.dart';
 
 class SearchPagePhone extends StatelessWidget {
@@ -18,7 +17,6 @@ class SearchPagePhone extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
           "Komik Search",

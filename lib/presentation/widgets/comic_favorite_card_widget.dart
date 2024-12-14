@@ -44,7 +44,7 @@ class ComicFavoriteCardWidget extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.3),
+              color: Colors.black.withValues(alpha: .3),
               blurStyle: BlurStyle.outer,
               blurRadius: 20.0,
             ),

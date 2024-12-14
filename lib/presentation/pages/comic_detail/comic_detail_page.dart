@@ -21,7 +21,9 @@ class ComicDetailPage extends StatelessWidget {
       initState: (state) => WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (Get.parameters['detail'] == null &&
-              Get.parameters['path'] == null) return;
+              Get.parameters['path'] == null) {
+            return;
+          }
           state.controller.initialize(
             "/${Get.parameters['detail']!}/${Get.parameters['path']!}/",
           );
