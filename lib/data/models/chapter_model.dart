@@ -37,7 +37,7 @@ class ChapterModel extends Equatable {
 class DataChapterModel extends Equatable {
   final String? title;
   final String? comicPath;
-  final int? chapter;
+  final num? chapter;
   final String? uploadedDate;
   @JsonKey(fromJson: imageUrlListFromJson, toJson: imageUrlListToJson)
   final List<String>? images;

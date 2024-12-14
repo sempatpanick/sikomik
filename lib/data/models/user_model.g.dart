@@ -18,31 +18,21 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
           json['lastUpdated'], const TimestampConverter().fromJson),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'avatarUrl': instance.avatarUrl,
-    'name': instance.name,
-    'email': instance.email,
-    'phoneNumber': instance.phoneNumber,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'createdAt',
-      _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.createdAt, const TimestampConverter().toJson));
-  writeNotNull(
-      'lastUpdated',
-      _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.lastUpdated, const TimestampConverter().toJson));
-  return val;
-}
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      'id': instance.id,
+      'avatarUrl': instance.avatarUrl,
+      'name': instance.name,
+      'email': instance.email,
+      'phoneNumber': instance.phoneNumber,
+      if (_$JsonConverterToJson<Timestamp, DateTime>(
+              instance.createdAt, const TimestampConverter().toJson)
+          case final value?)
+        'createdAt': value,
+      if (_$JsonConverterToJson<Timestamp, DateTime>(
+              instance.lastUpdated, const TimestampConverter().toJson)
+          case final value?)
+        'lastUpdated': value,
+    };
 
 Value? _$JsonConverterFromJson<Json, Value>(
   Object? json,
