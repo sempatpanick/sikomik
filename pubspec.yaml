@@ -11,8 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cached_network_image: ^3.4.1
-  cached_network_image_platform_interface: ^4.1.1
   cloud_firestore: ^5.5.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
