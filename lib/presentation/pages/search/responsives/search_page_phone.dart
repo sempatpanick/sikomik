@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sikomik/presentation/widgets/comic_card_widget.dart';
 
 import '../../../../common/enums.dart';
 import '../../../controllers/search_comic_controller.dart';
+import '../../../widgets/comic_card_widget.dart';
 
 class SearchPagePhone extends StatelessWidget {
   const SearchPagePhone({super.key});
