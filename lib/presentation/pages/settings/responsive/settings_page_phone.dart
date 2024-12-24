@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../controllers/main_controller.dart';
 import '../../browser_in_app/browser_in_app_page.dart';
@@ -17,7 +18,6 @@ class SettingsPagePhone extends StatelessWidget {
       body: GetX<MainController>(
         builder: (controller) => SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 16.0,
@@ -100,6 +100,44 @@ class SettingsPagePhone extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (snapshot.data == null) {
+                    return Text(
+                      "Failed to get app version",
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    );
+                  }
+                  return Column(
+                    children: [
+                      Text(
+                        "${snapshot.data?.appName ?? ""} v${snapshot.data?.version}",
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        "Copyright ©2024",
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sikomik/common/utils/color_converter.dart';
 import 'package:toastification/toastification.dart';
 
 Future<bool?> successSnackBar(
@@ -43,6 +42,10 @@ Future<bool?> successSnackBar(
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: durationSecond,
   );
+}
+
+extension on Color {
+  getWebColor() {}
 }
 
 Future<bool?> failedSnackBar(

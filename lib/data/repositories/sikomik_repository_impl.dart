@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sikomik/domain/entities/user_comic_entity.dart';
-import 'package:sikomik/domain/entities/user_entity.dart';
 
 import '../../common/enums.dart';
 import '../../common/exception.dart';
@@ -12,6 +10,8 @@ import '../../domain/entities/chapter_entity.dart';
 import '../../domain/entities/comic_detail_entity.dart';
 import '../../domain/entities/comic_entity.dart';
 import '../../domain/entities/configuration_entity.dart';
+import '../../domain/entities/user_comic_entity.dart';
+import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/sikomik_repository.dart';
 import '../datasources/sikomik_firebase_auth_data_source.dart';
 import '../datasources/sikomik_firebase_firestore_data_source.dart';
