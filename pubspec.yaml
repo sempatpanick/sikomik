@@ -30,6 +30,7 @@ dependencies:
   http: ^1.2.2
   intl: ^0.20.1
   json_annotation: ^4.9.0
+  package_info_plus: ^8.1.2
   responsive_framework: ^1.5.1
   toastification: ^2.3.0
   window_size:
