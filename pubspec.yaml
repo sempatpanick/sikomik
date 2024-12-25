@@ -2,7 +2,7 @@ name: SiKomik
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.3+10
+version: 1.0.4+10
 
 environment:
   sdk: '>=3.6.0 <4.0.0'
