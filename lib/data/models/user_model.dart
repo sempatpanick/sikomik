@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/timestamp_converter.dart';
@@ -8,7 +7,7 @@ import '../../domain/entities/user_entity.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class UserModel extends Equatable {
+class UserModel {
   final String? id;
   final String? avatarUrl;
   final String? name;
@@ -19,9 +18,9 @@ class UserModel extends Equatable {
   final DateTime? createdAt;
   @JsonKey(includeIfNull: false)
   @TimestampConverter()
-  final DateTime? lastUpdated;
+  DateTime? lastUpdated;
 
-  const UserModel({
+  UserModel({
     required this.id,
     required this.avatarUrl,
     required this.name,
@@ -45,15 +44,4 @@ class UserModel extends Equatable {
         createdAt: createdAt,
         lastUpdated: lastUpdated,
       );
-
-  @override
-  List<Object?> get props => [
-        id,
-        avatarUrl,
-        name,
-        email,
-        phoneNumber,
-        createdAt,
-        lastUpdated,
-      ];
 }

@@ -8,20 +8,25 @@ abstract class SiKomikFirebaseFirestoreDataSource {
   Future<UserModel?> setUser({
     required UserModel user,
   });
+
   Future<UserModel?> getUser({
     required String userId,
   });
+
   Future<UserComicModel?> setUserComic({
     required String userId,
     required UserComicModel userComic,
   });
+
   Future<UserComicModel?> getUserComicById({
     required String userId,
     required String id,
   });
+
   Future<List<UserComicModel>> getFavorites({
     required String userId,
   });
+
   Future<UserComicModel?> getFavoriteById({
     required String userId,
     required String id,
@@ -42,7 +47,7 @@ class SiKomikFirebaseFirestoreDataSourceImpl
   @override
   Future<UserModel?> setUser({required UserModel user}) async {
     await client.collection(usersCollectionName).doc(user.id).set(
-          user.toJson(),
+          (user..lastUpdated = DateTime.now().toUtc()).toJson(),
           SetOptions(merge: true),
         );
 
@@ -71,7 +76,7 @@ class SiKomikFirebaseFirestoreDataSourceImpl
         .collection(userComicsCollectionName)
         .doc(encodeText(userComic.id!))
         .set(
-          userComic.toJson(),
+          (userComic..lastUpdated = DateTime.now().toUtc()).toJson(),
           SetOptions(merge: true),
         );
 
@@ -103,6 +108,7 @@ class SiKomikFirebaseFirestoreDataSourceImpl
         .doc(userId)
         .collection(userComicsCollectionName)
         .where("isFavorite", isEqualTo: true)
+        .orderBy("lastUpdated", descending: true)
         .get();
 
     return getData.docs

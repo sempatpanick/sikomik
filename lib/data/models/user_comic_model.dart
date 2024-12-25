@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/timestamp_converter.dart';
@@ -10,7 +9,7 @@ import 'comic_detail_model.dart';
 part 'user_comic_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class UserComicModel extends Equatable {
+class UserComicModel {
   final String? id;
   @JsonKey(includeIfNull: false)
   final DataComicDetailModel? comic;
@@ -25,9 +24,9 @@ class UserComicModel extends Equatable {
   final DateTime? createdAt;
   @JsonKey(includeIfNull: false)
   @TimestampConverter()
-  final DateTime? lastUpdated;
+  DateTime? lastUpdated;
 
-  const UserComicModel({
+  UserComicModel({
     required this.id,
     required this.comic,
     required this.readChapters,
@@ -51,15 +50,4 @@ class UserComicModel extends Equatable {
         createdAt: createdAt,
         lastUpdated: lastUpdated,
       );
-
-  @override
-  List<Object?> get props => [
-        id,
-        comic,
-        readChapters,
-        lastReadChapter,
-        isFavorite,
-        createdAt,
-        lastUpdated,
-      ];
 }
