@@ -49,10 +49,6 @@ class ChapterPagePhone extends StatelessWidget {
                               itemCount:
                                   controller.chapter.value?.images?.length ?? 0,
                               itemBuilder: (context, index) {
-                                if (controller.chapter.value?.images == null) {
-                                  return SizedBox();
-                                }
-
                                 final item =
                                     controller.chapter.value!.images![index];
 
