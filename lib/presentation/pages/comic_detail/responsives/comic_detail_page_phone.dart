@@ -232,7 +232,7 @@ class ComicDetailPageContent extends StatelessWidget {
                                 ElevatedButton.icon(
                                   onPressed: controller.setFavorite,
                                   style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(130, 150),
+                                    maximumSize: Size(150, 150),
                                   ),
                                   icon: controller.stateFavorite.value ==
                                           RequestState.loading
@@ -565,18 +565,20 @@ class ComicDetailPageContent extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () async {
-              final isCanPop = await Navigator.of(context).maybePop();
-              if (!isCanPop) {
-                Get.offNamed(MainPage.routeName);
-              }
-            },
-            icon: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.arrow_back_outlined,
-                color: theme.primaryColor,
+          SafeArea(
+            child: IconButton(
+              onPressed: () async {
+                final isCanPop = await Navigator.of(context).maybePop();
+                if (!isCanPop) {
+                  Get.offNamed(MainPage.routeName);
+                }
+              },
+              icon: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.arrow_back_outlined,
+                  color: theme.primaryColor,
+                ),
               ),
             ),
           ),
