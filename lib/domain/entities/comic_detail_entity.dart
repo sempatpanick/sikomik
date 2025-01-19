@@ -24,6 +24,7 @@ class ComicDetailEntity extends Equatable {
 }
 
 class DataComicDetailEntity extends Equatable {
+  final String? path;
   final String? title;
   final String? titleIndonesia;
   final String? imageUrl;
@@ -38,6 +39,7 @@ class DataComicDetailEntity extends Equatable {
   final List<ChapterDataComicDetailEntity>? chapters;
 
   const DataComicDetailEntity({
+    required this.path,
     required this.title,
     required this.titleIndonesia,
     required this.imageUrl,
@@ -53,6 +55,7 @@ class DataComicDetailEntity extends Equatable {
   });
 
   DataComicDetailModel toModel() => DataComicDetailModel(
+        path: path,
         title: title,
         titleIndonesia: titleIndonesia,
         imageUrl: imageUrl,
@@ -69,6 +72,7 @@ class DataComicDetailEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        path,
         title,
         titleIndonesia,
         imageUrl,

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:SiKomik/domain/entities/user_comic_chapter_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -177,12 +178,12 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   @override
   Future<Either<Failure, UserComicEntity>> setUserComic({
     required String userId,
-    required UserComicEntity userComic,
+    required UserComicEntity data,
   }) async {
     try {
       final result = await firebaseFirestoreDataSource.setUserComic(
         userId: userId,
-        userComic: userComic.toModel(),
+        data: data.toModel(),
       );
 
       if (result == null) {
@@ -271,6 +272,119 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
       }
 
       return Right(result.toEntity());
+    } on FirebaseAuthException catch (e) {
+      return Left(ResponseFailure(e.message ?? "Failed to proceed"));
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserComicChapterEntity>> setUserComicChapterRead({
+    required String userId,
+    required UserComicChapterEntity data,
+  }) async {
+    try {
+      final result = await firebaseFirestoreDataSource.setUserComicChapterRead(
+        userId: userId,
+        data: data.toModel(),
+      );
+
+      if (result == null) {
+        return Left(ResponseFailure("Failed to set chapter as chapter read"));
+      }
+
+      return Right(result.toEntity());
+    } on FirebaseAuthException catch (e) {
+      return Left(ResponseFailure(e.message ?? "Failed to proceed"));
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setBatchUserComicChapterRead({
+    required String userId,
+    required List<UserComicChapterEntity> data,
+  }) async {
+    try {
+      final result =
+          await firebaseFirestoreDataSource.setBatchUserComicChapterRead(
+        userId: userId,
+        data: data.map((item) => item.toModel()).toList(),
+      );
+
+      return Right(result);
+    } on FirebaseAuthException catch (e) {
+      return Left(ResponseFailure(e.message ?? "Failed to proceed"));
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserComicChapterEntity>> getUserComicChapterReadById({
+    required String userId,
+    required String userComicId,
+    required String id,
+  }) async {
+    try {
+      final result =
+          await firebaseFirestoreDataSource.getUserComicChapterReadById(
+        userId: userId,
+        userComicId: userComicId,
+        id: id,
+      );
+
+      if (result == null) {
+        return Left(ResponseFailure("Chapter not found"));
+      }
+
+      return Right(result.toEntity());
+    } on FirebaseAuthException catch (e) {
+      return Left(ResponseFailure(e.message ?? "Failed to proceed"));
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserComicChapterEntity>>>
+      getUserComicChaptersRead({
+    required String userId,
+    required String userComicId,
+  }) async {
+    try {
+      final result = await firebaseFirestoreDataSource.getUserComicChaptersRead(
+        userId: userId,
+        userComicId: userComicId,
+      );
+
+      return Right(result.map((item) => item.toEntity()).toList());
     } on FirebaseAuthException catch (e) {
       return Left(ResponseFailure(e.message ?? "Failed to proceed"));
     } on ResponseFailure catch (e) {

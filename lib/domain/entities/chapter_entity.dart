@@ -24,6 +24,7 @@ class ChapterEntity extends Equatable {
 }
 
 class DataChapterEntity extends Equatable {
+  final String? path;
   final String? title;
   final String? comicPath;
   final num? chapter;
@@ -31,6 +32,7 @@ class DataChapterEntity extends Equatable {
   final List<String>? images;
 
   const DataChapterEntity({
+    required this.path,
     required this.title,
     required this.comicPath,
     required this.chapter,
@@ -39,6 +41,7 @@ class DataChapterEntity extends Equatable {
   });
 
   DataChapterModel toModel() => DataChapterModel(
+        path: path,
         title: title,
         comicPath: comicPath,
         chapter: chapter,
@@ -48,6 +51,7 @@ class DataChapterEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        path,
         title,
         comicPath,
         chapter,

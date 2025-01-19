@@ -23,6 +23,7 @@ Map<String, dynamic> _$ComicDetailModelToJson(ComicDetailModel instance) =>
 DataComicDetailModel _$DataComicDetailModelFromJson(
         Map<String, dynamic> json) =>
     DataComicDetailModel(
+      path: json['path'] as String?,
       title: json['title'] as String?,
       titleIndonesia: json['titleIndonesia'] as String?,
       imageUrl: imageUrlFromJson(json['imageUrl']),
@@ -46,6 +47,7 @@ DataComicDetailModel _$DataComicDetailModelFromJson(
 Map<String, dynamic> _$DataComicDetailModelToJson(
         DataComicDetailModel instance) =>
     <String, dynamic>{
+      'path': instance.path,
       'title': instance.title,
       'titleIndonesia': instance.titleIndonesia,
       'imageUrl': imageUrlToJson(instance.imageUrl),

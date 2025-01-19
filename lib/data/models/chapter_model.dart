@@ -35,6 +35,7 @@ class ChapterModel extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class DataChapterModel extends Equatable {
+  final String? path;
   final String? title;
   final String? comicPath;
   final num? chapter;
@@ -43,6 +44,7 @@ class DataChapterModel extends Equatable {
   final List<String>? images;
 
   const DataChapterModel({
+    required this.path,
     required this.title,
     required this.comicPath,
     required this.chapter,
@@ -56,6 +58,7 @@ class DataChapterModel extends Equatable {
   Map<String, dynamic> toJson() => _$DataChapterModelToJson(this);
 
   DataChapterEntity toEntity() => DataChapterEntity(
+        path: path,
         title: title,
         comicPath: comicPath,
         chapter: chapter,
@@ -65,6 +68,7 @@ class DataChapterModel extends Equatable {
 
   @override
   List<Object?> get props => [
+        path,
         title,
         comicPath,
         chapter,

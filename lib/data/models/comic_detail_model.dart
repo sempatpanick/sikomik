@@ -35,6 +35,7 @@ class ComicDetailModel extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class DataComicDetailModel extends Equatable {
+  final String? path;
   final String? title;
   final String? titleIndonesia;
   @JsonKey(fromJson: imageUrlFromJson, toJson: imageUrlToJson)
@@ -51,6 +52,7 @@ class DataComicDetailModel extends Equatable {
   final List<ChapterDataComicDetailModel>? chapters;
 
   const DataComicDetailModel({
+    required this.path,
     required this.title,
     required this.titleIndonesia,
     required this.imageUrl,
@@ -71,6 +73,7 @@ class DataComicDetailModel extends Equatable {
   Map<String, dynamic> toJson() => _$DataComicDetailModelToJson(this);
 
   DataComicDetailEntity toEntity() => DataComicDetailEntity(
+        path: path,
         title: title,
         titleIndonesia: titleIndonesia,
         imageUrl: imageUrl,
@@ -87,6 +90,7 @@ class DataComicDetailModel extends Equatable {
 
   @override
   List<Object?> get props => [
+        path,
         title,
         titleIndonesia,
         imageUrl,

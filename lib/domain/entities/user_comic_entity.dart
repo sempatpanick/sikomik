@@ -7,7 +7,6 @@ import 'comic_detail_entity.dart';
 class UserComicEntity extends Equatable {
   final String? id;
   final DataComicDetailEntity? comic;
-  final List<DataChapterEntity>? readChapters;
   final DataChapterEntity? lastReadChapter;
   final bool? isFavorite;
   final DateTime? createdAt;
@@ -16,7 +15,6 @@ class UserComicEntity extends Equatable {
   const UserComicEntity({
     required this.id,
     this.comic,
-    this.readChapters,
     this.lastReadChapter,
     this.isFavorite,
     this.createdAt,
@@ -26,7 +24,6 @@ class UserComicEntity extends Equatable {
   UserComicModel toModel() => UserComicModel(
         id: id,
         comic: comic?.toModel(),
-        readChapters: readChapters?.map((item) => item.toModel()).toList(),
         lastReadChapter: lastReadChapter?.toModel(),
         isFavorite: isFavorite,
         createdAt: createdAt,
@@ -37,7 +34,6 @@ class UserComicEntity extends Equatable {
   List<Object?> get props => [
         id,
         comic,
-        readChapters,
         lastReadChapter,
         isFavorite,
         createdAt,

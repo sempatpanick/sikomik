@@ -15,6 +15,7 @@ import 'domain/usecases/get_configuration_case.dart';
 import 'domain/usecases/get_latest_comic_case.dart';
 import 'domain/usecases/search_comic_case.dart';
 import 'domain/usecases/user_comic_case.dart';
+import 'domain/usecases/user_comic_chapter_case.dart';
 import 'domain/usecases/user_detail_case.dart';
 
 final locator = GetIt.instance;
@@ -44,6 +45,9 @@ void init() {
   );
   locator.registerLazySingleton(
     () => UserComicCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => UserComicChapterCase(repository: locator()),
   );
 
   // repository

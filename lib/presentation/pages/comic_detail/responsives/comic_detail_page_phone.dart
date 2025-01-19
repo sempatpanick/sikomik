@@ -235,7 +235,9 @@ class ComicDetailPageContent extends StatelessWidget {
                                     maximumSize: Size(150, 150),
                                   ),
                                   icon: controller.stateFavorite.value ==
-                                          RequestState.loading
+                                              RequestState.loading ||
+                                          controller.stateUserComic.value ==
+                                              RequestState.loading
                                       ? SizedBox(
                                           width: 20,
                                           height: 20,
@@ -396,10 +398,10 @@ class ComicDetailPageContent extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final item =
                                     controller.comic.value!.chapters![index];
-                                final isRead = controller
-                                        .userComic.value?.readChapters
-                                        ?.firstWhereOrNull((read) =>
-                                            read.chapter == item.chapter) !=
+                                final isRead = controller.userComicChaptersRead
+                                        .firstWhereOrNull((read) =>
+                                            read.chapter?.chapter ==
+                                            item.chapter) !=
                                     null;
                                 final isLastRead = controller.userComic.value
                                         ?.lastReadChapter?.chapter ==
