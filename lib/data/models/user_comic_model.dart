@@ -14,8 +14,6 @@ class UserComicModel {
   @JsonKey(includeIfNull: false)
   final DataComicDetailModel? comic;
   @JsonKey(includeIfNull: false)
-  final List<DataChapterModel>? readChapters;
-  @JsonKey(includeIfNull: false)
   final DataChapterModel? lastReadChapter;
   @JsonKey(includeIfNull: false)
   final bool? isFavorite;
@@ -29,7 +27,6 @@ class UserComicModel {
   UserComicModel({
     required this.id,
     required this.comic,
-    required this.readChapters,
     required this.lastReadChapter,
     required this.isFavorite,
     this.createdAt,
@@ -44,7 +41,6 @@ class UserComicModel {
   UserComicEntity toEntity() => UserComicEntity(
         id: id,
         comic: comic?.toEntity(),
-        readChapters: readChapters?.map((item) => item.toEntity()).toList(),
         lastReadChapter: lastReadChapter?.toEntity(),
         isFavorite: isFavorite,
         createdAt: createdAt,

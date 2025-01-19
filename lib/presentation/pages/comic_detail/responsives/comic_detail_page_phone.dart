@@ -232,10 +232,12 @@ class ComicDetailPageContent extends StatelessWidget {
                                 ElevatedButton.icon(
                                   onPressed: controller.setFavorite,
                                   style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(130, 150),
+                                    maximumSize: Size(150, 150),
                                   ),
                                   icon: controller.stateFavorite.value ==
-                                          RequestState.loading
+                                              RequestState.loading ||
+                                          controller.stateUserComic.value ==
+                                              RequestState.loading
                                       ? SizedBox(
                                           width: 20,
                                           height: 20,
@@ -396,10 +398,10 @@ class ComicDetailPageContent extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final item =
                                     controller.comic.value!.chapters![index];
-                                final isRead = controller
-                                        .userComic.value?.readChapters
-                                        ?.firstWhereOrNull((read) =>
-                                            read.chapter == item.chapter) !=
+                                final isRead = controller.userComicChaptersRead
+                                        .firstWhereOrNull((read) =>
+                                            read.chapter?.chapter ==
+                                            item.chapter) !=
                                     null;
                                 final isLastRead = controller.userComic.value
                                         ?.lastReadChapter?.chapter ==
@@ -565,18 +567,20 @@ class ComicDetailPageContent extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () async {
-              final isCanPop = await Navigator.of(context).maybePop();
-              if (!isCanPop) {
-                Get.offNamed(MainPage.routeName);
-              }
-            },
-            icon: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.arrow_back_outlined,
-                color: theme.primaryColor,
+          SafeArea(
+            child: IconButton(
+              onPressed: () async {
+                final isCanPop = await Navigator.of(context).maybePop();
+                if (!isCanPop) {
+                  Get.offNamed(MainPage.routeName);
+                }
+              },
+              icon: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.arrow_back_outlined,
+                  color: theme.primaryColor,
+                ),
               ),
             ),
           ),

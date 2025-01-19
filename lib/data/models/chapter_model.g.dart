@@ -21,6 +21,7 @@ Map<String, dynamic> _$ChapterModelToJson(ChapterModel instance) =>
 
 DataChapterModel _$DataChapterModelFromJson(Map<String, dynamic> json) =>
     DataChapterModel(
+      path: json['path'] as String?,
       title: json['title'] as String?,
       comicPath: json['comicPath'] as String?,
       chapter: json['chapter'] as num?,
@@ -30,6 +31,7 @@ DataChapterModel _$DataChapterModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DataChapterModelToJson(DataChapterModel instance) =>
     <String, dynamic>{
+      'path': instance.path,
       'title': instance.title,
       'comicPath': instance.comicPath,
       'chapter': instance.chapter,

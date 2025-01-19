@@ -1,36 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_comic_model.dart';
+part of 'user_comic_chapter_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserComicModel _$UserComicModelFromJson(Map<String, dynamic> json) =>
-    UserComicModel(
+UserComicChapterModel _$UserComicChapterModelFromJson(
+        Map<String, dynamic> json) =>
+    UserComicChapterModel(
       id: json['id'] as String?,
-      comic: json['comic'] == null
+      chapter: json['chapter'] == null
           ? null
-          : DataComicDetailModel.fromJson(
-              json['comic'] as Map<String, dynamic>),
-      lastReadChapter: json['lastReadChapter'] == null
-          ? null
-          : DataChapterModel.fromJson(
-              json['lastReadChapter'] as Map<String, dynamic>),
-      isFavorite: json['isFavorite'] as bool?,
+          : DataChapterModel.fromJson(json['chapter'] as Map<String, dynamic>),
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const TimestampConverter().fromJson),
       lastUpdated: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['lastUpdated'], const TimestampConverter().fromJson),
     );
 
-Map<String, dynamic> _$UserComicModelToJson(UserComicModel instance) =>
+Map<String, dynamic> _$UserComicChapterModelToJson(
+        UserComicChapterModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      if (instance.comic?.toJson() case final value?) 'comic': value,
-      if (instance.lastReadChapter?.toJson() case final value?)
-        'lastReadChapter': value,
-      if (instance.isFavorite case final value?) 'isFavorite': value,
+      if (instance.chapter?.toJson() case final value?) 'chapter': value,
       if (_$JsonConverterToJson<Timestamp, DateTime>(
               instance.createdAt, const TimestampConverter().toJson)
           case final value?)

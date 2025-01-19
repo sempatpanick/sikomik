@@ -11,9 +11,9 @@ class UserComicCase {
 
   Future<Either<Failure, UserComicEntity>> setUserComic({
     required String userId,
-    required UserComicEntity userComic,
+    required UserComicEntity data,
   }) =>
-      repository.setUserComic(userId: userId, userComic: userComic);
+      repository.setUserComic(userId: userId, data: data);
 
   Future<Either<Failure, UserComicEntity>> getUserComicById({
     required String userId,

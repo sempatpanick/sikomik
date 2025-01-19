@@ -9,10 +9,12 @@ import '../../common/enums.dart';
 import '../../common/snackbar.dart';
 import '../../domain/entities/chapter_entity.dart';
 import '../../domain/entities/comic_detail_entity.dart';
+import '../../domain/entities/user_comic_chapter_entity.dart';
 import '../../domain/entities/user_comic_entity.dart';
 import '../../domain/usecases/get_chapter_case.dart';
 import '../../domain/usecases/get_comic_detail_case.dart';
 import '../../domain/usecases/user_comic_case.dart';
+import '../../domain/usecases/user_comic_chapter_case.dart';
 import '../../injection.dart';
 import '../pages/chapter/chapter_page.dart';
 import 'comic_detail_controller.dart';
@@ -22,6 +24,7 @@ class ChapterController extends GetxController {
   final GetChapterCase getChapterCase = locator();
   final GetComicDetailCase getComicDetailCase = locator();
   final UserComicCase userComicCase = locator();
+  final UserComicChapterCase userComicChapterCase = locator();
 
   final mainController = Get.find<MainController>();
 
@@ -246,28 +249,35 @@ class ChapterController extends GetxController {
       }
     }
 
-    final readChapters = List<DataChapterEntity>.of(
-      userComic.value?.readChapters ?? [],
-    );
-
-    final getIndexChapter = readChapters
-        .indexWhere((item) => item.chapter == chapter.value?.chapter);
-
-    if (getIndexChapter == -1) {
-      readChapters.add(chapter.value!);
-    } else {
-      readChapters[getIndexChapter] = chapter.value!;
-    }
-
-    await userComicCase.setUserComic(
+    final resultUserComic = await userComicCase.setUserComic(
       userId: mainController.user.value?.uid ?? "",
-      userComic: UserComicEntity(
+      data: UserComicEntity(
         id: chapter.value?.comicPath,
         comic: comic.value,
-        readChapters: readChapters,
         lastReadChapter: chapter.value,
       ),
     );
+    resultUserComic.fold((l) {}, (r) {
+      if (Get.isRegistered<ComicDetailController>()) {
+        final comicDetailController = Get.find<ComicDetailController>();
+        comicDetailController.getUserComic();
+      }
+    });
+
+    final resultUserComicChapterRead =
+        await userComicChapterCase.setUserComicChapterRead(
+      userId: mainController.user.value?.uid ?? "",
+      data: UserComicChapterEntity(
+        id: chapter.value?.path,
+        chapter: chapter.value,
+      ),
+    );
+    resultUserComicChapterRead.fold((l) {}, (r) {
+      if (Get.isRegistered<ComicDetailController>()) {
+        final comicDetailController = Get.find<ComicDetailController>();
+        comicDetailController.getUserComicChaptersRead();
+      }
+    });
   }
 
   Future<void> retryCheckUserId() async {

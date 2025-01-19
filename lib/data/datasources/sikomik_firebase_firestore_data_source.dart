@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../common/utils/encode_decode_text.dart';
+import '../models/user_comic_chapter_model.dart';
 import '../models/user_comic_model.dart';
 import '../models/user_model.dart';
 
@@ -15,7 +16,7 @@ abstract class SiKomikFirebaseFirestoreDataSource {
 
   Future<UserComicModel?> setUserComic({
     required String userId,
-    required UserComicModel userComic,
+    required UserComicModel data,
   });
 
   Future<UserComicModel?> getUserComicById({
@@ -31,6 +32,27 @@ abstract class SiKomikFirebaseFirestoreDataSource {
     required String userId,
     required String id,
   });
+
+  Future<UserComicChapterModel?> setUserComicChapterRead({
+    required String userId,
+    required UserComicChapterModel data,
+  });
+
+  Future<void> setBatchUserComicChapterRead({
+    required String userId,
+    required List<UserComicChapterModel> data,
+  });
+
+  Future<UserComicChapterModel?> getUserComicChapterReadById({
+    required String userId,
+    required String userComicId,
+    required String id,
+  });
+
+  Future<List<UserComicChapterModel>> getUserComicChaptersRead({
+    required String userId,
+    required String userComicId,
+  });
 }
 
 class SiKomikFirebaseFirestoreDataSourceImpl
@@ -43,6 +65,7 @@ class SiKomikFirebaseFirestoreDataSourceImpl
 
   final usersCollectionName = "users";
   final userComicsCollectionName = "comics";
+  final userComicsChaptersReadCollectionName = "chapters_read";
 
   @override
   Future<UserModel?> setUser({required UserModel user}) async {
@@ -68,19 +91,19 @@ class SiKomikFirebaseFirestoreDataSourceImpl
   @override
   Future<UserComicModel?> setUserComic({
     required String userId,
-    required UserComicModel userComic,
+    required UserComicModel data,
   }) async {
     await client
         .collection(usersCollectionName)
         .doc(userId)
         .collection(userComicsCollectionName)
-        .doc(encodeText(userComic.id!))
+        .doc(encodeText(data.id!))
         .set(
-          (userComic..lastUpdated = DateTime.now().toUtc()).toJson(),
+          (data..lastUpdated = DateTime.now().toUtc()).toJson(),
           SetOptions(merge: true),
         );
 
-    return await getUserComicById(userId: userId, id: userComic.id ?? "");
+    return await getUserComicById(userId: userId, id: data.id ?? "");
   }
 
   @override
@@ -137,5 +160,90 @@ class SiKomikFirebaseFirestoreDataSourceImpl
       return null;
     }
     return UserComicModel.fromJson(getData.docs.first.data());
+  }
+
+  @override
+  Future<UserComicChapterModel?> setUserComicChapterRead({
+    required String userId,
+    required UserComicChapterModel data,
+  }) async {
+    await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .doc(encodeText(data.chapter!.comicPath!))
+        .collection(userComicsChaptersReadCollectionName)
+        .doc(encodeText(data.id!))
+        .set(
+          (data..lastUpdated = DateTime.now().toUtc()).toJson(),
+          SetOptions(merge: true),
+        );
+
+    return await getUserComicChapterReadById(
+      userId: userId,
+      userComicId: data.chapter?.comicPath ?? "",
+      id: data.id ?? "",
+    );
+  }
+
+  @override
+  Future<void> setBatchUserComicChapterRead({
+    required String userId,
+    required List<UserComicChapterModel> data,
+  }) async {
+    final batch = client.batch();
+
+    for (final item in data) {
+      final document = client
+          .collection(usersCollectionName)
+          .doc(userId)
+          .collection(userComicsCollectionName)
+          .doc(encodeText(item.id!))
+          .collection(userComicsChaptersReadCollectionName)
+          .doc(encodeText(item.chapter!.comicPath!));
+      batch.set(document, item);
+    }
+
+    await batch.commit();
+  }
+
+  @override
+  Future<UserComicChapterModel?> getUserComicChapterReadById({
+    required String userId,
+    required String userComicId,
+    required String id,
+  }) async {
+    final getData = await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .doc(encodeText(userComicId))
+        .collection(userComicsChaptersReadCollectionName)
+        .doc(encodeText(id))
+        .get();
+
+    if (getData.data() == null) {
+      return null;
+    }
+    return UserComicChapterModel.fromJson(getData.data()!);
+  }
+
+  @override
+  Future<List<UserComicChapterModel>> getUserComicChaptersRead({
+    required String userId,
+    required String userComicId,
+  }) async {
+    final getData = await client
+        .collection(usersCollectionName)
+        .doc(userId)
+        .collection(userComicsCollectionName)
+        .doc(encodeText(userComicId))
+        .collection(userComicsChaptersReadCollectionName)
+        .orderBy("lastUpdated", descending: true)
+        .get();
+
+    return getData.docs
+        .map((item) => UserComicChapterModel.fromJson(item.data()))
+        .toList();
   }
 }
