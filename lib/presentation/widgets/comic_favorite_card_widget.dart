@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
@@ -54,13 +52,11 @@ class ComicFavoriteCardWidget extends StatelessWidget {
           children: [
             if ((userComic.comic?.imageUrl ?? "").isNotEmpty)
               Image(
-                image: kIsWeb || kIsWasm
-                    ? NetworkImage(
-                        userComic.comic!.imageUrl!,
-                      )
-                    : NetworkImageWithRetry(
-                        userComic.comic!.imageUrl!,
-                      ),
+                image: NetworkImage(
+                  userComic.comic!.imageUrl!,
+                  webHtmlElementStrategy:
+                  WebHtmlElementStrategy.fallback,
+                ),
                 width: double.infinity,
                 height: 140,
                 fit: BoxFit.cover,

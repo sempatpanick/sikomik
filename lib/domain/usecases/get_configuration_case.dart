@@ -9,5 +9,6 @@ class GetConfigurationCase {
 
   GetConfigurationCase({required this.repository});
 
-  Future<Either<Failure, ConfigurationEntity>> execute() => repository.getConfiguration();
+  Future<Either<Failure, ConfigurationEntity>> execute() =>
+      repository.getConfiguration();
 }

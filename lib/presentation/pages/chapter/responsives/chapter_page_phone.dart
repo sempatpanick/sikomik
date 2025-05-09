@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/enums.dart';
@@ -53,9 +51,11 @@ class ChapterPagePhone extends StatelessWidget {
                                     controller.chapter.value!.images![index];
 
                                 return Image(
-                                  image: kIsWeb || kIsWasm
-                                      ? NetworkImage(item)
-                                      : NetworkImageWithRetry(item),
+                                  image: NetworkImage(
+                                    item,
+                                    webHtmlElementStrategy:
+                                        WebHtmlElementStrategy.fallback,
+                                  ),
                                   fit: BoxFit.fill,
                                   frameBuilder: (context, child, value, state) {
                                     if (value == null) {

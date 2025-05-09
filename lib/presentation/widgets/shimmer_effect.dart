@@ -18,7 +18,8 @@ class ShimmerEffect extends StatefulWidget {
   ShimmerEffectState createState() => ShimmerEffectState();
 }
 
-class ShimmerEffectState extends State<ShimmerEffect> with SingleTickerProviderStateMixin {
+class ShimmerEffectState extends State<ShimmerEffect>
+    with SingleTickerProviderStateMixin {
   late AnimationController _shimmerController;
   Listenable get shimmerChanges => _shimmerController;
 
@@ -41,10 +42,12 @@ class ShimmerEffectState extends State<ShimmerEffect> with SingleTickerProviderS
         stops: widget.linearGradient.stops,
         begin: widget.linearGradient.begin,
         end: widget.linearGradient.end,
-        transform: _SlidingGradientTransform(slidePercent: _shimmerController.value),
+        transform:
+            _SlidingGradientTransform(slidePercent: _shimmerController.value),
       );
 
-  bool get isSized => (context.findRenderObject() as RenderBox?)?.hasSize ?? false;
+  bool get isSized =>
+      (context.findRenderObject() as RenderBox?)?.hasSize ?? false;
 
   Size get size => (context.findRenderObject() as RenderBox).size;
 

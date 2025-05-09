@@ -1,8 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
@@ -62,15 +60,12 @@ class ComicDetailPageContent extends StatelessWidget {
                                     "")
                                 .isNotEmpty
                             ? Image(
-                                image: kIsWeb || kIsWasm
-                                    ? NetworkImage(
-                                        controller.comic.value?.thumbnailUrl ??
-                                            controller.comic.value!.imageUrl!,
-                                      )
-                                    : NetworkImageWithRetry(
-                                        controller.comic.value?.thumbnailUrl ??
-                                            controller.comic.value!.imageUrl!,
-                                      ),
+                                image: NetworkImage(
+                                  controller.comic.value?.thumbnailUrl ??
+                                      controller.comic.value!.imageUrl!,
+                                  webHtmlElementStrategy:
+                                  WebHtmlElementStrategy.fallback,
+                                ),
                                 width: double.infinity,
                                 height: 200,
                                 fit: BoxFit.cover,
@@ -490,13 +485,9 @@ class ComicDetailPageContent extends StatelessWidget {
                     top: 110,
                     child: (controller.comic.value?.imageUrl ?? "").isNotEmpty
                         ? Image(
-                            image: kIsWeb || kIsWasm
-                                ? NetworkImage(
-                                    controller.comic.value!.imageUrl!,
-                                  )
-                                : NetworkImageWithRetry(
-                                    controller.comic.value!.imageUrl!,
-                                  ),
+                            image: NetworkImage(
+                              controller.comic.value!.imageUrl!,
+                            ),
                             width: 130,
                             height: 200,
                             fit: BoxFit.cover,
