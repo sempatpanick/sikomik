@@ -64,8 +64,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     storageBucket: 'sikomik-86156.appspot.com',
-    androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    androidClientId:
+        '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
+    iosClientId:
+        '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
     iosBundleId: 'com.sempatpanick.sikomik',
   );
 
@@ -75,8 +77,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     storageBucket: 'sikomik-86156.appspot.com',
-    androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    androidClientId:
+        '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
+    iosClientId:
+        '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
     iosBundleId: 'com.sempatpanick.sikomik',
   );
 
@@ -89,5 +93,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'sikomik-86156.appspot.com',
     measurementId: 'G-LB82WWGSL2',
   );
-
 }
