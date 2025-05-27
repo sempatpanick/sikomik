@@ -28,6 +28,8 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/cirruslabs/flutter:stable
     if: github.ref == 'refs/heads/master'
 
     steps:
