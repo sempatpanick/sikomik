@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 import 'package:window_size/window_size.dart';
 
+import 'common/remove_splash_web.dart';
 import 'common/scroll_behavior_helper.dart';
 import 'common/theme.dart';
 import 'firebase_options.dart';
@@ -55,6 +56,10 @@ Future<void> main() async {
 
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
     await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
+  }
+
+  if (kIsWeb) {
+    removeSplash();
   }
 
   init();
