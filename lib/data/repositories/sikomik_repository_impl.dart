@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:SiKomik/domain/entities/user_comic_chapter_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,6 +10,7 @@ import '../../domain/entities/chapter_entity.dart';
 import '../../domain/entities/comic_detail_entity.dart';
 import '../../domain/entities/comic_entity.dart';
 import '../../domain/entities/configuration_entity.dart';
+import '../../domain/entities/user_comic_chapter_entity.dart';
 import '../../domain/entities/user_comic_entity.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/sikomik_repository.dart';

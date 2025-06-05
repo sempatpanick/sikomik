@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../../../common/utils/snake_to_title_case.dart';
 import '../../../controllers/main_controller.dart';
 import '../../browser_in_app/browser_in_app_page.dart';
 import '../../login/login_page.dart';
@@ -122,7 +123,7 @@ class SettingsPagePhone extends StatelessWidget {
                   return Column(
                     children: [
                       Text(
-                        "${snapshot.data?.appName ?? ""} v${snapshot.data?.version}",
+                        "${snakeToTitleCase(snapshot.data?.appName ?? "")} v${snapshot.data?.version}",
                         style: theme.textTheme.labelMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
