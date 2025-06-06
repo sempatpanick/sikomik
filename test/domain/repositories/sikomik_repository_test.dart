@@ -1,12 +1,12 @@
-import 'package:SiKomik/common/failure.dart';
-import 'package:SiKomik/data/models/configuration_model.dart';
-import 'package:SiKomik/data/repositories/sikomik_repository_impl.dart';
-import 'package:SiKomik/domain/entities/configuration_entity.dart';
-import 'package:SiKomik/domain/repositories/sikomik_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:si_komik/common/failure.dart';
+import 'package:si_komik/data/models/configuration_model.dart';
+import 'package:si_komik/data/repositories/sikomik_repository_impl.dart';
+import 'package:si_komik/domain/entities/configuration_entity.dart';
+import 'package:si_komik/domain/repositories/sikomik_repository.dart';
 
 import '../../data/datasources/sikomik_firebase_auth_data_source_test.mocks.dart';
 import '../../data/datasources/sikomik_firebase_firestore_data_source_test.mocks.dart';

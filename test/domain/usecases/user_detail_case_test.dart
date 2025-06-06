@@ -1,9 +1,9 @@
-import 'package:SiKomik/common/failure.dart';
-import 'package:SiKomik/domain/entities/user_entity.dart';
-import 'package:SiKomik/domain/usecases/user_detail_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:si_komik/common/failure.dart';
+import 'package:si_komik/domain/entities/user_entity.dart';
+import 'package:si_komik/domain/usecases/user_detail_case.dart';
 
 import '../repositories/sikomik_repository_test.mocks.dart';
 

@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.sempatpanick" "\0"
-            VALUE "FileDescription", "sikomik" "\0"
+            VALUE "FileDescription", "si_komik" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "sikomik" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.sempatpanick. All rights reserved." "\0"
-            VALUE "OriginalFilename", "sikomik.exe" "\0"
-            VALUE "ProductName", "sikomik" "\0"
+            VALUE "InternalName", "si_komik" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.sempatpanick. All rights reserved." "\0"
+            VALUE "OriginalFilename", "si_komik.exe" "\0"
+            VALUE "ProductName", "si_komik" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

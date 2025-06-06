@@ -1,12 +1,12 @@
-import 'package:SiKomik/common/enums.dart';
-import 'package:SiKomik/common/failure.dart';
-import 'package:SiKomik/domain/usecases/authentication_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in_mocks/google_sign_in_mocks.dart';
 import 'package:mockito/mockito.dart';
+import 'package:si_komik/common/enums.dart';
+import 'package:si_komik/common/failure.dart';
+import 'package:si_komik/domain/usecases/authentication_case.dart';
 
 import '../repositories/sikomik_repository_test.mocks.dart';
 

@@ -46,7 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     authDomain: 'sikomik-86156.firebaseapp.com',
-    storageBucket: 'sikomik-86156.appspot.com',
+    storageBucket: 'sikomik-86156.firebasestorage.app',
     measurementId: 'G-4QB1BW99S2',
   );
 
@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
     appId: '1:504193950692:android:3f6013d5d89c78a21fddf1',
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
-    storageBucket: 'sikomik-86156.appspot.com',
+    storageBucket: 'sikomik-86156.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -63,11 +63,9 @@ class DefaultFirebaseOptions {
     appId: '1:504193950692:ios:bc2450abc2af61db1fddf1',
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
-    storageBucket: 'sikomik-86156.appspot.com',
-    androidClientId:
-        '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId:
-        '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    storageBucket: 'sikomik-86156.firebasestorage.app',
+    androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
+    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
     iosBundleId: 'com.sempatpanick.sikomik',
   );
 
@@ -76,11 +74,9 @@ class DefaultFirebaseOptions {
     appId: '1:504193950692:ios:bc2450abc2af61db1fddf1',
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
-    storageBucket: 'sikomik-86156.appspot.com',
-    androidClientId:
-        '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
-    iosClientId:
-        '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
+    storageBucket: 'sikomik-86156.firebasestorage.app',
+    androidClientId: '504193950692-juj7uknam85pa798sukp2k305p9j0kk9.apps.googleusercontent.com',
+    iosClientId: '504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com',
     iosBundleId: 'com.sempatpanick.sikomik',
   );
 
@@ -90,7 +86,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '504193950692',
     projectId: 'sikomik-86156',
     authDomain: 'sikomik-86156.firebaseapp.com',
-    storageBucket: 'sikomik-86156.appspot.com',
+    storageBucket: 'sikomik-86156.firebasestorage.app',
     measurementId: 'G-LB82WWGSL2',
   );
+
 }

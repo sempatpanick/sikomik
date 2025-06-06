@@ -36,28 +36,35 @@ class HomePagePhone extends StatelessWidget {
             child: SingleChildScrollView(
               controller: controller.scrollController,
               physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24.0,
-                  horizontal: 16.0,
-                ),
+              child: SizedBox(
+                width: double.infinity,
                 child: Column(
                   children: [
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: (size.width / 250).round(),
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                        mainAxisExtent: 260,
-                      ),
-                      itemCount: controller.comics.length,
-                      itemBuilder: (context, index) {
-                        final item = controller.comics[index];
+                    Container(
+                      alignment: Alignment.center,
+                      constraints: BoxConstraints(maxWidth: 900),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 24.0,
+                          horizontal: 16.0,
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: (size.width / 250).round() <= 5
+                              ? (size.width / 250).round()
+                              : 5,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                          mainAxisExtent: 260,
+                        ),
+                        itemCount: controller.comics.length,
+                        itemBuilder: (context, index) {
+                          final item = controller.comics[index];
 
-                        return ComicCardWidget(comic: item);
-                      },
+                          return ComicCardWidget(comic: item);
+                        },
+                      ),
                     ),
                     if (controller.stateComics.value == RequestState.loading)
                       const SizedBox(

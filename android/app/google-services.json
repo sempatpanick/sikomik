@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "504193950692",
     "project_id": "sikomik-86156",
-    "storage_bucket": "sikomik-86156.appspot.com"
+    "storage_bucket": "sikomik-86156.firebasestorage.app"
   },
   "client": [
     {
@@ -39,7 +39,43 @@
               "client_type": 3
             },
             {
-              "client_id": "504193950692-e1livvo3iqd9kg6ofrclbgggpsmrav0m.apps.googleusercontent.com",
+              "client_id": "504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sempatpanick.sikomik"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504193950692:android:0f4389b1dd4efc481fddf1",
+        "android_client_info": {
+          "package_name": "com.sempatpanick.sikomik_bloc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504193950692-3ug7r3lmaajvh29569v6jqgu7ubvmv88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwLqjzbgyz9IZDMERjP_pIq_b0SqZA6QE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504193950692-3ug7r3lmaajvh29569v6jqgu7ubvmv88.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "504193950692-b4f98vtjom5l2d752vv2spfrnuoo58nq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.sempatpanick.sikomik"
