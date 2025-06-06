@@ -34,7 +34,8 @@ class FavoritesPagePhone extends StatelessWidget {
             child: SingleChildScrollView(
               controller: controller.scrollController,
               physics: const BouncingScrollPhysics(),
-              child: Padding(
+              child: Container(
+                width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                   vertical: 24.0,
                   horizontal: 16.0,
@@ -53,24 +54,31 @@ class FavoritesPagePhone extends StatelessWidget {
                         ),
                       ),
                     if (controller.favorites.isNotEmpty)
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: (size.width / 250).round(),
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                          mainAxisExtent: 260,
-                        ),
-                        itemCount: controller.favorites.length,
-                        itemBuilder: (context, index) {
-                          final item = controller.favorites[index];
+                      Container(
+                        alignment: Alignment.center,
+                        constraints: BoxConstraints(maxWidth: 900),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: (size.width / 250).round() <= 5
+                                ? (size.width / 250).round()
+                                : 5,
+                            crossAxisSpacing: 8.0,
+                            mainAxisSpacing: 8.0,
+                            mainAxisExtent: 260,
+                          ),
+                          itemCount: controller.favorites.length,
+                          itemBuilder: (context, index) {
+                            final item = controller.favorites[index];
 
-                          return ComicFavoriteCardWidget(
-                            userComic: item,
-                            afterCloseComic: controller.getFavorites,
-                          );
-                        },
+                            return ComicFavoriteCardWidget(
+                              userComic: item,
+                              afterCloseComic: controller.getFavorites,
+                            );
+                          },
+                        ),
                       ),
                     if (controller.stateFavorites.value == RequestState.loading)
                       const SizedBox(
