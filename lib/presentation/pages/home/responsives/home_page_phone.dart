@@ -48,6 +48,46 @@ class HomePagePhone extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
+                        "Komik Terpopuler",
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 230,
+                        child: controller.stateComicsPopular.value ==
+                                RequestState.loading
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: 8,
+                                ),
+                                itemCount: controller.comicsPopular.length,
+                                itemBuilder: (context, index) {
+                                  final item = controller.comicsPopular[index];
+
+                                  return SizedBox(
+                                    width: 150,
+                                    child: ComicCardWidget(
+                                      comic: item,
+                                      isExpandedWidth: false,
+                                    ),
+                                  );
+                                },
+                              ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
                         "Komik Terbaru",
                         style: theme.textTheme.titleLarge?.copyWith(
                           color: Colors.white,
@@ -111,61 +151,46 @@ class HomePagePhone extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      if ((controller.selectedComicType.value ==
-                                  ComicType.manga &&
-                              controller.stateComicsManga.value ==
-                                  RequestState.loading) ||
-                          (controller.selectedComicType.value ==
-                                  ComicType.manhua &&
-                              controller.stateComicsManhua.value ==
-                                  RequestState.loading) ||
-                          (controller.selectedComicType.value ==
-                                  ComicType.manhwa &&
-                              controller.stateComicsManhwa.value ==
-                                  RequestState.loading))
-                        SizedBox(
-                          height: 260,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      if ((controller.selectedComicType.value ==
-                                  ComicType.manga &&
-                              controller.stateComicsManga.value !=
-                                  RequestState.loading) ||
-                          (controller.selectedComicType.value ==
-                                  ComicType.manhua &&
-                              controller.stateComicsManhua.value !=
-                                  RequestState.loading) ||
-                          (controller.selectedComicType.value ==
-                                  ComicType.manhwa &&
-                              controller.stateComicsManhwa.value !=
-                                  RequestState.loading))
-                        SizedBox(
-                          height: 260,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
-                            separatorBuilder: (context, index) => SizedBox(
-                              width: 8,
-                            ),
-                            itemCount: controller
-                                .getComicsBasedOnSelectedType()
-                                .length,
-                            itemBuilder: (context, index) {
-                              final item = controller
-                                  .getComicsBasedOnSelectedType()[index];
-
-                              return SizedBox(
-                                width: 150,
-                                child: ComicCardWidget(
-                                  comic: item,
-                                  isExpandedWidth: false,
+                      SizedBox(
+                        height: 260,
+                        child: (controller.selectedComicType.value ==
+                                        ComicType.manga &&
+                                    controller.stateComicsManga.value ==
+                                        RequestState.loading) ||
+                                (controller.selectedComicType.value ==
+                                        ComicType.manhua &&
+                                    controller.stateComicsManhua.value ==
+                                        RequestState.loading) ||
+                                (controller.selectedComicType.value ==
+                                        ComicType.manhwa &&
+                                    controller.stateComicsManhwa.value ==
+                                        RequestState.loading)
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: 8,
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                                itemCount: controller
+                                    .getComicsBasedOnSelectedType()
+                                    .length,
+                                itemBuilder: (context, index) {
+                                  final item = controller
+                                      .getComicsBasedOnSelectedType()[index];
+
+                                  return SizedBox(
+                                    width: 150,
+                                    child: ComicCardWidget(
+                                      comic: item,
+                                      isExpandedWidth: false,
+                                    ),
+                                  );
+                                },
+                              ),
+                      ),
                       SizedBox(
                         height: 16,
                       ),

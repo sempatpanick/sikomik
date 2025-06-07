@@ -15,6 +15,9 @@ abstract class SiKomikRemoteDataSource {
   Future<ComicModel> getLatestComic({
     required int page,
   });
+  Future<ComicModel> getPopularComic({
+    required int page,
+  });
   Future<ComicModel> getMangaComic({
     required int page,
   });
@@ -71,6 +74,27 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
 
     final response = await retryClient.get(
       Uri.parse("$url/newest/page/$page"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*",
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ComicModel.fromJson(json.decode(response.body));
+    } else {
+      throw ResponseFailure(
+        'Error get comic list',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<ComicModel> getPopularComic({required int page}) async {
+    final retryClient = RetryClient(client);
+
+    final response = await retryClient.get(
+      Uri.parse("$url/popular/page/$page"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "*",

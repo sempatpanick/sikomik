@@ -68,6 +68,27 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   }
 
   @override
+  Future<Either<Failure, ComicEntity>> getPopularComic({
+    required int page,
+  }) async {
+    try {
+      final result = await remoteDataSource.getPopularComic(
+        page: page,
+      );
+
+      return Right(result.toEntity());
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, ComicEntity>> getMangaComic({
     required int page,
   }) async {

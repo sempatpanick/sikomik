@@ -16,6 +16,9 @@ abstract class SiKomikRepository {
   Future<Either<Failure, ComicEntity>> getLatestComic({
     required int page,
   });
+  Future<Either<Failure, ComicEntity>> getPopularComic({
+    required int page,
+  });
   Future<Either<Failure, ComicEntity>> getMangaComic({
     required int page,
   });

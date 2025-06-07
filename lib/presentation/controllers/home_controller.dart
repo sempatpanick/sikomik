@@ -8,16 +8,19 @@ import '../../domain/usecases/get_latest_comic_case.dart';
 import '../../domain/usecases/get_manga_comic_case.dart';
 import '../../domain/usecases/get_manhua_comic_case.dart';
 import '../../domain/usecases/get_manhwa_comic_case.dart';
+import '../../domain/usecases/get_popular_comic_case.dart';
 import '../../injection.dart';
 import 'main_controller.dart';
 
 class HomeController extends GetxController {
   final GetLatestComicCase getLatestComicCase = locator();
-  final GetMangaComicCase getLatestComicMangaCase = locator();
-  final GetManhuaComicCase getLatestComicManhuaCase = locator();
-  final GetManhwaComicCase getLatestComicManhwaCase = locator();
+  final GetPopularComicCase getPopularComicCase = locator();
+  final GetMangaComicCase getMangaComicCase = locator();
+  final GetManhuaComicCase getManhuaComicCase = locator();
+  final GetManhwaComicCase getManhwaComicCase = locator();
 
   Rx<RequestState> stateComics = RequestState.loading.obs;
+  Rx<RequestState> stateComicsPopular = RequestState.loading.obs;
   Rx<RequestState> stateComicsManga = RequestState.loading.obs;
   Rx<RequestState> stateComicsManhua = RequestState.loading.obs;
   Rx<RequestState> stateComicsManhwa = RequestState.loading.obs;
@@ -28,6 +31,7 @@ class HomeController extends GetxController {
   final TextEditingController searchInputController = TextEditingController();
 
   RxList<DataComicEntity> comics = <DataComicEntity>[].obs;
+  RxList<DataComicEntity> comicsPopular = <DataComicEntity>[].obs;
   RxList<DataComicEntity> comicsManga = <DataComicEntity>[].obs;
   RxList<DataComicEntity> comicsManhua = <DataComicEntity>[].obs;
   RxList<DataComicEntity> comicsManhwa = <DataComicEntity>[].obs;
@@ -57,6 +61,7 @@ class HomeController extends GetxController {
   Future<void> initialize() async {
     await mainController.getConfiguration();
     getLatestComics(isClearComics: true);
+    getPopularComics();
     getMangaComics();
     getManhuaComics();
     getManhwaComics();
@@ -109,10 +114,26 @@ class HomeController extends GetxController {
     });
   }
 
+  Future<void> getPopularComics() async {
+    changeStateComicsPopular(RequestState.loading);
+
+    final result = await getPopularComicCase.execute(
+      page: 1,
+    );
+
+    result.fold((l) {
+      changeStateComicsPopular(RequestState.error);
+      failedSnackBar("", l.message);
+    }, (r) {
+      changeStateComicsPopular(RequestState.loaded);
+      comicsPopular.assignAll(r.data ?? []);
+    });
+  }
+
   Future<void> getMangaComics() async {
     changeStateComicsManga(RequestState.loading);
 
-    final result = await getLatestComicMangaCase.execute(
+    final result = await getMangaComicCase.execute(
       page: 1,
     );
 
@@ -128,7 +149,7 @@ class HomeController extends GetxController {
   Future<void> getManhuaComics() async {
     changeStateComicsManhua(RequestState.loading);
 
-    final result = await getLatestComicManhuaCase.execute(
+    final result = await getManhuaComicCase.execute(
       page: 1,
     );
 
@@ -144,7 +165,7 @@ class HomeController extends GetxController {
   Future<void> getManhwaComics() async {
     changeStateComicsManhwa(RequestState.loading);
 
-    final result = await getLatestComicManhwaCase.execute(
+    final result = await getManhwaComicCase.execute(
       page: 1,
     );
 
@@ -160,6 +181,11 @@ class HomeController extends GetxController {
   void changeStateComics(RequestState state) {
     stateComics.value = state;
     stateComics.refresh();
+  }
+
+  void changeStateComicsPopular(RequestState state) {
+    stateComicsPopular.value = state;
+    stateComicsPopular.refresh();
   }
 
   void changeStateComicsManga(RequestState state) {

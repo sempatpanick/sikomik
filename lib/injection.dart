@@ -16,6 +16,7 @@ import 'domain/usecases/get_latest_comic_case.dart';
 import 'domain/usecases/get_manga_comic_case.dart';
 import 'domain/usecases/get_manhua_comic_case.dart';
 import 'domain/usecases/get_manhwa_comic_case.dart';
+import 'domain/usecases/get_popular_comic_case.dart';
 import 'domain/usecases/search_comic_case.dart';
 import 'domain/usecases/user_comic_case.dart';
 import 'domain/usecases/user_comic_chapter_case.dart';
@@ -30,6 +31,9 @@ void init() {
   );
   locator.registerLazySingleton(
     () => GetLatestComicCase(repository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => GetPopularComicCase(repository: locator()),
   );
   locator.registerLazySingleton(
     () => GetMangaComicCase(repository: locator()),
