@@ -100,23 +100,31 @@ class SearchPagePhone extends StatelessWidget {
                       ),
                     if (controller.comics.isNotEmpty &&
                         controller.stateSearch.value == RequestState.loaded)
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: (size.width / 250).round(),
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                          mainAxisExtent: 260,
-                        ),
-                        itemCount: controller.comics.length,
-                        itemBuilder: (context, index) {
-                          final item = controller.comics[index];
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        constraints: BoxConstraints(maxWidth: 900),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: (size.width / 250).round() <= 5
+                                ? (size.width / 250).round()
+                                : 5,
+                            crossAxisSpacing: 8.0,
+                            mainAxisSpacing: 8.0,
+                            mainAxisExtent: 260,
+                          ),
+                          itemCount: controller.comics.length,
+                          itemBuilder: (context, index) {
+                            final item = controller.comics[index];
 
-                          return ComicCardWidget(
-                            comic: item,
-                          );
-                        },
+                            return ComicCardWidget(
+                              comic: item,
+                            );
+                          },
+                        ),
                       ),
                     if (controller.stateSearch.value == RequestState.loading)
                       const SizedBox(
