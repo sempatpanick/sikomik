@@ -14,7 +14,15 @@ abstract class SiKomikRemoteDataSource {
   Future<ConfigurationModel> getConfiguration();
   Future<ComicModel> getLatestComic({
     required int page,
-    String? q,
+  });
+  Future<ComicModel> getMangaComic({
+    required int page,
+  });
+  Future<ComicModel> getManhuaComic({
+    required int page,
+  });
+  Future<ComicModel> getManhwaComic({
+    required int page,
   });
   Future<ComicDetailModel> getComicDetail({
     required String path,
@@ -58,11 +66,74 @@ class SiKomikRemoteDataSourceImpl implements SiKomikRemoteDataSource {
   }
 
   @override
-  Future<ComicModel> getLatestComic({required int page, String? q}) async {
+  Future<ComicModel> getLatestComic({required int page}) async {
     final retryClient = RetryClient(client);
 
     final response = await retryClient.get(
       Uri.parse("$url/newest/page/$page"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*",
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ComicModel.fromJson(json.decode(response.body));
+    } else {
+      throw ResponseFailure(
+        'Error get comic list',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<ComicModel> getMangaComic({required int page}) async {
+    final retryClient = RetryClient(client);
+
+    final response = await retryClient.get(
+      Uri.parse("$url/manga/page/$page"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*",
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ComicModel.fromJson(json.decode(response.body));
+    } else {
+      throw ResponseFailure(
+        'Error get comic list',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<ComicModel> getManhuaComic({required int page}) async {
+    final retryClient = RetryClient(client);
+
+    final response = await retryClient.get(
+      Uri.parse("$url/manhua/page/$page"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*",
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ComicModel.fromJson(json.decode(response.body));
+    } else {
+      throw ResponseFailure(
+        'Error get comic list',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<ComicModel> getManhwaComic({required int page}) async {
+    final retryClient = RetryClient(client);
+
+    final response = await retryClient.get(
+      Uri.parse("$url/manhwa/page/$page"),
       headers: {
         "Content-Type": "application/json",
         "Accept": "*",

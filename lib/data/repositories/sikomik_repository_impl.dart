@@ -49,10 +49,74 @@ class SiKomikRepositoryImpl implements SiKomikRepository {
   @override
   Future<Either<Failure, ComicEntity>> getLatestComic({
     required int page,
-    String? q,
   }) async {
     try {
-      final result = await remoteDataSource.getLatestComic(page: page, q: q);
+      final result = await remoteDataSource.getLatestComic(
+        page: page,
+      );
+
+      return Right(result.toEntity());
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComicEntity>> getMangaComic({
+    required int page,
+  }) async {
+    try {
+      final result = await remoteDataSource.getMangaComic(
+        page: page,
+      );
+
+      return Right(result.toEntity());
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComicEntity>> getManhuaComic({
+    required int page,
+  }) async {
+    try {
+      final result = await remoteDataSource.getManhuaComic(
+        page: page,
+      );
+
+      return Right(result.toEntity());
+    } on ResponseFailure catch (e) {
+      return Left(e);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComicEntity>> getManhwaComic({
+    required int page,
+  }) async {
+    try {
+      final result = await remoteDataSource.getManhwaComic(
+        page: page,
+      );
 
       return Right(result.toEntity());
     } on ResponseFailure catch (e) {

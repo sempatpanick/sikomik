@@ -1,2 +1,2 @@
-export 'remove_splash_other.dart'
-    if (dart.library.js_interop) 'remove_splash_web.dart';
+export 'src/remove_splash_non_web.dart'
+    if (dart.library.js_interop) 'src/remove_splash_web.dart';

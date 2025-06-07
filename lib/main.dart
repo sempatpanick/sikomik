@@ -58,7 +58,7 @@ Future<void> main() async {
     await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
   }
 
-  if (kIsWeb) {
+  if (kIsWeb || kIsWasm) {
     removeSplash();
   }
 

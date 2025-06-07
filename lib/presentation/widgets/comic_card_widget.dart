@@ -7,10 +7,12 @@ import '../pages/comic_detail/comic_detail_page.dart';
 
 class ComicCardWidget extends StatelessWidget {
   final DataComicEntity comic;
+  final bool isExpandedWidth;
 
   const ComicCardWidget({
     super.key,
     required this.comic,
+    this.isExpandedWidth = true,
   });
 
   @override
@@ -49,16 +51,15 @@ class ComicCardWidget extends StatelessWidget {
               Image(
                 image: NetworkImage(
                   comic.imageUrl!,
-                  webHtmlElementStrategy:
-                  WebHtmlElementStrategy.fallback,
+                  webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
                 ),
-                width: double.infinity,
+                width: isExpandedWidth ? double.infinity : 140,
                 height: 140,
                 fit: BoxFit.cover,
                 frameBuilder: (context, child, value, state) {
                   if (value == null) {
                     return SizedBox(
-                      width: double.infinity,
+                      width: isExpandedWidth ? double.infinity : 140,
                       height: 140,
                       child: Center(
                         child: SizedBox(
