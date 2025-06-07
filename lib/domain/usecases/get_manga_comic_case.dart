@@ -4,13 +4,13 @@ import '../../common/failure.dart';
 import '../entities/comic_entity.dart';
 import '../repositories/sikomik_repository.dart';
 
-class GetLatestComicCase {
+class GetMangaComicCase {
   final SiKomikRepository repository;
 
-  GetLatestComicCase({required this.repository});
+  GetMangaComicCase({required this.repository});
 
   Future<Either<Failure, ComicEntity>> execute({
     required int page,
   }) =>
-      repository.getLatestComic(page: page);
+      repository.getMangaComic(page: page);
 }
