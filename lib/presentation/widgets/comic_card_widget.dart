@@ -53,13 +53,13 @@ class ComicCardWidget extends StatelessWidget {
                   comic.imageUrl!,
                   webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
                 ),
-                width: isExpandedWidth ? double.infinity : 140,
+                width: isExpandedWidth ? double.infinity : 150,
                 height: 140,
                 fit: BoxFit.cover,
                 frameBuilder: (context, child, value, state) {
                   if (value == null) {
                     return SizedBox(
-                      width: isExpandedWidth ? double.infinity : 140,
+                      width: isExpandedWidth ? double.infinity : 150,
                       height: 140,
                       child: Center(
                         child: SizedBox(
