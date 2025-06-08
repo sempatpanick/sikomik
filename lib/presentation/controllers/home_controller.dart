@@ -60,7 +60,11 @@ class HomeController extends GetxController {
 
   Future<void> initialize() async {
     await mainController.getConfiguration();
-    getLatestComics(isClearComics: true);
+    if (searchInputController.text.isEmpty) {
+      getLatestComics(isClearComics: true);
+    } else {
+      getLatestComics(isClearSearch: true);
+    }
     getPopularComics();
     getMangaComics();
     getManhuaComics();

@@ -26,9 +26,7 @@ class HomePagePhone extends StatelessWidget {
       ),
       body: GetX<HomeController>(
         builder: (controller) => RefreshIndicator(
-          onRefresh: () => controller.searchInputController.text.isEmpty
-              ? controller.getLatestComics(isClearComics: true)
-              : controller.getLatestComics(isClearSearch: true),
+          onRefresh: () => controller.initialize(),
           child: Scrollbar(
             controller: controller.scrollController,
             interactive: true,
@@ -49,7 +47,7 @@ class HomePagePhone extends StatelessWidget {
                     children: [
                       Text(
                         "Komik Terpopuler",
-                        style: theme.textTheme.titleLarge?.copyWith(
+                        style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -89,7 +87,7 @@ class HomePagePhone extends StatelessWidget {
                       ),
                       Text(
                         "Komik Terbaru",
-                        style: theme.textTheme.titleLarge?.copyWith(
+                        style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -108,7 +106,7 @@ class HomePagePhone extends StatelessWidget {
                             children: {
                               ComicType.manga: Text(
                                 "Manga",
-                                style: theme.textTheme.titleMedium?.copyWith(
+                                style: theme.textTheme.titleSmall?.copyWith(
                                   color: controller.selectedComicType.value ==
                                           ComicType.manga
                                       ? Colors.white
@@ -117,7 +115,7 @@ class HomePagePhone extends StatelessWidget {
                               ),
                               ComicType.manhua: Text(
                                 "Manhua",
-                                style: theme.textTheme.titleMedium?.copyWith(
+                                style: theme.textTheme.titleSmall?.copyWith(
                                   color: controller.selectedComicType.value ==
                                           ComicType.manhua
                                       ? Colors.white
@@ -126,7 +124,7 @@ class HomePagePhone extends StatelessWidget {
                               ),
                               ComicType.manhwa: Text(
                                 "Manhwa",
-                                style: theme.textTheme.titleMedium?.copyWith(
+                                style: theme.textTheme.titleSmall?.copyWith(
                                   color: controller.selectedComicType.value ==
                                           ComicType.manhwa
                                       ? Colors.white
@@ -196,7 +194,7 @@ class HomePagePhone extends StatelessWidget {
                       ),
                       Text(
                         "Semua Komik Terbaru",
-                        style: theme.textTheme.titleLarge?.copyWith(
+                        style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
