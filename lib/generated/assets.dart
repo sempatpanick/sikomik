@@ -4,5 +4,13 @@ class Assets {
 
   static const String imagesIcLauncher = 'images/ic_launcher.png';
   static const String imagesSikomik = 'images/sikomik.png';
-
+  static const String screenshotsChapterDetail =
+      'images/screenshots/chapter-detail.png';
+  static const String screenshotsComicDetail =
+      'images/screenshots/comic-detail.png';
+  static const String screenshotsFavorites = 'images/screenshots/favorites.png';
+  static const String screenshotsLogin = 'images/screenshots/login.png';
+  static const String screenshotsScreenshot1747264813 =
+      'images/screenshots/Screenshot_1747264813.png';
+  static const String screenshotsSettings = 'images/screenshots/settings.png';
 }
