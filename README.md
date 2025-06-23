@@ -19,12 +19,14 @@ A modern comic reading application built with Flutter for reading manga, manhua,
 
 ## Screenshots 📱
 
-![Home](images/screenshots/home.png)
-![Comic Detail](images/screenshots/comic-detail.png)
-![Chapter Detail](images/screenshots/chapter-detail.png)
-![Favorites](images/screenshots/favorites.png)
-![Settings](images/screenshots/settings.png)
-![Login](images/screenshots/login.png)
+<p float="left">
+<img src="images/screenshots/home.png" alt="Home" width="200"/>
+<img src="images/screenshots/comic-detail.png" alt="Comic Detail" width="200"/>
+<img src="images/screenshots/chapter-detail.png" alt="Chapter Detail" width="200"/>
+<img src="images/screenshots/favorites.png" alt="Favorites" width="200"/>
+<img src="images/screenshots/settings.png" alt="Settings" width="200"/>
+<img src="images/screenshots/login.png" alt="Login" width="200"/>
+</p>
 
 ## Getting Started 🚀
 
