@@ -1,13 +1,7 @@
-import 'dart:js' as js;
+@JS()
+library;
 
-void preventSwipeBack() {
-  js.context.callMethod("eval", [
-    """
-    document.addEventListener("wheel", function(e) {
-       if (e.shiftKey || e.deltaX !== 0 {
-          e.preventDefault();
-       }
-    }, { passive: false });
-    """
-  ]);
-}
+import 'dart:js_interop';
+
+@JS('preventSwipeBack')
+external void preventSwipeBack();
