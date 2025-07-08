@@ -10,6 +10,7 @@ import 'package:window_size/window_size.dart';
 
 import 'common/scroll_behavior_helper.dart';
 import 'common/theme.dart';
+import 'common/utils/prevent_swipe_back/prevent_swipe_back.dart';
 import 'common/utils/remove_splash/remove_splash.dart';
 import 'firebase_options.dart';
 import 'injection.dart';
@@ -60,6 +61,7 @@ Future<void> main() async {
 
   if (kIsWeb || kIsWasm) {
     removeSplash();
+    preventSwipeBack();
   }
 
   init();

@@ -307,6 +307,15 @@
     <script src="flutter_bootstrap.js" async></script>
   </div>
   <script>
+    function preventSwipeBack() {
+      document.addEventListener("wheel", function (e) {
+        if (e.shiftKey || e.deltaX !== 0) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    }
+  </script>
+  <script>
     function removeSplash() {
       const splash = document.getElementById('splash-screen');
       const flutterContainer = document.getElementById('flutter-container');
